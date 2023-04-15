@@ -1,5 +1,6 @@
 import React from 'react'
 import Slider from '../components/Slider'
+import Categories from '../components/Categories'
 // import LogoHeader from '../components/LogoHeader'
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
 		<div>
       {/* <LogoHeader /> */}
 			<Slider />
+			<Categories />
 		</div>
 	)
 }
