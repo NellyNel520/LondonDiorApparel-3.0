@@ -3,8 +3,7 @@ import Slider from '../components/Slider'
 
 const Home = () => {
 	return (
-		<div className='text-white'>
-			Homepage
+		<div>
 			<Slider />
 		</div>
 	)
