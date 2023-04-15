@@ -72,7 +72,34 @@ const MenuItem = styled.div`
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    
+    <Container >
+    <Wrapper>
+        <Left>
+          <Language>EN</Language>
+          <SearchContainer className='rounded'>
+            <Input className="text-black" placeholder="Search" />
+            <SearchIcon style={{ color: "#0ca2e2", fontSize: 25 }} />
+          </SearchContainer>
+        </Left>
+        <Center>
+          <Logo className='font-ari text-[2rem]'>London Dior Apparel</Logo>
+        </Center>
+        <Right>
+          <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
+          <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
+					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
+					<Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
+          <Link to={"/cart"}><MenuItem className='hover:text-white'>
+            <Badge badgeContent={0} color="primary">
+              <ShoppingCartIcon />
+            </Badge>
+          </MenuItem>
+          </Link>
+        </Right>
+      </Wrapper>
+    </Container>
   )
 }
 
