@@ -73,7 +73,7 @@ const MenuItem = styled.div`
 const Navbar = () => {
   return (
     
-    <Container >
+    <Container className='text-blue-400' >
     <Wrapper>
         <Left>
           <Language>EN</Language>
