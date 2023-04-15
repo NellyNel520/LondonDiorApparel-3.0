@@ -10,6 +10,7 @@ import Newsletter from './components/Newsletter';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
+import About from './pages/About';
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
          {/* <Route path="/" element={<ProductDetails />} /> */}
          {/* <Route path="/" element={<Register />} /> */}
          {/* <Route path="/" element={<Login />} /> */}
-         <Route path="/" element={<Cart />} />
+         {/* <Route path="/" element={<Cart />} /> */}
+         <Route path="/" element={<About />} />
       </Routes>
       </main>
       <Newsletter />
