@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "styled-components": "^5.3.9",
     "tailwindcss": "^3.3.1"
   }
 }
