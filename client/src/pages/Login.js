@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 // import { RegisterUser } from '../services/Auth'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-// import { mobile } from '../responsive'
+import { mobile } from '../responsive'
 
 
 const Container = styled.div`
@@ -22,7 +22,7 @@ width: 40%;
 padding: 20px;
 background-color: rgba(255, 255, 255, 0.6);
 border-radius: 20px;
-${'' /* ${mobile({ width: '75%' })} */}
+${mobile({ width: '75%' })}
 `
 
 

@@ -19,13 +19,13 @@ function App() {
       <Announcement />
       <main>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Products />} /> */}
          {/* <Route path="/" element={<ProductDetails />} /> */}
          {/* <Route path="/" element={<Register />} /> */}
          {/* <Route path="/" element={<Login />} /> */}
          {/* <Route path="/" element={<Cart />} /> */}
-         <Route path="/" element={<About />} />
+         {/* <Route path="/" element={<About />} /> */}
       </Routes>
       </main>
       <Newsletter />

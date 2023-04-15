@@ -4,7 +4,7 @@ import { useState } from "react";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { sliderItems } from '../data';
-// import { mobile } from "../responsive";
+import { mobile } from "../responsive";
 import { Link } from 'react-router-dom'
 
 
@@ -14,7 +14,7 @@ const Container = styled.div`
 	display: flex;
 	position: relative;
 	overflow: hidden;
-	${'' /* ${mobile({ display: "none" })} */}
+	${mobile({ display: "none" })}
 `
 
 const Arrow = styled.div`

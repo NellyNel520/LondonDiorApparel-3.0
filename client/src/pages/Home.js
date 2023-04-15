@@ -12,7 +12,6 @@ const Home = () => {
 			<Slider />
 			<Categories />
 			<FeaturedProducts />
-			<Newsletter />
 		</div>
 	)
 }

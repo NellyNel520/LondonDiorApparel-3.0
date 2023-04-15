@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import FeaturedProducts from '../components/FeaturedProducts';
 import Newsletter from '../components/Newsletter';
+import { mobile } from "../responsive";
+
 const Container = styled.div`
 
 `
@@ -23,14 +25,14 @@ const FilterText = styled.span`
   font-weight: 600;
   margin-right: 20px;
   color: white;
-  ${'' /* ${mobile({ marginRight: "0px" })} */}
+  ${mobile({ marginRight: "0px" })}
 `;
 
 const Select = styled.select`
   padding: 3px;
   margin-right: 20px;
   border-radius: 5px;
-  ${'' /* ${mobile({ margin: "10px 0px" })} */}
+  ${mobile({ margin: "10px 0px" })}
 `;
 const Option = styled.option``;
 
