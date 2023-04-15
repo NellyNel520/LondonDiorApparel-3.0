@@ -25,18 +25,6 @@ border-radius: 20px;
 ${'' /* ${mobile({ width: '75%' })} */}
 `
 
-const Title = styled.h1`
-font-size: 3rem;
-font-weight: 300;
-`
-
-const Agreement = styled.span`
-font-size: 0.9rem;
-margin: 30px 10px 20px 10px;
-
-text-align: center;
-`
-
 
 
 const Login = () => {
