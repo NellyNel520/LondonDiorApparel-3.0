@@ -26,7 +26,7 @@ const Description = styled.div`
 
 const InputContainer = styled.div`
   width: 50%;
-  height: 40px;
+  height: 60px;
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -52,7 +52,7 @@ const Newsletter = () => {
   return (
     <Container>
       <Title className='font-play'>NewsLetter</Title>
-      <Description className='font-play'>Sign up for our newsletter today and be the first to know about our latest arrivals, exclusive discounts, and special promotions. </Description>
+      <Description className='font-play w-[80%] text-center'>Sign up for our newsletter today and be the first to know about our latest arrivals, exclusive discounts, and special promotions. </Description>
       <InputContainer>
         <Input placeholder='Enter Your Email' />
         <Button className='hover:bg-yellow-400'>
