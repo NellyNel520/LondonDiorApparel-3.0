@@ -8,6 +8,7 @@ import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 import Newsletter from './components/Newsletter';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
         {/* <Route path="/" element={<Home />} /> */}
         {/* <Route path="/" element={<Products />} /> */}
          {/* <Route path="/" element={<ProductDetails />} /> */}
-         <Route path="/" element={<Register />} />
+         {/* <Route path="/" element={<Register />} /> */}
+         <Route path="/" element={<Login />} />
       </Routes>
       </main>
       <Newsletter />
