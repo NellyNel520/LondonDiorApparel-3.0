@@ -1,24 +1,16 @@
-const { Category, Product } = require('../models')
+const { Product } = require('../models')
 
 // CREATE 
 
 const createProduct = async (req, res) => {
-	try {
-		console.log(req.body)
-		const product = await new Product(req.body);
-		await product.save();
-		if (req.body.categoryId) {
-			const categoryId = await Category.findById(req.body.categoryId)
-			categoryId.products.push(product._id);
-			await categoryId.save();
-		}
+  const newProduct = new Product(req.body);
 
-		return res.status(201).json({
-			product,
-		});
-	} catch (error) {
-		return res.status(500).json({ error: error.message });
-	}
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
 // Update Product
