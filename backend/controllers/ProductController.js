@@ -85,7 +85,7 @@ const getAllProducts = async (req, res) => {
 
 // Get all products to filter 
 
-const filterProducts = async (req, res) => {
+const getAllProductsAndFilter = async (req, res) => {
 	const qNew = req.query.new;
   const qCategory = req.query.category;
 	try {
@@ -120,7 +120,7 @@ module.exports ={
   getProductById,
   updateProduct,
   deleteProduct,
-	filterProducts
+	getAllProductsAndFilter
 
 
 }
