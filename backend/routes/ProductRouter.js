@@ -8,6 +8,7 @@ const {
 
 router.post('/add', verifyTokenAndAdmin, controller.createProduct)
 
-router.put('/update/:id', verifyTokenAndAdmin, controller.updateProduct)
+router.put('/:id', verifyTokenAndAdmin, controller.updateProduct)
+router.delete('/:id', verifyTokenAndAdmin, controller.deleteProduct)
 
 module.exports = router
