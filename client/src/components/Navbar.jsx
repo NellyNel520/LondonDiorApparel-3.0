@@ -76,7 +76,7 @@ const Navbar = () => {
   return (
     
     <Container className='text-blue-400' >
-    <Wrapper>
+    <Wrapper className='max-w-screen-2xl flex flex-wrap items-center'>
         <Left>
           <Language>EN</Language>
           <SearchContainer className='rounded'>
@@ -91,7 +91,7 @@ const Navbar = () => {
           <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
           <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
 					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
-					<Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+					<Link to={"/products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
 					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
           <Link to={"/cart"}><MenuItem className='hover:text-white'>
             <Badge badgeContent={0} color="primary">

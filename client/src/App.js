@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from './pages/About';
 
+
 function App() {
   return (
      <div>
@@ -20,12 +21,12 @@ function App() {
       <main>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/" element={<Products />} /> */}
-         {/* <Route path="/" element={<ProductDetails />} /> */}
-         {/* <Route path="/" element={<Register />} /> */}
-         {/* <Route path="/" element={<Login />} /> */}
-         {/* <Route path="/" element={<Cart />} /> */}
-         {/* <Route path="/" element={<About />} /> */}
+         <Route path="/register" element={<Register />} />
+         <Route path="/login" element={<Login />} />
+        <Route path="/products" element={<Products />} />
+         <Route path="/product/:id" element={<ProductDetails />} />
+         <Route path="/cart" element={<Cart />} />
+         <Route path="/about" element={<About />} />
       </Routes>
       </main>
       <Newsletter />
