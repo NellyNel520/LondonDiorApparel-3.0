@@ -1,6 +1,7 @@
 import { Add, Remove } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
+import Rating from '../components/Rating';
 import { mobile } from "../responsive";
 
 
@@ -128,9 +129,9 @@ const ProductDetails = () => {
 				<InfoContainer>
 					<Title className="text-6xl text-blue-400">Boondocks Tee</Title>
 
-					{/* <div>
-						<Rating rating={product.rating} numReviews={product.numReviews} />
-					</div> */}
+					<div>
+						<Rating rating={4.5} numReviews={10} />
+					</div>
 
 					<Desc className="text-white text-xl">
 						
