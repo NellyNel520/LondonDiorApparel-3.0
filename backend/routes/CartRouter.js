@@ -8,6 +8,10 @@ const {
 
 
 router.post('/', verifyToken, controller.createCart)
+router.put('/:id', verifyTokenAndAuthorization, controller.updateCart)
+router.delete('/:id', verifyTokenAndAuthorization, controller.deleteCart)
+router.get('/find/:userId', verifyTokenAndAuthorization, controller.getUserCart)
+router.get('/all', verifyTokenAndAdmin, controller.getAllCarts)
 
 
 module.exports = router
