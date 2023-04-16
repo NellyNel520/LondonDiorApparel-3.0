@@ -1,16 +1,12 @@
 const { User } = require('../models')
-const {
-  verifyToken,
-  verifyTokenAndAuthorization,
-  verifyTokenAndAdmin,
-} = require("./VerifyToken")
+
 
 // UPDATE
 const updateUser = async (req, res) => {
   if (req.body.password) {
-    req.body.password = bcrypt.hash(
+    req.body.password = CryptoJS.AES.encrypt(
       req.body.password,
-      process.env.APP_SECRET
+      process.env.PASS_SEC
     ).toString();
   }
 
@@ -27,3 +23,11 @@ const updateUser = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+// const deleteUser = async (req, res) => {
+
+// }
+
+module.exports = {
+  updateUser,
+}
