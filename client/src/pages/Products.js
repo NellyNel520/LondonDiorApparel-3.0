@@ -57,7 +57,7 @@ const Products = () => {
   return (
     <Container className='font-play'>
     <Title className='text-6xl text-center pt-5 text-blue-400 font-play'>Products</Title>
-    <div className='text-4xl font-play pl-8  text-white'><span className='text-blue-400'>Category:</span> {category}</div>
+    <div className='text-4xl font-play pl-8  text-white'>{category}</div>
     <FilterContainer>
       <Filter >
         <FilterText>Filter Products:</FilterText>

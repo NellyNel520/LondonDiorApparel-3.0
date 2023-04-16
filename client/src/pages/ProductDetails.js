@@ -3,6 +3,10 @@ import React from 'react'
 import styled from 'styled-components'
 import Rating from '../components/Rating';
 import { mobile } from "../responsive";
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { BASE_URL } from '../services/api'
 
 
 const Container = styled.div``

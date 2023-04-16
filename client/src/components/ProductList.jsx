@@ -32,6 +32,7 @@ const ProductList = ({category, filters, sort}) => {
     getProducts();
   }, [category]);
 
+  // Axios call to sort by category and filter by size and color products (working)
   useEffect(() => {
     category &&
       setFilteredProducts(
