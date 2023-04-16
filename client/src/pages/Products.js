@@ -72,7 +72,6 @@ const Products = () => {
       </Filter>
     </FilterContainer>
     <FeaturedProducts />
-    <Newsletter />
   </Container>
   )
 }
