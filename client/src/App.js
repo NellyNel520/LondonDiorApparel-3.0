@@ -11,13 +11,15 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from './pages/About';
+import { useSelector } from "react-redux";
 
 
 function App() {
+  const user = useSelector((state) => state.user.currentUser);
   return (
      <div>
-      <Navbar />
-      <Announcement />
+      <Navbar user={user} />
+      <Announcement user={user} />
       <main>
       <Routes>
         <Route path="/" element={<Home />} />
