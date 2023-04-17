@@ -5,8 +5,12 @@ import { useNavigate, Link } from 'react-router-dom'
 import { mobile } from "../responsive";
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-// import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios'
+import { BASE_URL } from '../services/api'
+import StripeCheckout from 'react-stripe-checkout'
+// import { useHistory } from "react-router";
 
+const KEY = process.env.STRIPE_KEY
 
 
 
@@ -168,6 +172,8 @@ const Cart = () => {
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
 	let navigate = useNavigate()
+	// const history = useHistory();
+
 
 	const handleQuantity = (type) => {
 		if (type === 'dec') {
@@ -176,6 +182,35 @@ const Cart = () => {
 			setQuantity(quantity + 1)
 		}
 	}
+
+	const onToken = (token) => {
+		setStripeToken(token)
+	}
+	console.log(stripeToken)
+
+	useEffect(() => {
+		const makeRequest = async () => {
+			try {
+				const response = await axios.post(
+					`${BASE_URL}/checkout/payment`,
+					{
+						tokenId: stripeToken.id,
+						amount: cart.total * 100,
+					}
+				)
+				console.log(response.data)
+				navigate('/success')
+				// history.push("/success", {
+				//   stripeData: response.data,
+				//   products: cart,
+				// })
+			} catch (err) {
+				console.log(err)
+			}
+		}
+		stripeToken && makeRequest()
+	}, [stripeToken, cart.total, navigate])
+
   return (
     <Container className="text-white font-play">
 			<Wrapper>
@@ -191,13 +226,23 @@ const Cart = () => {
 						<TopText>Your Wishlist(12)</TopText>
 					</TopTexts>
 
-					
+					<StripeCheckout
+						name="London Dior Apparel"
+						image="https://i.ibb.co/JxgT8GP/LDA-Logo-Blue2.png"
+						billingAddress
+						shippingAddress
+						description={`Your total is $${cart.total}`}
+						amount={cart.total * 100}
+						token={onToken}
+						stripeKey={KEY}
+					>
 						<TopButton
 							type="field"
 							className="bg-blue-400 rounded text-black hover:text-white"
 						>
 							CHECKOUT NOW
 						</TopButton>
+						</StripeCheckout>
 
 				</Top>
 				<Bottom>
@@ -228,12 +273,12 @@ const Cart = () => {
 									<ProductAmountContainer>
 										<Add className="hover:text-green-500"
 								onClick={() => handleQuantity('inc')}/>
-										<ProductAmount>{quantity}</ProductAmount>
+										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove className="hover:text-red-500"
 								onClick={() => handleQuantity('dec')} />
 									</ProductAmountContainer>
 									<ProductPrice>
-									${product.price * quantity}
+									${product.price * product.quantity}
 									</ProductPrice>
 								</PriceDetail>
 							</Product>
@@ -250,26 +295,37 @@ const Cart = () => {
 						</SummaryTitle>
 						<SummaryItem className="text-xl">
 							<SummaryItemText>Subtotal:</SummaryItemText>
-							<SummaryItemPrice>$20.50</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText>Estimated Shipping:</SummaryItemText>
-							<SummaryItemPrice>$4.29</SummaryItemPrice>
+							<SummaryItemPrice>$6.25</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText>Shipping Discount:</SummaryItemText>
-							<SummaryItemPrice>-$4.29</SummaryItemPrice>
+							<SummaryItemPrice>-$6.25</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText type="total" className="text-blue-400 text-xl">
 								Total:
 							</SummaryItemText>
-							<SummaryItemPrice>$200</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
 						</SummaryItem>
+						<StripeCheckout
+							name="London Dior Apparel"
+							image="https://i.ibb.co/JxgT8GP/LDA-Logo-Blue2.png"
+							billingAddress
+							shippingAddress
+							description={`Your total is $${cart.total}`}
+							amount={cart.total * 100}
+							token={onToken}
+							stripeKey={KEY}
+						>
 						
 							<Button className="hover:bg-[#0ca2e2] border rounded">
 								CHECKOUT
 							</Button>
+							</StripeCheckout>
 					</Summary>
 				</Bottom>
 			</Wrapper>
