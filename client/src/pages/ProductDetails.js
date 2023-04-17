@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
 // import { addProduct } from "../redux/cartRedux";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 
@@ -133,7 +133,7 @@ const ProductDetails = () => {
 	const [quantity, setQuantity] = useState(1)
 	const [color, setColor] = useState('')
 	const [size, setSize] = useState('')
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	// axios call to get product by id 
 	useEffect(() => {
@@ -159,11 +159,11 @@ const ProductDetails = () => {
 	}
 
 // add to cart
-	// const handleClick = () => {
-	//   dispatch(
-	//     addProduct({ ...product, quantity, color, size })
-	//   );
-	// };
+	const handleClick = () => {
+	  dispatch(
+	    addProduct({ ...product, quantity, color, size })
+	  );
+	};
 
   return (
     <Container className="font-play">
