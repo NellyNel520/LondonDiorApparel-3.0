@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
-// import { addProduct } from "../redux/cartRedux";
+import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
 
@@ -243,7 +243,7 @@ const ProductDetails = () => {
 						</AmountContainer>
 
 						{product.inStock > 0 && (
-							<button class="flex ml-auto text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded">
+							<button class="flex ml-auto text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded" onClick={handleClick}>
 								Add to Cart
 							</button>
 						)}
