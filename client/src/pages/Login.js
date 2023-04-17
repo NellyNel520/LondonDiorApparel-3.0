@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // import { RegisterUser } from '../services/Auth'
+import { login } from "../redux/apiCalls"
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { mobile } from '../responsive'
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Container = styled.div`
@@ -30,22 +32,17 @@ ${mobile({ width: '75%' })}
 const Login = () => {
 
   let navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
 
-	const initialState = { email: '', password: '' }
+	const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { email, password })
+    navigate('/')
+  }
 
-	const [formValues, setFormValues] = useState(initialState)
-
-	const handleChange = (e) => {
-		setFormValues({ ...formValues, [e.target.name]: e.target.value })
-	}
-
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault()
-	// 	const payload = await SignInUser(formValues)
-	// 	setFormValues(initialState)
-	// 	setUser(payload)
-	// 	navigate('/')
-	// } 
   return (
     <Container>
     <Wrapper>
@@ -61,11 +58,10 @@ const Login = () => {
               Email:
             </label>
             <input
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
               name="email"
               type="email"
               placeholder="example@example.com"
-              value={formValues.email}
               required
             />
           </div>
@@ -74,15 +70,14 @@ const Login = () => {
               Password:
             </label>
             <input
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
-              value={formValues.password}
               required
             />
           </div>
           <button
-            disabled={!formValues.email || !formValues.password}
+          onClick={handleClick} disabled={isFetching}
             className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Sign In

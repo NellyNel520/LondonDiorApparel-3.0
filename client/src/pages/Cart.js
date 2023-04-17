@@ -10,7 +10,7 @@ import { BASE_URL } from '../services/api'
 import StripeCheckout from 'react-stripe-checkout'
 // import { useHistory } from "react-router";
 
-const KEY = process.env.STRIPE_KEY
+const KEY = "pk_test_51MsoK7ApFenuQy8MR8LgDNJu3AtBcuO8LjCDKeQn10hJ6EE8p0G29GkIdTYBYk8EOQsYFvMpOXvOHMFeDt4FN4kY00vus1QbyV"
 
 
 
