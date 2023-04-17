@@ -16,9 +16,17 @@ import { useSelector } from "react-redux";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
+
+  const handleLogOut = () => {
+		//Reset all auth related state and clear localStorage
+		localStorage.clear()
+    // localStorage.removeItem("user");
+	}
+
+  
   return (
      <div>
-      <Navbar user={user} />
+      <Navbar user={user} handleLogOut={handleLogOut}/>
       <Announcement user={user} />
       <main>
       <Routes>
