@@ -196,9 +196,9 @@ const ProductDetails = () => {
 							{product.color?.map((c) => (
 								<FilterColor  color={c} key={c} onClick={() => setColor(c)} />
 							))}
-							<FilterColor color="white" />
+							{/* <FilterColor color="white" />
 							<FilterColor color="blue" />
-							<FilterColor color="red" />
+							<FilterColor color="red" /> */}
 						</Filter>
 						<Filter>
 							<FilterTitle className="text-white">Size:</FilterTitle>

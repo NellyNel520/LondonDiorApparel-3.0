@@ -3,6 +3,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate, Link } from 'react-router-dom'
 import { mobile } from "../responsive";
+import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+// import StripeCheckout from 'react-stripe-checkout'
 
 
 
@@ -161,15 +164,18 @@ const Button = styled.button`
 `
 
 const Cart = () => {
+	const cart = useSelector((state) => state.cart)
+	const [quantity, setQuantity] = useState(1)
+	const [stripeToken, setStripeToken] = useState(null)
+	let navigate = useNavigate()
 
-
-	// const handleQuantity = (type) => {
-	// 	if (type === 'dec') {
-	// 		quantity > 1 && setQuantity(quantity - 1)
-	// 	} else {
-	// 		setQuantity(quantity + 1)
-	// 	}
-	// }
+	const handleQuantity = (type) => {
+		if (type === 'dec') {
+			quantity > 1 && setQuantity(quantity - 1)
+		} else {
+			setQuantity(quantity + 1)
+		}
+	}
   return (
     <Container className="text-white font-play">
 			<Wrapper>
@@ -197,102 +203,43 @@ const Cart = () => {
 				<Bottom>
 					<Info>
 						<Hr />
-						
+						{cart.products.map((product) => (
 							<Product className="mt-8 mb-8">
 								<ProductDetail>
-									<Image src="https://i.postimg.cc/BQqsbbjk/Product-4.png" />
+									<Image src={product.img} />
 									<Details className="text-xl">
 										<ProductName>
 											<b className="text-blue-400">Product: </b>
-											Boondocks Tee
+											{product.title}
 										</ProductName>
 										<ProductId>
-											<b className="text-blue-400">ID:</b> 3544
+											<b className="text-blue-400">ID:</b> {product._id}
 										</ProductId>
 										<div className='flex'>
 											<b className="text-blue-400 pr-3">Color:</b>
-											<ProductColor className="mt-2" color="blue" />
+											<ProductColor className="mt-2" color={product.color} />
 										</div>
 										<ProductSize>
-											<b className="text-blue-400">Size:</b> XL
+											<b className="text-blue-400">Size:</b> {product.size}
 										</ProductSize>
 									</Details>
 								</ProductDetail>
 								<PriceDetail>
 									<ProductAmountContainer>
-										<Add />
-										<ProductAmount>2</ProductAmount>
-										<Remove />
+										<Add className="hover:text-green-500"
+								onClick={() => handleQuantity('inc')}/>
+										<ProductAmount>{quantity}</ProductAmount>
+										<Remove className="hover:text-red-500"
+								onClick={() => handleQuantity('dec')} />
 									</ProductAmountContainer>
 									<ProductPrice>
-										$4O
+									${product.price * quantity}
 									</ProductPrice>
 								</PriceDetail>
 							</Product>
+							))}
 
-              <Product className="mt-8 mb-8">
-								<ProductDetail>
-									<Image src="https://i.postimg.cc/BQqsbbjk/Product-4.png" />
-									<Details className="text-xl">
-										<ProductName>
-											<b className="text-blue-400">Product: </b>
-											Boondocks Tee
-										</ProductName>
-										<ProductId>
-											<b className="text-blue-400">ID:</b> 3544
-										</ProductId>
-										<div className='flex'>
-											<b className="text-blue-400 pr-3">Color:</b>
-											<ProductColor className="mt-2" color="blue" />
-										</div>
-										<ProductSize>
-											<b className="text-blue-400">Size:</b> XL
-										</ProductSize>
-									</Details>
-								</ProductDetail>
-								<PriceDetail>
-									<ProductAmountContainer>
-										<Add />
-										<ProductAmount>2</ProductAmount>
-										<Remove />
-									</ProductAmountContainer>
-									<ProductPrice>
-										$4O
-									</ProductPrice>
-								</PriceDetail>
-							</Product>
-
-              <Product className="mt-8 mb-8">
-								<ProductDetail>
-									<Image src="https://i.postimg.cc/BQqsbbjk/Product-4.png" />
-									<Details className="text-xl">
-										<ProductName>
-											<b className="text-blue-400">Product: </b>
-											Boondocks Tee
-										</ProductName>
-										<ProductId>
-											<b className="text-blue-400">ID:</b> 3544
-										</ProductId>
-										<div className='flex'>
-											<b className="text-blue-400 pr-3">Color:</b>
-											<ProductColor className="mt-2" color="blue" />
-										</div>
-										<ProductSize>
-											<b className="text-blue-400">Size:</b> XL
-										</ProductSize>
-									</Details>
-								</ProductDetail>
-								<PriceDetail>
-									<ProductAmountContainer>
-										<Add />
-										<ProductAmount>2</ProductAmount>
-										<Remove />
-									</ProductAmountContainer>
-									<ProductPrice>
-										$4O
-									</ProductPrice>
-								</PriceDetail>
-							</Product>
+              
 						
 
 						<Hr />
