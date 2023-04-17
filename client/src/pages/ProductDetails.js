@@ -7,6 +7,9 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
+// import { addProduct } from "../redux/cartRedux";
+// import { useDispatch } from "react-redux";
+
 
 
 const Container = styled.div``
@@ -124,21 +127,59 @@ const Button = styled.button`
 `
 
 const ProductDetails = () => {
+	const location = useLocation()
+	const id = location.pathname.split('/')[2]
+	const [product, setProduct] = useState({})
+	const [quantity, setQuantity] = useState(1)
+	const [color, setColor] = useState('')
+	const [size, setSize] = useState('')
+	// const dispatch = useDispatch();
+
+	// axios call to get product by id 
+	useEffect(() => {
+		const getProduct = async () => {
+			try {
+				const res = await axios.get(`${BASE_URL}/products/find/${id}`)
+				// console.log(res)
+				setProduct(res.data.product)
+				// console.log(res.data.product.title)
+				// console.log(product)
+			} catch (err) {}
+		}
+		getProduct()
+	}, [id])
+
+	// +/- quantity
+	const handleQuantity = (type) => {
+		if (type === 'dec') {
+			quantity > 1 && setQuantity(quantity - 1)
+		} else {
+			setQuantity(quantity + 1)
+		}
+	}
+
+// add to cart
+	// const handleClick = () => {
+	//   dispatch(
+	//     addProduct({ ...product, quantity, color, size })
+	//   );
+	// };
+
   return (
     <Container className="font-play">
 			<Wrapper>
 				<ImgContainer>
-					<Image src="https://i.postimg.cc/ydkgwnHh/Product-2.png" />
+					<Image src={product.img} />
 				</ImgContainer>
 				<InfoContainer>
-					<Title className="text-6xl text-blue-400">Boondocks Tee</Title>
+					<Title className="text-6xl text-blue-400">{product.title}</Title>
 
 					<div>
-						<Rating rating={4.5} numReviews={10} />
+						<Rating rating={product.rating} numReviews={product.numReviews} />
 					</div>
 
 					<Desc className="text-white text-xl">
-						
+					{product.desc}
 
 						<p>
 							This classic t-shirt is a wardrobe essential. Made from
@@ -147,40 +188,44 @@ const ProductDetails = () => {
 							Available in a range of colors and sizes to suit your style.
 						</p>
 					</Desc>
-					<Price className="text-white">$25.00</Price>
+					<Price className="text-white">${product.price} </Price>
 
 					<FilterContainer>
 						<Filter>
 							<FilterTitle className="text-white">Color:</FilterTitle>
-							{/* {product.color?.map((c) => (
+							{product.color?.map((c) => (
 								<FilterColor  color={c} key={c} onClick={() => setColor(c)} />
-							))} */}
+							))}
 							<FilterColor color="white" />
 							<FilterColor color="blue" />
 							<FilterColor color="red" />
 						</Filter>
 						<Filter>
 							<FilterTitle className="text-white">Size:</FilterTitle>
-							<FilterSize>
-								{/* {product.size?.map((s) => (
+							<FilterSize  onChange={(e) => setSize(e.target.value)}>
+								{product.size?.map((s) => (
 									<FilterSizeOption key={s}>{s}</FilterSizeOption>
-								))} */}
-								<FilterSizeOption>XS</FilterSizeOption>
+								))}
+								{/* <FilterSizeOption>XS</FilterSizeOption>
 								<FilterSizeOption>S</FilterSizeOption>
 								<FilterSizeOption>M</FilterSizeOption>
 								<FilterSizeOption>L</FilterSizeOption>
 								<FilterSizeOption>XL</FilterSizeOption>
-								<FilterSizeOption>2X</FilterSizeOption>
+								<FilterSizeOption>2X</FilterSizeOption> */}
 							</FilterSize>
 						</Filter>
 
 						<Filter>
 							<FilterTitle className="text-white pr-2">Status: </FilterTitle>
-							
+							{product.inStock > 0 ? (
 								<span className=" text-white border-0 py-2 px-3 bg-green-500 rounded">
 									In Stock
 								</span>
-						
+							) : (
+								<span className=" text-white border-0 py-2 px-6 bg-red-500 rounded">
+									Unavailable
+								</span>
+							)}
 						</Filter>
 					</FilterContainer>
 
@@ -188,20 +233,20 @@ const ProductDetails = () => {
 						<AmountContainer className="text-3xl justify-center">
 							<Remove
 								className="hover:text-red-500"
-								// onClick={() => handleQuantity('dec')}
+								onClick={() => handleQuantity('dec')}
 							/>
-							<Amount>1</Amount>
+							<Amount>{quantity}</Amount>
 							<Add
 								className="hover:text-green-500"
-								// onClick={() => handleQuantity('inc')}
+								onClick={() => handleQuantity('inc')}
 							/>
 						</AmountContainer>
 
-						{/* {product.inStock > 0 && ( */}
+						{product.inStock > 0 && (
 							<button class="flex ml-auto text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-400 rounded">
 								Add to Cart
 							</button>
-						{/* )} */}
+						)}
 					</AddContainer>
 				</InfoContainer>
 			</Wrapper>
