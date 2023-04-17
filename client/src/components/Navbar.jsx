@@ -73,12 +73,12 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
-const Navbar = () => {
+const Navbar = ({ user, handleLogOut }) => {
   const quantity = useSelector(state=>state.cart.quantity)
-  return (
-    
-    <Container className='text-blue-400' >
-    <Wrapper className='max-w-screen-2xl flex flex-wrap items-center'>
+  let userOptions
+  if (user) {
+    userOptions = (
+      <Wrapper className='text-blue-400'>
         <Left>
           <Language>EN</Language>
           <SearchContainer className='rounded'>
@@ -90,10 +90,12 @@ const Navbar = () => {
           <Logo className='font-ari text-[2rem]'>London Dior Apparel</Logo>
         </Center>
         <Right>
-          <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
-          <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
+          <Link onClick={handleLogOut} to="/"><MenuItem className='hover:text-white'>
+          <ExitToAppOutlinedIcon />
+          </MenuItem></Link>
+          <Link to={"/"}><MenuItem><PersonIcon /></MenuItem></Link>
 					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
-					<Link to={"/products/"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+					<Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
 					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
           <Link to={"/cart"}><MenuItem className='hover:text-white'>
             <Badge badgeContent={quantity} color="primary">
@@ -103,7 +105,39 @@ const Navbar = () => {
           </Link>
         </Right>
       </Wrapper>
-    </Container>
+    )
+  }
+  const publicOptions = (
+   
+    <Wrapper className='text-blue-400'>
+      <Left>
+        <Language>EN</Language>
+        <SearchContainer className='rounded'>
+          <Input className="text-black" placeholder="Search" />
+          <SearchIcon style={{ color: "#0ca2e2", fontSize: 25 }} />
+        </SearchContainer>
+      </Left>
+      <Center>
+        <Logo className='font-ari text-[2rem]'>London Dior Apparel</Logo>
+      </Center>
+      <Right>
+        <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
+        <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
+        <Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
+        <Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+        <Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
+        <Link to={"/cart"}><MenuItem className='hover:text-white'>
+          <Badge badgeContent={quantity} color="primary">
+            <ShoppingCartIcon />
+          </Badge>
+        </MenuItem>
+        </Link>
+      </Right>
+    </Wrapper>
+  
+)
+  return (
+    <Container>{user ? userOptions : publicOptions}</Container>
   )
 }
 
