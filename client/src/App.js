@@ -11,17 +11,24 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from './pages/About';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from './redux/userRedux';
+import { useNavigate } from 'react-router-dom'
+
 
 
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
 
-  const handleLogOut = () => {
+  const dispatch = useDispatch()
+  let navigate = useNavigate()
+
+  const handleLogOut = (e) => {
 		//Reset all auth related state and clear localStorage
-    
-   
+    e.preventDefault();
+    dispatch(logout())
+    navigate("/")
 	}
 
   

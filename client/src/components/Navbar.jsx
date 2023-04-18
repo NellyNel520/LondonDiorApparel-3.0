@@ -90,7 +90,7 @@ const Navbar = ({ user, handleLogOut }) => {
           <Logo className='font-ari text-[2rem]'>London Dior Apparel</Logo>
         </Center>
         <Right>
-          <Link onClick={handleLogOut} to="/"><MenuItem className='hover:text-white'>
+          <Link onClick={(e) => handleLogOut(e)} to="/"><MenuItem className='hover:text-white'>
           <ExitToAppOutlinedIcon />
           </MenuItem></Link>
           <Link to={"/"}><MenuItem><PersonIcon /></MenuItem></Link>
