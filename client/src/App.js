@@ -14,6 +14,7 @@ import About from './pages/About';
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from './redux/userRedux';
 import { useNavigate } from 'react-router-dom'
+import Success from './pages/Success';
 
 
 
@@ -46,6 +47,7 @@ function App() {
          <Route path="/product/:id" element={<ProductDetails />} />
          <Route path="/cart" element={<Cart />} />
          <Route path="/about" element={<About />} />
+         <Route path="/success" element={<Success />} />
       </Routes>
       </main>
       <Newsletter />
