@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
 import StripeCheckout from 'react-stripe-checkout'
+import { userRequest } from '../services/requestMethods'
 // import { useHistory } from "react-router";
 
 const KEY =
@@ -170,7 +171,7 @@ const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
-	// const [stripeData, setStripeData] = useState({})
+	const [stripeData, setStripeData] = useState({})
 	let navigate = useNavigate()
 	// const history = useHistory();
 
@@ -190,12 +191,14 @@ const Cart = () => {
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
-				const response = await axios.post(`${BASE_URL}checkout/payment`, {
+				const response = await userRequest.post('checkout/payment', {
 					tokenId: stripeToken.id,
 					amount: cart.total * 100,
 				})
 				console.log(response.data)
-				navigate('/success')
+				navigate('/success', {
+					state: { stripeData: response.data, products: cart },
+				})
 				// history.push("/success", {
 				//   stripeData: response.data,
 				//   products: cart,
