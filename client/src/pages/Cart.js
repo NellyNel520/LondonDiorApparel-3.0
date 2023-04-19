@@ -2,7 +2,7 @@ import { Add, Remove } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate, Link } from 'react-router-dom'
-import { mobile } from "../responsive";
+import { mobile } from '../responsive'
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -10,9 +10,8 @@ import { BASE_URL } from '../services/api'
 import StripeCheckout from 'react-stripe-checkout'
 // import { useHistory } from "react-router";
 
-const KEY = "pk_test_51MsoK7ApFenuQy8MR8LgDNJu3AtBcuO8LjCDKeQn10hJ6EE8p0G29GkIdTYBYk8EOQsYFvMpOXvOHMFeDt4FN4kY00vus1QbyV"
-
-
+const KEY =
+	'pk_test_51MsoK7ApFenuQy8MR8LgDNJu3AtBcuO8LjCDKeQn10hJ6EE8p0G29GkIdTYBYk8EOQsYFvMpOXvOHMFeDt4FN4kY00vus1QbyV'
 
 const Container = styled.div`
 	${'' /* background-color: white; */}
@@ -20,7 +19,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 	padding: 1rem 1rem 4rem 1rem;
-	${mobile({ padding: "10px" })}
+	${mobile({ padding: '10px' })}
 `
 
 const Title = styled.h1`
@@ -171,9 +170,9 @@ const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
+	// const [stripeData, setStripeData] = useState({})
 	let navigate = useNavigate()
 	// const history = useHistory();
-
 
 	const handleQuantity = (type) => {
 		if (type === 'dec') {
@@ -191,13 +190,10 @@ const Cart = () => {
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
-				const response = await axios.post(
-					`${BASE_URL}/checkout/payment`,
-					{
-						tokenId: stripeToken.id,
-						amount: cart.total * 100,
-					}
-				)
+				const response = await axios.post(`${BASE_URL}checkout/payment`, {
+					tokenId: stripeToken.id,
+					amount: cart.total * 100,
+				})
 				console.log(response.data)
 				navigate('/success')
 				// history.push("/success", {
@@ -211,8 +207,14 @@ const Cart = () => {
 		stripeToken && makeRequest()
 	}, [stripeToken, cart.total, navigate])
 
-  return (
-    <Container className="text-white font-play">
+	// const handleClick = () => {
+	//   dispatch(
+	//     addBillingInfo({ ...stripeData})
+	//   );
+	// };
+
+	return (
+		<Container className="text-white font-play">
 			<Wrapper>
 				<Title className="text-xl text-blue-400">YOUR CART</Title>
 				<Top>
@@ -242,8 +244,7 @@ const Cart = () => {
 						>
 							CHECKOUT NOW
 						</TopButton>
-						</StripeCheckout>
-
+					</StripeCheckout>
 				</Top>
 				<Bottom>
 					<Info>
@@ -260,7 +261,7 @@ const Cart = () => {
 										<ProductId>
 											<b className="text-blue-400">ID:</b> {product._id}
 										</ProductId>
-										<div className='flex'>
+										<div className="flex">
 											<b className="text-blue-400 pr-3">Color:</b>
 											<ProductColor className="mt-2" color={product.color} />
 										</div>
@@ -271,21 +272,22 @@ const Cart = () => {
 								</ProductDetail>
 								<PriceDetail>
 									<ProductAmountContainer>
-										<Add className="hover:text-green-500"
-								onClick={() => handleQuantity('inc')}/>
+										<Add
+											className="hover:text-green-500"
+											onClick={() => handleQuantity('inc')}
+										/>
 										<ProductAmount>{product.quantity}</ProductAmount>
-										<Remove className="hover:text-red-500"
-								onClick={() => handleQuantity('dec')} />
+										<Remove
+											className="hover:text-red-500"
+											onClick={() => handleQuantity('dec')}
+										/>
 									</ProductAmountContainer>
 									<ProductPrice>
-									${product.price * product.quantity}
+										${product.price * product.quantity}
 									</ProductPrice>
 								</PriceDetail>
 							</Product>
-							))}
-
-              
-						
+						))}
 
 						<Hr />
 					</Info>
@@ -321,16 +323,15 @@ const Cart = () => {
 							token={onToken}
 							stripeKey={KEY}
 						>
-						
 							<Button className="hover:bg-[#0ca2e2] border rounded">
 								CHECKOUT
 							</Button>
-							</StripeCheckout>
+						</StripeCheckout>
 					</Summary>
 				</Bottom>
 			</Wrapper>
 		</Container>
-  )
+	)
 }
 
 export default Cart

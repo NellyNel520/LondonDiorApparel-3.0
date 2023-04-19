@@ -17,8 +17,9 @@ const makePayment = async (req, res) => {
 			}
 		}
 	)
-}
+} 
 
 module.exports = {
 	makePayment,
 }
+
