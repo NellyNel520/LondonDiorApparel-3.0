@@ -199,10 +199,10 @@ const Cart = () => {
 				navigate('/success', {
 					state: { stripeData: response.data, products: cart },
 				})
-				// history.push("/success", {
-				//   stripeData: response.data,
-				//   products: cart,
-				// })
+				// navigate('/success',  {
+				// 	stripeData: response.data,
+				// 	products: cart },
+				// )
 			} catch (err) {
 				console.log(err)
 			}

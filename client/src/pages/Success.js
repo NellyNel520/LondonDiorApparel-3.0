@@ -27,31 +27,33 @@ const Wrapper = styled.div`
 
 const Success = () => {
 	const location = useLocation()
-	const data = location.state.stripeData
-	const cart = location.state.cart
-	const currentUser = useSelector((state) => state.user.currentUser)
-	const [orderId, setOrderId] = useState(null)
+
+	console.log(location)
+	// const data = location.state.stripeData
+	// const cart = location.state.cart
+	// const currentUser = useSelector((state) => state.user.currentUser)
+	// const [orderId, setOrderId] = useState(null)
 
 
-	// axios call not automatically
-	useEffect(() => {
-		const createOrder = async () => {
-			try {
-				const response = await userRequest.post('order/new', {
-					userId: currentUser._id,
-					products: cart.products.map((item) => ({
-						productId: item._id,
-						quantity: item._quantity,
-					})),
-					amount: cart.total,
-					address: data.billing_details.address,
-				})
-				setOrderId(response.data._id)
-				console.log(response)
-			} catch {}
-		}
-		data && createOrder()
-	}, [cart, data, currentUser])
+	// // axios call not automatically
+	// useEffect(() => {
+	// 	const createOrder = async () => {
+	// 		try {
+	// 			const response = await userRequest.post('order/new', {
+	// 				userId: currentUser._id,
+	// 				products: cart.products.map((item) => ({
+	// 					productId: item._id,
+	// 					quantity: item._quantity,
+	// 				})),
+	// 				amount: cart.total,
+	// 				address: data.billing_details.address,
+	// 			})
+	// 			setOrderId(response.data._id)
+	// 			console.log(response)
+	// 		} catch {}
+	// 	}
+	// 	data && createOrder()
+	// }, [cart, data, currentUser])
 
 	return (
 		<Container>
@@ -59,11 +61,11 @@ const Success = () => {
 				<div className="flex justify-center text-black`">
 					<div className="text-center">
 						<div className="text-4xl">Success! </div>
-						{/* <div> Your order is being processed. Thank you for shopping with London Dior Apparel
-						</div> */}
-						{orderId
+						<div> Your order is being processed. Thank you for shopping with London Dior Apparel
+						</div>
+						{/* {orderId
 							? `Order has been created successfully. Your order number is ${orderId}`
-							: `Successfull. Your order is being prepared...`}
+							: `Successfull. Your order is being prepared...`} */}
 
 						<Link to={'/'}>
 							<button className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
