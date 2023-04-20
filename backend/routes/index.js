@@ -14,7 +14,7 @@ Router.use("/auth", AuthRouter)
 Router.use("/user", UserRouter)
 Router.use("/products", ProductRouter)
 Router.use("/cart", CartRouter)
-Router.use("/order", OrderRouter)
+Router.use("/orders", OrderRouter)
 Router.use("/checkout", StripeRouter)
 
 

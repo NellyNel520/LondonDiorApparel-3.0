@@ -9,6 +9,7 @@ import axios from 'axios'
 import { BASE_URL } from '../services/api'
 import StripeCheckout from 'react-stripe-checkout'
 import { userRequest } from '../services/requestMethods'
+
 // import { useHistory } from "react-router";
 
 const KEY =
@@ -167,7 +168,7 @@ const Button = styled.button`
 	font-weight: 600;
 `
 
-const Cart = () => {
+const Cart = ({clearCart}) => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
@@ -215,6 +216,7 @@ const Cart = () => {
 	//     addBillingInfo({ ...stripeData})
 	//   );
 	// };
+
 
 	return (
 		<Container className="text-white font-play">
