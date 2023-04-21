@@ -12,18 +12,19 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    increaseQuantity: (state, {payload}) => {
+     const product = state.products.find((product) => product._id === payload._id)
+     product.quantity = product.quantity +1;
+    },
+    decreaseQuantity: (state, action) => {
+      const product = state.products.find((item) => item._id === action.payload._id);
+      product.quantity = product.quantity - 1;
+    },
+     // WORKS!!!
     clearCart: (state) => {
       state.products = [];
       state.quantity = 0;
       state.total = 0;
-    },
-    increaseQuantity: (state, {payload}) => {
-      const product = state.products.find((item) => item._id === payload._id);
-      product.quantity = product.quantity + 1;
-    },
-    decreaseQuantity: (state, {payload}) => {
-      const product = state.products.find((item) => item._id === payload._id);
-      product.quantity = product.quantity - 1;
     },
     // WORKS!!!
     addProduct: (state, action) => {

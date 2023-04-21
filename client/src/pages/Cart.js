@@ -182,13 +182,7 @@ const Cart = () => {
   const dispatch = useDispatch()
 
 
-	const handleQuantity = (type) => {
-		if (type === 'dec') {
-			quantity > 1 && setQuantity(quantity - 1)
-		} else {
-			setQuantity(quantity + 1)
-		}
-	}
+
 
 	useEffect(() => {
 		dispatch(calculateTotal())
@@ -293,12 +287,12 @@ const Cart = () => {
 									<ProductAmountContainer>
 										<Add
 											className="hover:text-green-500"
-								
+											
 										/>
 										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove
 											className="hover:text-red-500"
-											onClick={() => handleQuantity('dec')}
+											
 										/>
 									</ProductAmountContainer>
 									<ProductPrice>
@@ -314,7 +308,9 @@ const Cart = () => {
 						))}
 
 						<Hr />
-						<button className='border rounded p-4 mt-5 ml-[50%]'>Clear Cart</button>
+						<button onClick={() => {
+							dispatch(clearCart())
+						}}  className='border rounded p-4 mt-5 ml-[50%]'>Clear Cart</button>
 					</Info>
 					<Summary>
 						<SummaryTitle className="text-2xl text-blue-400">
