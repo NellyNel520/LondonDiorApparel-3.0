@@ -7,8 +7,12 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../services/api'
+import { clearCart, increaseQuantity, decreaseQuantity, removeItem, calculateTotal } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 import StripeCheckout from 'react-stripe-checkout'
 import { userRequest } from '../services/requestMethods'
+
+
 
 // import { useHistory } from "react-router";
 
@@ -168,13 +172,14 @@ const Button = styled.button`
 	font-weight: 600;
 `
 
-const Cart = ({clearCart}) => {
+const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
 	const [stripeData, setStripeData] = useState({})
 	let navigate = useNavigate()
-	// const history = useHistory();
+  const dispatch = useDispatch()
+
 
 	const handleQuantity = (type) => {
 		if (type === 'dec') {
@@ -183,6 +188,14 @@ const Cart = ({clearCart}) => {
 			setQuantity(quantity + 1)
 		}
 	}
+
+	useEffect(() => {
+
+	}, [])
+
+	
+
+
 
 	const onToken = (token) => {
 		setStripeToken(token)
@@ -295,6 +308,7 @@ const Cart = ({clearCart}) => {
 						))}
 
 						<Hr />
+						<button className='border rounded p-4 mt-5 ml-[50%]'>Clear Cart</button>
 					</Info>
 					<Summary>
 						<SummaryTitle className="text-2xl text-blue-400">

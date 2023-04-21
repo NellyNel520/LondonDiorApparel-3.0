@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from './redux/userRedux';
+import { logout, clearCart } from './redux/userRedux';
 // import { clearCart } from "./redux/cartRedux";
 import { useNavigate } from 'react-router-dom'
 import Success from './pages/Success';
@@ -32,6 +32,13 @@ function App() {
     dispatch(logout())
     navigate("/")
 	}
+
+  // const clearCart = (e) => {
+	// 	//Reset all auth related state and clear localStorage
+  //   e.preventDefault();
+  //   dispatch(clearCart())
+  //   navigate("/cart")
+	// }
 
 
 	// // Clear Cart
