@@ -33,6 +33,7 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       state.products = state.products.filter((item) => item._id !== itemId);
     },
+    // WORKS!!
     calculateTotal: (state) => {
       let quantity = 0
       let total = 0 

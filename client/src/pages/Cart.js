@@ -175,6 +175,7 @@ const Button = styled.button`
 const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
+	
 	const [stripeToken, setStripeToken] = useState(null)
 	const [stripeData, setStripeData] = useState({})
 	let navigate = useNavigate()
@@ -190,8 +191,8 @@ const Cart = () => {
 	}
 
 	useEffect(() => {
-
-	}, [])
+		dispatch(calculateTotal())
+	})
 
 	
 
@@ -292,7 +293,7 @@ const Cart = () => {
 									<ProductAmountContainer>
 										<Add
 											className="hover:text-green-500"
-											onClick={() => handleQuantity('inc')}
+											
 										/>
 										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove
@@ -303,6 +304,11 @@ const Cart = () => {
 									<ProductPrice>
 										${product.price * product.quantity}
 									</ProductPrice>
+
+									<button className="border rounded p-3 mt-6" onClick={() => {
+										dispatch(removeItem
+										(product._id))
+									}}>delete</button>
 								</PriceDetail>
 							</Product>
 						))}
