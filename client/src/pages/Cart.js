@@ -293,7 +293,7 @@ const Cart = () => {
 									<ProductAmountContainer>
 										<Add
 											className="hover:text-green-500"
-											
+								
 										/>
 										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove
@@ -322,7 +322,7 @@ const Cart = () => {
 						</SummaryTitle>
 						<SummaryItem className="text-xl">
 							<SummaryItemText>Subtotal:</SummaryItemText>
-							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total.toFixed(2)}</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText>Estimated Shipping:</SummaryItemText>
@@ -336,7 +336,7 @@ const Cart = () => {
 							<SummaryItemText type="total" className="text-blue-400 text-xl">
 								Total:
 							</SummaryItemText>
-							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total.toFixed(2)}</SummaryItemPrice>
 						</SummaryItem>
 						<StripeCheckout
 							name="London Dior Apparel"
