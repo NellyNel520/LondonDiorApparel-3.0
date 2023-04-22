@@ -175,7 +175,6 @@ const Button = styled.button`
 const Cart = () => {
 	const cart = useSelector((state) => state.cart)
 	const [quantity, setQuantity] = useState(1)
-	
 	const [stripeToken, setStripeToken] = useState(null)
 	const [stripeData, setStripeData] = useState({})
 	let navigate = useNavigate()
@@ -237,7 +236,7 @@ const Cart = () => {
 						</Link>
 					</TopButton>
 					<TopTexts>
-						<TopText>Shopping Bag(2)</TopText>
+						<TopText>Shopping Bag({cart.quantity})</TopText>
 						<TopText>Your Wishlist(12)</TopText>
 					</TopTexts>
 
@@ -263,6 +262,7 @@ const Cart = () => {
 					<Info>
 						<Hr />
 						{cart.products.map((product) => (
+						
 							<Product className="mt-8 mb-8">
 								<ProductDetail>
 									<Image src={product.img} />

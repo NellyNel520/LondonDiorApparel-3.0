@@ -12,6 +12,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    // Currently stuck unable to adjust item quantity once inside cart
     increaseQuantity: (state, {payload}) => {
      const product = state.products.find((product) => product._id === payload._id)
      product.quantity = product.quantity +1;
@@ -20,6 +21,8 @@ const cartSlice = createSlice({
       const product = state.products.find((item) => item._id === action.payload._id);
       product.quantity = product.quantity - 1;
     },
+
+    
      // WORKS!!!
     clearCart: (state) => {
       state.products = [];

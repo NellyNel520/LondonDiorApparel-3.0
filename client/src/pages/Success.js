@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { userRequest } from '../services/requestMethods'
+import { useDispatch } from "react-redux";
+import { clearCart } from "../redux/cartRedux";
 // import client from /seriveces/api
 
 const Container = styled.div`
@@ -33,12 +35,12 @@ const Success = () => {
 	const cart = location.state.products
 	const currentUser = useSelector((state) => state.user.currentUser)
 	const [orderId, setOrderId] = useState(null)
-
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const createOrder = async () => {
 			try {
-				const res = await userRequest.post("orders/new", {
+				const res = await userRequest.post('orders/new', {
 					userId: currentUser._id,
 					products: cart.products.map((item) => ({
 						productId: item._id,
@@ -52,28 +54,51 @@ const Success = () => {
 			} catch {}
 		}
 		data && createOrder()
+		dispatch(clearCart())
+		
 	}, [cart, data, currentUser])
 
-	return (
-		<Container>
-			<Wrapper>
-				<div className="flex justify-center text-black`">
-					<div className="text-center">
-						<div className="text-4xl">Success! </div>
-						{/* <div> Your order is being processed. Thank you for shopping with London Dior Apparel */}
-						{/* </div> */}
-						{orderId
-							? `Order has been created successfully. Your order number is ${orderId}`
-							: `Successfull. Your order is being prepared...`}
-
-						<Link to={'/'}>
-							<button className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
-								Go to Homepage
-							</button>
-						</Link>
+	let orderConfirmed
+	if(orderId) {
+		orderConfirmed = (	<Wrapper>
+			<div className="flex justify-center text-black`">
+				<div className="text-center">
+					<div className="text-4xl mb-4 ">Success! </div>
+					{/* <div> Your order is being processed. Thank you for shopping with London Dior Apparel */}
+					{/* </div> */}
+					<div className="text-lg font-play py-3">
+						Your order has been created successfully and is being processed.
+						Your order number is{' '}
+						<span className="text-blue-600 text-[1.5rem]">{orderId}</span>
+						<br />
+						<div>
+							Thank you {currentUser.name} for shopping with <br />
+							<span className='font-ari text-3xl'>London Dior Apparel</span>
+						</div>
 					</div>
+					<Link to={'/'}>
+						<button className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
+							Go to Homepage
+						</button>
+					</Link>
 				</div>
-			</Wrapper>
+			</div>
+		</Wrapper>)
+	}
+	
+	const error = (
+		<Wrapper>
+			<div>something went wrong</div>
+			<button className='border rounded p-2'>Continue Shopping</button>
+		</Wrapper>
+	)
+
+	
+	
+
+
+	return (
+		<Container> {orderId ? orderConfirmed : error}
 		</Container>
 	)
 }
