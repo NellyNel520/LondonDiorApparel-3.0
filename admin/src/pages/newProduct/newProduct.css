@@ -4,6 +4,7 @@
 
 .addProductForm {
   margin-top: 10px;
+  
 }
 
 .addProductItem {
@@ -29,7 +30,7 @@
 
 .addProductButton {
   margin-top: 10px;
-  padding: 7px 10px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
   background-color: darkblue;
