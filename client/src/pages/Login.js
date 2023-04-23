@@ -1,13 +1,11 @@
-import React from 'react'
+import { useState } from 'react'
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import { SignInUser } from '../services/Auth'
 import { Link } from 'react-router-dom'
-import { login } from '../redux/apiCalls';
 import { useDispatch, useSelector } from "react-redux";
-
-
+import { login } from '../redux/apiCalls'
 
 
 const Container = styled.div`
@@ -34,8 +32,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  ${'' /* font-size: 24px; */}
-  ${'' /* font-weight: 300; */}
+  font-size: 24px;
+  font-weight: 300;
 `;
 
 const Form = styled.form`
@@ -68,47 +66,77 @@ const Links = styled.a`
   text-align: center;
 `;
 
-// const Error = styled.span`
-//   color: red;
-// `;
 
-const Login = () => {
-  let navigate = useNavigate()
-  const [name, setName] = useState("");
+const Login = ({ setUser }) => {
+	let navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
-
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { name, email,  });
+    login(dispatch, { email, password });
+    navigate("/")
   };
 
+	
 
-  return (
- 
-  <Container className='font-play'>
-    <Wrapper>
-      <Title className='text-center text-[3rem] text-blue-500'>SIGN IN</Title>
-      <Form>
-        <Input 
-        placeholder='Email' 
-        onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input 
-        placeholder='Password'  
-        onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button onClick={handleClick} className='rounded'>LOGIN</Button>
-        <Links>DO NOT YOU REMEMBER THE PASSWORD?</Links>
-        <Links><Link to={"/register"}>CREATE A NEW ACCOUNT</Link></Links>
-      </Form>
-    </Wrapper>
-  </Container>
- 
-  )
+	return (
+    <Container>
+      <Wrapper>
+    <div>
+		<div className="signin-cont font-play">
+			<div className="signin-wrapper">
+				<div className="text-center text-5xl text-blue-500 font-bold font-play pb-[2rem]">
+					SIGN IN
+				</div>
+				<form className="flex-wrap font-play">
+					<div className="text-center justify-center">
+						<div className="flex justify-center input-wrapper text-xl pb-3">
+							<label htmlFor="email" className="pr-2">
+								Email:
+							</label>
+							<input
+								onChange={(e) => setEmail(e.target.value)}
+								name="email"
+								type="email"
+								placeholder="example@example.com"
+								// value={formValues.email}
+								required
+							/>
+						</div>
+						<div className="flex input-wrapper justify-center text-center text-xl pb-5">
+							<label htmlFor="password" className="pr-2">
+								Password:
+							</label>
+							<input
+								onChange={(e) => setPassword(e.target.value)}
+								type="password"
+								name="password"
+								// value={formValues.password}
+								required
+							/>
+						</div>
+						<button 
+              onClick={handleClick}
+              disabled={isFetching}
+							className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+						>
+							Sign In
+						</button>
+						<div className='text-bold underline hover:text-blue-600'>FORGOT YOUR PASSWORD?</div>
+						<Link to={"/register"}>
+							<div className='text-bold underline hover:text-blue-600'>CREATE A NEW ACCOUNT</div>
+						</Link>
+					</div>
+				</form>
+			</div>
+		</div>
+    </div>
+      </Wrapper>
+    </Container>
+	)
 }
 
 export default Login
