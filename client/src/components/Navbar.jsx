@@ -120,7 +120,7 @@ const Navbar = ({ user, handleLogOut }) => {
         </Center>
         <Right>
           <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
-          <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
+          <Link to={"/login"}><MenuItem className='hover:text-white'>LOGIN</MenuItem></Link>
 					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
 					<Link to={"/products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
 					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>

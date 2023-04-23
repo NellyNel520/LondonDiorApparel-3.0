@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
-import { userRequest, publicRequest } from '../services/requestMethods'
+import { userRequest } from '../services/requestMethods'
 // import client from /seriveces/api
 
 const Container = styled.div`
