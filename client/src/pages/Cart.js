@@ -3,14 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate, Link } from 'react-router-dom'
 import { mobile } from '../responsive'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-
-
 import axios from 'axios'
-import Client from '../services/api'
-
+import { clearCart, removeItem } from '../redux/cartRedux'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 const KEY =
 	'pk_test_51MsoK7ApFenuQy8MR8LgDNJu3AtBcuO8LjCDKeQn10hJ6EE8p0G29GkIdTYBYk8EOQsYFvMpOXvOHMFeDt4FN4kY00vus1QbyV'
@@ -174,6 +172,8 @@ const Cart = () => {
 	const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
 	let navigate = useNavigate()
+	const dispatch = useDispatch()
+
 	// const history = useHistory();
 
 	const handleQuantity = (type) => {
@@ -189,29 +189,6 @@ const Cart = () => {
 	}
 	console.log(stripeToken)
 
-	// useEffect(() => {
-	// 	const makeRequest = async () => {
-	// 		try {
-	// 			const response = await userRequest.post(
-	// 				'/checkout/payment', {
-	//           tokenId: stripeToken.id,
-	//           amount: cart.total*100,
-
-	//         }
-	// 			)
-	//       console.log(response.data)
-	//       navigate('/success')
-	//       // history.push("/success", {
-	//       //   stripeData: response.data,
-	//       //   products: cart,
-	//       // })
-	// 		} catch (err) {
-	// 			console.log(err)
-	// 		}
-	// 	}
-	//   stripeToken && makeRequest()
-	// }, [stripeToken, cart.total, navigate])
-
 	useEffect(() => {
 		const makeRequest = async () => {
 			try {
@@ -223,7 +200,13 @@ const Cart = () => {
 					}
 				)
 				console.log(response.data)
-				navigate('/success')
+				navigate('/success', {
+					state: {
+						stripeData: response.data,
+						products: cart,
+					},
+				})
+
 				// history.push("/success", {
 				//   stripeData: response.data,
 				//   products: cart,
@@ -234,6 +217,15 @@ const Cart = () => {
 		}
 		stripeToken && makeRequest()
 	}, [stripeToken, cart.total, navigate])
+
+	const handleClearCart = () => {
+		dispatch(clearCart())
+	}
+
+	// const deleteItem = (product) => {
+	// 	dispatch(removeItem(product))
+	// }
+	
 	return (
 		<Container className="text-white font-play">
 			<Wrapper>
@@ -282,7 +274,7 @@ const Cart = () => {
 										<ProductId>
 											<b className="text-blue-400">ID:</b> {product._id}
 										</ProductId>
-										<div className='flex'>
+										<div className="flex">
 											<b className="text-blue-400 pr-3">Color:</b>
 											<ProductColor className="mt-2" color={product.color} />
 										</div>
@@ -297,14 +289,26 @@ const Cart = () => {
 										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove onClick={() => handleQuantity('dec')} />
 									</ProductAmountContainer>
+
 									<ProductPrice>
 										${product.price * product.quantity}
 									</ProductPrice>
+									<br />
+								
+									
+									
+									
 								</PriceDetail>
 							</Product>
 						))}
 
 						<Hr />
+						<button
+							onClick={handleClearCart}
+							className="border rounded p-2 mt-6 ml-[50%]"
+						>
+							Clear Cart
+						</button>
 					</Info>
 					<Summary>
 						<SummaryTitle className="text-2xl text-blue-400">

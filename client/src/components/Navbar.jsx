@@ -93,7 +93,7 @@ const Navbar = ({ user, handleLogOut }) => {
           </MenuItem></Link>
           <Link to={"/"}><MenuItem><PersonIcon /></MenuItem></Link>
 					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
-					<Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+					<Link to={"/products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
 					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
           <Link to={"/cart"}><MenuItem className='hover:text-white'>
             <Badge badgeContent={quantity} color="primary">
@@ -122,7 +122,7 @@ const Navbar = ({ user, handleLogOut }) => {
           <Link to={"/register"}><MenuItem className='hover:text-white'>REGISTER</MenuItem></Link>
           <Link to={"/login"}><MenuItem className='hover:text-white'>SIGN IN</MenuItem></Link>
 					<Link to={"/"}><MenuItem className='hover:text-white'>HOME</MenuItem></Link>
-					<Link to={"/all-products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
+					<Link to={"/products"}><MenuItem className='hover:text-white'>PRODUCTS</MenuItem></Link>
 					<Link to={"/about"}><MenuItem className='hover:text-white'>ABOUT</MenuItem></Link>
           <Link to={"/cart"}><MenuItem className='hover:text-white'>
             <Badge badgeContent={quantity} color="primary">

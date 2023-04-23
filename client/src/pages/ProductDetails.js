@@ -2,7 +2,6 @@ import { Add, Remove } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
 import Rating from '../components/Rating'
-import Newsletter from '../components/Newsletter'
 import { mobile } from '../responsive'
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -250,7 +249,6 @@ const ProductDetails = () => {
 					</AddContainer>
 				</InfoContainer>
 			</Wrapper>
-			<Newsletter />
 		</Container>
 	)
 }
