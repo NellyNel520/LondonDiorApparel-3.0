@@ -10,7 +10,7 @@ export default function Topbar() {
     <div className="topbar">
       <div className="topbarWrapper">
         <div className="topLeft">
-          <span className="logo">LDA Admin</span>
+          <span className="logo font-ari text-blue-500">London Dior Apparel Admin</span>
         </div>
         <div className="topRight">
           <div className="topbarIconContainer">
