@@ -10,6 +10,7 @@ const Home = () => {
       {/* <LogoHeader /> */}
       <Slider /> 
       <Categories />
+      <div className='text-white text-[4rem] font-play text-center'>Featured Products</div>
       <Products />
     </div>
   )

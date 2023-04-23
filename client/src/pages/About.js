@@ -42,7 +42,7 @@ const About = () => {
 								forward to serving you and helping you find the perfect t-shirt
 								to express your unique style.
 							</p>
-							<Link to={'/all-products'}>
+							<Link to={'/products'}>
 								<button className="bg-white text-blue-400 py-2 px-2 mt-6 hover:bg-blue-400 hover:text-white rounded">
 									SHOP NOW
 								</button>

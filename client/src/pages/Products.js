@@ -59,7 +59,8 @@ const ProductPage = () => {
 
   return (
     <Container className='font-play'>
-      <Title className='text-6xl text-center pt-5 text-blue-400 font-play'>{category}</Title>
+      <Title className='text-6xl text-center pt-5 text-blue-400 font-play'>Products</Title>
+      <div className='text-blue-400 pl-8 text-[2rem]'>{category}</div>
       <FilterContainer>
         <Filter >
           <FilterText>Filter Products:</FilterText>

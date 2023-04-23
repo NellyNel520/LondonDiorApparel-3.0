@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
-import { clearCart, removeItem } from '../redux/cartRedux'
+import { calculateTotal, clearCart, removeItem } from '../redux/cartRedux'
 import DeleteIcon from '@mui/icons-material/Delete'
 
 const KEY =
@@ -169,25 +169,23 @@ const Button = styled.button`
 
 const Cart = () => {
 	const cart = useSelector((state) => state.cart)
-	const [quantity, setQuantity] = useState(1)
+	// const [quantity, setQuantity] = useState(1)
 	const [stripeToken, setStripeToken] = useState(null)
 	let navigate = useNavigate()
 	const dispatch = useDispatch()
 
-	// const history = useHistory();
 
-	const handleQuantity = (type) => {
-		if (type === 'dec') {
-			quantity > 1 && setQuantity(quantity - 1)
-		} else {
-			setQuantity(quantity + 1)
-		}
-	}
+
+	useEffect(() => {
+		dispatch(calculateTotal())
+	})
 
 	const onToken = (token) => {
 		setStripeToken(token)
 	}
 	console.log(stripeToken)
+
+	
 
 	useEffect(() => {
 		const makeRequest = async () => {
@@ -200,17 +198,10 @@ const Cart = () => {
 					}
 				)
 				console.log(response.data)
-				navigate('/success', {
-					state: {
-						stripeData: response.data,
-						products: cart,
-					},
+				navigate("/success", {
+					state: { stripeData: response.data, products: cart},
 				})
-
-				// history.push("/success", {
-				//   stripeData: response.data,
-				//   products: cart,
-				// })
+				dispatch(clearCart())
 			} catch (err) {
 				console.log(err)
 			}
@@ -222,9 +213,7 @@ const Cart = () => {
 		dispatch(clearCart())
 	}
 
-	// const deleteItem = (product) => {
-	// 	dispatch(removeItem(product))
-	// }
+	
 	
 	return (
 		<Container className="text-white font-play">
@@ -237,7 +226,7 @@ const Cart = () => {
 						</Link>
 					</TopButton>
 					<TopTexts>
-						<TopText>Shopping Bag(2)</TopText>
+						<TopText>Shopping Bag({cart.quantity})</TopText>
 						<TopText>Your Wishlist(12)</TopText>
 					</TopTexts>
 
@@ -285,19 +274,20 @@ const Cart = () => {
 								</ProductDetail>
 								<PriceDetail>
 									<ProductAmountContainer>
-										<Add onClick={() => handleQuantity('inc')} />
+										<Add />
 										<ProductAmount>{product.quantity}</ProductAmount>
-										<Remove onClick={() => handleQuantity('dec')} />
+										<Remove />
 									</ProductAmountContainer>
 
 									<ProductPrice>
 										${product.price * product.quantity}
 									</ProductPrice>
 									<br />
-								
-									
-									
-									
+									<button 
+									onClick={() => {
+										dispatch(removeItem(product._id))
+									}}
+									className='border rounded p-2'>Delete</button>
 								</PriceDetail>
 							</Product>
 						))}
@@ -316,7 +306,7 @@ const Cart = () => {
 						</SummaryTitle>
 						<SummaryItem className="text-xl">
 							<SummaryItemText>Subtotal:</SummaryItemText>
-							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total.toFixed(2)}</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText>Estimated Shipping:</SummaryItemText>
@@ -330,7 +320,7 @@ const Cart = () => {
 							<SummaryItemText type="total" className="text-blue-400 text-xl">
 								Total:
 							</SummaryItemText>
-							<SummaryItemPrice>${cart.total}</SummaryItemPrice>
+							<SummaryItemPrice>${cart.total.toFixed(2)}</SummaryItemPrice>
 						</SummaryItem>
 						<StripeCheckout
 							name="London Dior Apparel"
