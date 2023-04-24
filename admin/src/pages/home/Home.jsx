@@ -8,10 +8,10 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 
-export default function Home() {
+export default function Home({handleLogOut}) {
 	return (
 		<div className="home">
-			<Topbar />
+			<Topbar handleLogOut={handleLogOut}/>
 			<div className='flex'>
 				<Sidebar />
         <div className='cont'>

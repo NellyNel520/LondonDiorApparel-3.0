@@ -17,7 +17,7 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-	width: 40%;
+	min-width: 40%;
 	padding: 20px;
 	background-color: rgba(255, 255, 255, 0.8);
 	border-radius: 20px;
@@ -70,7 +70,7 @@ export default function NewProduct() {
 						New Product
 					</h1>
 
-					<form className="addProductForm pl-[20%] text-center">
+					<form className="addProductForm pl-[20%] text-center flex-wrap">
 						<div className="addProductItem">
 							<label>Image</label>
 							<input type="file" id="file" />

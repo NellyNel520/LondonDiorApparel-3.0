@@ -25,7 +25,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  width: 25%;
+  min-width: 25%;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 20px;

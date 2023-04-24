@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Switch, Redirect, Navigate } from 'react-router-dom'
+import { Switch, Redirect, Navigate } from 'react-router-dom' 
 import React from 'react'
 import Sidebar from './components/sidebar/Sidebar'
 import Topbar from './components/topbar/Topbar'
@@ -12,25 +12,38 @@ import ProductList from './pages/productList/ProductList'
 import Product from './pages/product/Product'
 import NewProduct from './pages/newProduct/NewProduct'
 import Login from '../src/pages/login/Login'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout } from './redux/userRedux';
 
 const App = () => {
 	// const admin = useSelector((state) => state.user.currentUser.isAdmin);
+	const user = useSelector((state) => state.user.currentUser)
+	const dispatch = useDispatch()
+  let navigate = useNavigate()
+
+	
+  const handleLogOut = (e) => {
+		//Reset all auth related state and clear localStorage
+    e.preventDefault();
+    dispatch(logout())
+    navigate("/")
+	}
+
 	return (
 		<div>
 			<Routes>
-				<Route path="/login" element={<Login />} />
-
-				<Route path="/" element={<Home />} />
-				<Route path="/users" element={<UserList />} />
-				<Route path="/user/:userId" element={<User />} />
-				<Route path="/newUser" element={<NewUser />} />
+				<Route path="/" element={<Login />} />
+				<Route path="/home" element={<Home handleLogOut={handleLogOut}/>} />
+				 <Route path="/users" element={ <UserList />} /> 
+				<Route path="/user/:userId" element={ <User />} />
+				<Route path="/newUser" element={ <NewUser /> } />
 				<Route path="/product/:productId" element={<Product />} />
-        <Route path="/products" element={<ProductList />} />
-				<Route path="/newproduct" element={<NewProduct />} />
+        <Route path="/products" element={<ProductList />} /> 
+				<Route path="/newproduct" element={<NewProduct />} /> 
 			</Routes>
 		</div>
 	)
-}
+} 
 
 export default App
