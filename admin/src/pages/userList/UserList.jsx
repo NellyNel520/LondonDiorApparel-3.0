@@ -8,7 +8,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 
-export default function UserList() {
+export default function UserList({handleLogOut}) {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -63,7 +63,7 @@ export default function UserList() {
 
   return (
     <div>
-    <Topbar />
+    <Topbar handleLogOut={handleLogOut}/>
       <div className="flex">
       <Sidebar />
 

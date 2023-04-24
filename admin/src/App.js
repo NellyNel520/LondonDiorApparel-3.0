@@ -35,12 +35,12 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Login />} />
 				<Route path="/home" element={<Home handleLogOut={handleLogOut}/>} />
-				 <Route path="/users" element={ <UserList />} /> 
-				<Route path="/user/:userId" element={ <User />} />
-				<Route path="/newUser" element={ <NewUser /> } />
-				<Route path="/product/:productId" element={<Product />} />
-        <Route path="/products" element={<ProductList />} /> 
-				<Route path="/newproduct" element={<NewProduct />} /> 
+				 <Route path="/users" element={ <UserList handleLogOut={handleLogOut}/>} /> 
+				<Route path="/user/:userId" element={ <User handleLogOut={handleLogOut}/>} />
+				<Route path="/newUser" element={ <NewUser handleLogOut={handleLogOut}/> } />
+				<Route path="/product/:productId" element={<Product handleLogOut={handleLogOut}/>} />
+        <Route path="/products" element={<ProductList handleLogOut={handleLogOut}/>} /> 
+				<Route path="/newproduct" element={<NewProduct handleLogOut={handleLogOut}/>} /> 
 			</Routes>
 		</div>
 	)

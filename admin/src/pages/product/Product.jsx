@@ -8,10 +8,10 @@ import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 
 
-export default function Product() {
+export default function Product({handleLogOut}) {
 	return (
 		<div>
-			<Topbar />
+			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
 

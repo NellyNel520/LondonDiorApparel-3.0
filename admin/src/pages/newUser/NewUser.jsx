@@ -58,10 +58,10 @@ const Links = styled.a`
 	text-align: center;
 `
 
-export default function NewUser() {
+export default function NewUser({handleLogOut}) {
 	return (
 		<div className="newUser">
-			<Topbar />
+			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
 				<Container>

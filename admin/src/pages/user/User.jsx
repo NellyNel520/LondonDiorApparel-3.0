@@ -11,10 +11,10 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 
-export default function User() {
+export default function User({handleLogOut}) {
 	return (
 		<div>
-			<Topbar />
+			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
 
