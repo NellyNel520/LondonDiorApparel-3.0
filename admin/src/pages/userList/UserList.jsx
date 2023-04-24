@@ -4,6 +4,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Sidebar from '../../components/sidebar/Sidebar'
+import Topbar from '../../components/topbar/Topbar'
+import '../../styles/App.css'
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
@@ -59,6 +62,12 @@ export default function UserList() {
   ];
 
   return (
+    <div>
+    <Topbar />
+      <div className="flex">
+      <Sidebar />
+
+     
     <div className="userList">
       <DataGrid
         rows={data}
@@ -67,6 +76,8 @@ export default function UserList() {
         pageSize={8}
         checkboxSelection
       />
+    </div>
+    </div>
     </div>
   );
 }
