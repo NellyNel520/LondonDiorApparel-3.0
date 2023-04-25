@@ -7,8 +7,47 @@ import WidgetLg from '../../components/widgetLg/WidgetLg'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
+import { useEffect, useMemo, useState } from "react";
+import { userRequest } from '../../services/requestMethods'
+
 
 export default function Home({handleLogOut}) {
+	const [userStats, setUserStats] = useState([]);
+
+	const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+	useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("/users/stats");
+        res.data.map((item) =>
+          setUserStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], "Active User": item.total },
+          ])
+        );
+      } catch {}
+    };
+    getStats();
+		console.log(userStats)
+  }, [MONTHS]);
+
 	return (
 		<div className="home">
 			<Topbar handleLogOut={handleLogOut}/>
