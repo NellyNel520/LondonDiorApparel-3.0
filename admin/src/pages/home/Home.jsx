@@ -56,7 +56,7 @@ export default function Home({handleLogOut}) {
         <div className='cont'>
 				  <FeaturedInfo />
 				  <Chart
-					  data={userData}
+					  data={userStats}
 					  title="User Analytics"
 					  grid
 					  dataKey="Active User"
