@@ -11,7 +11,7 @@ Router.get('/', (req, res) => res.send('This is root babyyyyyyy!'))
 
 
 Router.use("/auth", AuthRouter)
-Router.use("/user", UserRouter)
+Router.use("/users", UserRouter)
 Router.use("/products", ProductRouter)
 Router.use("/cart", CartRouter)
 Router.use("/orders", OrderRouter)

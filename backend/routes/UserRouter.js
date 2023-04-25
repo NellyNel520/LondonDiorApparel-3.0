@@ -9,7 +9,7 @@ const {
 router.put('/:id', verifyTokenAndAuthorization, controller.updateUser)
 router.delete('/:id', verifyTokenAndAuthorization, controller.deleteUser)
 router.get('/find/:id', verifyTokenAndAdmin, controller.getUserById)
-router.get('/all', verifyTokenAndAdmin, controller.getAllUsers)
+router.get('/', verifyTokenAndAdmin, controller.getAllUsers)
 router.get('/stats', verifyTokenAndAdmin, controller.getUserStats)
 
 module.exports = router

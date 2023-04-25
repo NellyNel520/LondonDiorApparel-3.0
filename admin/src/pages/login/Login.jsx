@@ -68,12 +68,12 @@ const Links = styled.a`
 `;
 
 
-const Login = ({ setUser }) => {
+const Login = () => {
 	let navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
+  // const { isFetching, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -121,7 +121,7 @@ const Login = ({ setUser }) => {
 						</div>
 						<button 
               onClick={handleClick}
-              disabled={isFetching}
+              
 							className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 						>
 							Sign In
