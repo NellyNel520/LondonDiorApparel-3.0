@@ -40,7 +40,7 @@ const getUserById = async (req, res) => {
     const user = await User.findById(req.params.id);
     const { password, ...others } = user._doc;
     res.status(200).json(others);
-  } catch (err) {
+  } catch (err) { 
     res.status(500).json(err);
   }
 }

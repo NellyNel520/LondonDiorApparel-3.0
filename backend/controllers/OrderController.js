@@ -54,8 +54,11 @@ const getUserOrders = async (req, res) => {
 // Get all  (admin purpose)
 
 const getAllOrders = async (req, res) => {
+  const query = req.query.new
 	try {
-    const orders = await Order.find();
+    const orders = query
+    ? await Order.find().sort({_id: -1}).limit(10)
+    : await Order.find()
     res.status(200).json(orders);
   } catch (err) {
     res.status(500).json(err);
