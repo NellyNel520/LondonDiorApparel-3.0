@@ -4,7 +4,6 @@ import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 import { addProduct } from '../../redux/apiCalls'
 import { useDispatch } from 'react-redux'
-import PublishIcon from '@mui/icons-material/Publish'
 import { useState } from 'react'
 import {
 	getStorage,
@@ -14,7 +13,7 @@ import {
 } from 'firebase/storage'
 import app from '../../firebase'
 
-export default function NewProduct({ handleLogOut }) {
+const NewProduct = ({ handleLogOut }) => {
 	const [inputs, setInputs] = useState({})
 	const [file, setFile] = useState(null)
 	const [cat, setCat] = useState([])
@@ -177,3 +176,5 @@ export default function NewProduct({ handleLogOut }) {
 		</div>
 	)
 }
+
+export default NewProduct
