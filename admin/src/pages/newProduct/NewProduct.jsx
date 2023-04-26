@@ -11,13 +11,15 @@ import {
 	ref,
 	uploadBytesResumable,
 	getDownloadURL,
-} from 'firebase/storage';
+} from 'firebase/storage'
 import app from '../../firebase'
 
 export default function NewProduct({ handleLogOut }) {
 	const [inputs, setInputs] = useState({})
 	const [file, setFile] = useState(null)
 	const [cat, setCat] = useState([])
+	const [color, setColor] = useState([])
+	const [size, setSize] = useState([])
 	const dispatch = useDispatch()
 
 	const handleChange = (e) => {
@@ -27,6 +29,12 @@ export default function NewProduct({ handleLogOut }) {
 	}
 	const handleCat = (e) => {
 		setCat(e.target.value.split(','))
+	}
+	const handleColor = (e) => {
+		setColor(e.target.value.split(','))
+	}
+	const handleSize = (e) => {
+		setSize(e.target.value.split(','))
 	}
 
 	const handleClick = (e) => {
@@ -54,7 +62,7 @@ export default function NewProduct({ handleLogOut }) {
 					case 'running':
 						console.log('Upload is running')
 						break
-						default:
+					default:
 				}
 			},
 			(error) => {
@@ -65,14 +73,22 @@ export default function NewProduct({ handleLogOut }) {
 				// For instance, get the download URL: https://firebasestorage.googleapis.com/...
 				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 					console.log('File available at', downloadURL)
-					// const product = { ...inputs, img: downloadURL, categories: cat };
-					// addProduct(product, dispatch);
+					const product = {
+						...inputs,
+						img: downloadURL,
+						categories: cat,
+						size: size,
+						color: color,
+					}
+					console.log(product)
+					addProduct(product, dispatch)
 				})
 			}
 		)
 	}
 
 	console.log(file)
+	console.log(inputs)
 	return (
 		<div className="newProduct ">
 			<Topbar handleLogOut={handleLogOut} />
@@ -89,6 +105,7 @@ export default function NewProduct({ handleLogOut }) {
 							<div className="productFormLeft">
 								<label>Product Name</label>
 								<input
+									name="title"
 									onChange={handleChange}
 									type="text"
 									placeholder="new shirt"
@@ -97,20 +114,22 @@ export default function NewProduct({ handleLogOut }) {
 
 								<label>Product Description</label>
 								<input
+									name="desc"
 									onChange={handleChange}
 									// value={formState.desc}
 									type="text"
 									placeholder="nice shirt"
 								/>
-								<label>Category</label>
+								<label>Categories</label>
 								<input
-									placeholder="t-shirt"
+									placeholder="t-shirt, long sleeve"
 									onChange={handleCat}
 									// value={formState.category}
 									type="text"
 								/>
 								<label>Price</label>
 								<input
+									name="price"
 									placeholder="$20.00"
 									onChange={handleChange}
 									// value={formState.price}
@@ -118,24 +137,27 @@ export default function NewProduct({ handleLogOut }) {
 								/>
 								<label>Size(s)</label>
 								<input
+									name="size"
 									placeholder="m,l"
-									onChange={handleChange}
+									onChange={handleSize}
 									// value={formState.size}
 									type="text"
 								/>
 								<label>Available Color(s)</label>
 								<input
+									name="color"
 									placeholder="blue"
-									onChange={handleChange}
+									onChange={handleColor}
 									// value={formState.color}
 									type="text"
 								/>
 								<label>Count In Stock</label>
 								<input
+									name="inStock"
 									placeholder="12"
 									onChange={handleChange}
 									// value={formState.inStock}
-									type="text"
+									type="number"
 								/>
 
 								<label for="file">Image</label>

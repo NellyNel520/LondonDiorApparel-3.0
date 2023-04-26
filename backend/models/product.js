@@ -12,8 +12,8 @@ const Product = new Schema(
 		color: [{ type: String, required: true }],
 		price: { type: Number, required: true },
 		inStock: { type: Number, default: true },
-		rating: { type: Number, required: true },
-		numReviews: { type: Number, required: true },
+		rating: { type: Number },
+		numReviews: { type: Number },
 	},
 	{ timestamps: true }
 )
