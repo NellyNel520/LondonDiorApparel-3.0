@@ -2,99 +2,105 @@ import './newProduct.css'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
-import styled from 'styled-components'
-import { mobile } from '../../responsive'
+import { addProduct } from '../../redux/apiCalls'
+import {useDispatch} from 'react-redux'
+import PublishIcon from '@mui/icons-material/Publish'
+import { useState } from "react";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const Container = styled.div`
-	width: 100vw;
-	height: 100vh;
-	background: linear-gradient(rgba(0, 150, 255, 0.5), rgba(0, 0, 0, 0.5)),
-		url('https://i.postimg.cc/Hkh6PLXN/LDA-Logo-Blue2nooffset.png') center;
-	background-size: cover;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`
+export default function NewProduct({ handleLogOut }) {
+	const [inputs, setInputs] = useState({});
+  const [file, setFile] = useState(null);
+  const [cat, setCat] = useState([]);
+  const dispatch = useDispatch();
 
-const Wrapper = styled.div`
-	min-width: 40%;
-	padding: 20px;
-	background-color: rgba(255, 255, 255, 0.8);
-	border-radius: 20px;
-	${mobile({ width: '75%' })}
-`
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const handleCat = (e) => {
+    setCat(e.target.value.split(","));
+  };
 
-const Title = styled.h1`
-	font-size: 24px;
-	font-weight: 300;
-`
 
-const Form = styled.form`
-	display: flex;
-	flex-direction: column;
-`
-
-const Input = styled.input`
-	flex: 1;
-	min-width: 40%;
-	margin: 10px 0px;
-	padding: 10px;
-`
-
-const Button = styled.button`
-	width: 40%;
-	border: none;
-	padding: 15px 20px;
-	background-color: #0ca2e2;
-	color: white;
-	cursor: pointer;
-`
-
-const Links = styled.a`
-	margin: 5px 0px;
-	font-size: 12px;
-	text-decoration: underline;
-	cursor: pointer;
-	text-align: center;
-`
-
-export default function NewProduct({handleLogOut}) {
 	return (
-	<div className="newProduct ">
-    <Topbar handleLogOut={handleLogOut}/>
-    <div className='flex'>
-    <Sidebar />
-		<Container className="font-play">
-			<Wrapper>
+		<div className="newProduct ">
+			<Topbar handleLogOut={handleLogOut} />
+			<div className="flex">
+				<Sidebar />
+
+				<div>
 					<h1 className="addProductTitle text-3xl text-center mb-6 font-play">
 						New Product
 					</h1>
 
-					<form className="addProductForm pl-[20%] text-center flex-wrap">
-						<div className="addProductItem">
-							<label>Image</label>
-							<input type="file" id="file" />
-						</div>
-						<div className="addProductItem">
-							<label>Name</label>
-							<input type="text" placeholder="Apple Airpods" />
-						</div>
-						<div className="addProductItem">
-							<label>Stock</label>
-							<input type="text" placeholder="123" />
-						</div>
-						<div className="addProductItem">
-							<label>Active</label>
-							<select name="active" id="active">
-								<option value="yes">Yes</option>
-								<option value="no">No</option>
-							</select>
-						</div>
-					</form>
-					<button className="addProductButton  ml-[42%]">Create</button>
-			</Wrapper>
-		</Container>
-    </div>
-	</div>
+					<div className="productBottom">
+						<form className="productForm">
+							<div className="productFormLeft">
+								<label>Product Name</label>
+								<input
+									onChange={handleChange}
+									type="text"
+									placeholder="new shirt"
+									// value={formState.title}
+								/>
+
+								<label>Product Description</label>
+								<input
+									onChange={handleChange}
+									// value={formState.desc}
+									type="text"
+									placeholder="nice shirt"
+								/>
+								<label>Category</label>
+								<input
+									placeholder="t-shirt"
+									onChange={handleCat}
+									// value={formState.category}
+									type="text"
+								/>
+								<label>Price</label>
+								<input
+									placeholder="$20.00"
+									onChange={handleChange}
+									// value={formState.price}
+									type="number"
+								/>
+								<label>Size(s)</label>
+								<input
+									placeholder="m,l"
+									onChange={handleChange}
+									// value={formState.size}
+									type="text"
+								/>
+								<label>Available Color(s)</label>
+								<input
+									placeholder="blue"
+									onChange={handleChange}
+									// value={formState.color}
+									type="text"
+								/>
+								<label>Count In Stock</label>
+								<input
+									placeholder="12"
+									onChange={handleChange}
+									// value={formState.inStock}
+									type="text"
+								/>
+							
+								<label for="file">Image</label>
+								<input
+									type="file"
+									id="file"
+									onChange={(e) => setFile(e.target.files[0])}
+								/>
+							<button className="productButton mt-3 ">Create</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	)
 }

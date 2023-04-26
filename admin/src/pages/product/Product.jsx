@@ -84,6 +84,7 @@ export default function Product({ handleLogOut }) {
 		}
 		getStats()
 	}, [productId, MONTHS])
+	console.log(pStats)
 
 	return (
 		<div>
@@ -100,6 +101,7 @@ export default function Product({ handleLogOut }) {
 					</div>
 					<div className="productTop">
 						<div className="productTopLeft">
+						{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
 							<Chart
 								data={productData}
 								dataKey="Sales"
