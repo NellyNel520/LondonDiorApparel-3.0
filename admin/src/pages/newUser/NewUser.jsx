@@ -5,8 +5,10 @@ import '../../styles/App.css'
 import { registerUser } from '../../redux/apiCalls'
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NewUser = ({ handleLogOut }) => {
+	let navigate = useNavigate()
 	const [inputs, setInputs] = useState({})
 	const dispatch = useDispatch()
 
@@ -17,13 +19,17 @@ const NewUser = ({ handleLogOut }) => {
 	}
 	console.log(inputs)
 
+	// axios call successful but not navigating to users page 
 	const handleClick = (e) => {
 		e.preventDefault()
 		const user = {
 			...inputs
 		}
 		console.log(user)
-		registerUser(user, dispatch)
+		registerUser(dispatch, user);
+		navigate("/users")
+		
+
 	}
 	return (
 		<div className="newUser">

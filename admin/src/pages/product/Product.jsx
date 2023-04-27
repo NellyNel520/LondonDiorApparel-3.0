@@ -11,20 +11,23 @@ import { useEffect, useMemo, useState } from 'react'
 import { userRequest } from '../../services/requestMethods'
 import { updateProduct } from '../../redux/apiCalls'
 import { useDispatch } from 'react-redux'
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from 'firebase/storage'
+import app from '../../firebase'
 
 export default function Product({ handleLogOut }) {
 	const location = useLocation()
 	const productId = location.pathname.split('/')[2]
 	const [pStats, setPStats] = useState([])
-
-	const [title, setTitle] = useState('')
-	const [desc, setDesc] = useState('')
-	const [img, setImg] = useState('')
-	const [category, setCategory] = useState('')
-	const [size, setSize] = useState('')
-	const [color, setColor] = useState('')
-	const [price, setPrice] = useState('')
-	const [inStock, setInStock] = useState('')
+	const [inputs, setInputs] = useState({})
+	const [file, setFile] = useState(null)
+	const [cat, setCat] = useState([])
+	const [color, setColor] = useState([])
+	const [size, setSize] = useState([])
 	const dispatch = useDispatch()
 
 	const product = useSelector((state) =>
@@ -33,20 +36,7 @@ export default function Product({ handleLogOut }) {
 
 	console.log(productId)
 
-	const handleUpdate = (e) => {
-		e.preventDefault()
-		updateProduct(dispatch, {
-			title,
-			desc,
-			img,
-			category,
-			size,
-			color,
-			price,
-			inStock,
-		})
-	}
-
+	
 	const MONTHS = useMemo(
 		() => [
 			'Jan',
@@ -86,6 +76,72 @@ export default function Product({ handleLogOut }) {
 	}, [productId, MONTHS])
 	console.log(pStats)
 
+	const handleChange = (e) => {
+		setInputs((prev) => {
+			return { ...prev, [e.target.name]: e.target.value }
+		})
+	}
+	const handleCat = (e) => {
+		setCat(e.target.value.split(','))
+	}
+	const handleColor = (e) => {
+		setColor(e.target.value.split(','))
+	}
+	const handleSize = (e) => {
+		setSize(e.target.value.split(','))
+	}
+
+	const handleClick = (e) => {
+		e.preventDefault()
+		const fileName = new Date().getTime() + file.name
+		const storage = getStorage(app)
+		const storageRef = ref(storage, fileName)
+		const uploadTask = uploadBytesResumable(storageRef, file)
+
+		// Register three observers:
+		// 1. 'state_changed' observer, called any time the state changes
+		// 2. Error observer, called on failure
+		// 3. Completion observer, called on successful completion
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				// Observe state change events such as progress, pause, and resume
+				// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				console.log('Upload is ' + progress + '% done')
+				switch (snapshot.state) {
+					case 'paused':
+						console.log('Upload is paused')
+						break
+					case 'running':
+						console.log('Upload is running')
+						break
+					default:
+				}
+			},
+			(error) => {
+				// Handle unsuccessful uploads
+			},
+			() => {
+				// Handle successful uploads on complete
+				// For instance, get the download URL: https://firebasestorage.googleapis.com/...
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					console.log('File available at', downloadURL)
+					const product = {
+						...inputs,
+						img: downloadURL,
+						categories: cat,
+						size: size,
+						color: color,
+					}
+					console.log(product)
+					updateProduct(product, productId, dispatch)
+				})
+			}
+		)
+	}
+
+
 	return (
 		<div>
 			<Topbar handleLogOut={handleLogOut} />
@@ -101,7 +157,7 @@ export default function Product({ handleLogOut }) {
 					</div>
 					<div className="productTop">
 						<div className="productTopLeft">
-						{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
+							{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
 							<Chart
 								data={productData}
 								dataKey="Sales"
@@ -134,66 +190,62 @@ export default function Product({ handleLogOut }) {
 						</div>
 					</div>
 
+
+
 					{/* update product form */}
 					<div className="productBottom">
 						<form className="productForm">
 							<div className="productFormLeft">
 								<label>Product Name</label>
 								<input
-									onChange={(e) => setTitle(e.target.value)}
-									// onChange={handleUpdate}
+									name="title"
+									onChange={handleChange}
 									type="text"
 									placeholder={product.title}
-									// value={formState.title}
 								/>
 
 								<label>Product Description</label>
 								<input
-									// onChange={handleUpdate}
-									// value={formState.desc}
+									name="desc"
 									type="text"
-									onChange={(e) => setDesc(e.target.value)}
+									onChange={handleChange}
 									placeholder={product.desc}
 								/>
 								<label>Category</label>
 								<input
-									onChange={(e) => setCategory(e.target.value)}
+									onChange={handleCat}
 									placeholder={product.categories}
-									// onChange={handleUpdate}
-									// value={formState.category}
+									name="categories"
 									type="text"
 								/>
 								<label>Price</label>
 								<input
-									onChange={(e) => setPrice(e.target.value)}
+									onChange={handleChange}
 									placeholder={product.price}
-									// onChange={handleUpdate}
-									// value={formState.price}
-									type="text"
+									name="price"
+									type="number"
 								/>
 								<label>Size(s)</label>
 								<input
-									onChange={(e) => setSize(e.target.value)}
+									// onChange={handleChange}
+									onChange={handleSize}
 									placeholder={product.size}
-									// onChange={handleUpdate}
-									// value={formState.size}
+									name="size"
 									type="text"
 								/>
 								<label>Available Color(s)</label>
 								<input
-									onChange={(e) => setColor(e.target.value)}
+									onChange={handleColor}
 									placeholder={product.color}
-									// onChange={handleUpdate}
-									// value={formState.color}
+									name="color"
 									type="text"
 								/>
 								<label>Count In Stock</label>
 								<input
-									onChange={(e) => setInStock(e.target.value)}
+									name="inStock"
 									placeholder={product.inStock}
-									// onChange={handleUpdate}
-									// value={formState.inStock}
-									type="text"
+									onChange={handleChange}
+									type="number"
 								/>
 								{/* <select name="inStock" id="idStock">
 									<option value="yes">Yes</option>
@@ -205,27 +257,26 @@ export default function Product({ handleLogOut }) {
 									<option value="no">No</option>
 								</select>
 							</div>
-							<div className="productFormRight">
+							<div className="productFormRight ">
+								<h3>Image</h3>
+								<img src={product.img} alt="" className="productUploadImg" />
 								<div className="productUpload">
-									<img src={product.img} alt="" className="productUploadImg" />
-									<label for="file">
-										<PublishIcon />
-									</label>
+									<label for="file">{/* <PublishIcon /> */}</label>
 									<input
-										onChange={(e) => setImg(e.target.value)}
-										// onChange={handleUpdate}
-										// value={formState.img}
-										type="file"
-										id="file"
-										style={{ display: 'none' }}
-									/>
+									type="file"
+									id="file"
+									onChange={(e) => setFile(e.target.files[0])}
+								/>
 								</div>
-								<button onClick={handleUpdate} className="productButton">
+								<button onClick={handleClick} className="productButton">
 									Update
 								</button>
 							</div>
 						</form>
 					</div>
+
+
+					
 				</div>
 			</div>
 		</div>
