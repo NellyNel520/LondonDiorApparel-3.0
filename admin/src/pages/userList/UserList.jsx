@@ -7,40 +7,55 @@ import { useState } from "react";
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
-
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser, getUsers } from "../../redux/apiCalls";
+ 
 export default function UserList({handleLogOut}) {
   const [data, setData] = useState(userRows);
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.customer.users);
+
+  useEffect(() => {
+    getUsers(dispatch);
+  }, [dispatch]);
+
+
+  // const handleDelete = (id) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    deleteUser(id, dispatch);
   };
   
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 90 },
     {
       field: "user",
-      headerName: "User",
+      headerName: "Name",
       width: 200,
       renderCell: (params) => {
         return (
           <div className="userListUser">
             <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
+            {params.row.name}
           </div>
         );
       },
     },
+  
     { field: "email", headerName: "Email", width: 200 },
     {
-      field: "status",
-      headerName: "Status",
+      field: "isAdmin",
+      headerName: "Admin",
       width: 120,
     },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
+    // {
+    //   field: "transaction",
+    //   headerName: "Transaction Volume",
+    //   width: 160,
+    // },
     {
       field: "action",
       headerName: "Action",
@@ -48,12 +63,12 @@ export default function UserList({handleLogOut}) {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/user/" + params.row.id}>
+            <Link to={"/user/" + params.row._id}>
               <button className="userListEdit">Edit</button>
             </Link>
             <DeleteOutlineIcon
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
@@ -70,7 +85,8 @@ export default function UserList({handleLogOut}) {
      
     <div className="userList">
       <DataGrid
-        rows={data}
+        rows={users}
+        getRowId={(row) => row._id}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}

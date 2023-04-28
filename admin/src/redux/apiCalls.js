@@ -14,6 +14,18 @@ import {
   addProductStart,
   addProductSuccess,
 } from "./productRedux";
+import {getCustomerStart,
+  getCustomerSuccess,
+  getCustomerFailure,
+  deleteCustomerStart,
+  deleteCustomerSuccess,
+  deleteCustomerFailure,
+  updateCustomerStart,
+  updateCustomerSuccess,
+  updateCustomerFailure,
+  addCustomerStart,
+  addCustomerSuccess,
+  addCustomerFailure, } from "./customerRedux"
 
 export const login = async (dispatch, user) => {
 	dispatch(loginStart())
@@ -34,6 +46,26 @@ export const registerUser = async (data) => {
 	}
 }
 
+// export const addUser = async (customer, dispatch) => {
+//   dispatch(addCustomerStart());
+//   try {
+//     const res = await userRequest.post(`/auth/register`, customer);
+//     dispatch(addCustomerSuccess(res.data));
+//   } catch (err) {
+//     dispatch(addCustomerFailure());
+//   }
+// };
+
+export const addProduct = async (product, dispatch) => {
+  dispatch(addProductStart());
+  try {
+    const res = await userRequest.post(`/products/add`, product);
+    dispatch(addProductSuccess(res.data));
+  } catch (err) {
+    dispatch(addProductFailure());
+  }
+};
+
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
@@ -44,16 +76,40 @@ export const getProducts = async (dispatch) => {
   }
 };
 
+export const getUsers = async (dispatch) => {
+  dispatch(getCustomerStart());
+  try {
+    const res = await userRequest.get("/users/");
+    dispatch(getCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(getCustomerFailure());
+  }
+};
+
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    // const res = await userRequest.delete(`/products/${id}`);
-    dispatch(deleteProductSuccess(id));
+    const res = await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(res.data));
   } catch (err) {
     dispatch(deleteProductFailure());
   }
 };
 
+
+export const deleteUser = async (id, dispatch) => {
+  dispatch(deleteCustomerStart());
+  try {
+    const res = await userRequest.delete(`/users/${id}`);
+    dispatch(deleteCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(deleteCustomerFailure());
+  }
+};
+
+
+
+// Needs work
 export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {
@@ -64,12 +120,4 @@ export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductFailure());
   }
 };
-export const addProduct = async (product, dispatch) => {
-  dispatch(addProductStart());
-  try {
-    const res = await userRequest.post(`/products/add`, product);
-    dispatch(addProductSuccess(res.data));
-  } catch (err) {
-    dispatch(addProductFailure());
-  }
-};
+
