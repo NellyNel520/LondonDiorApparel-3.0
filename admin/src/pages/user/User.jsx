@@ -10,8 +10,26 @@ import './user.css'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom';
 
 export default function User({handleLogOut}) {
+	const location = useLocation()
+	const userId = location.pathname.split('/')[2]
+	const dispatch = useDispatch()
+
+
+	const user = useSelector((state) =>
+		state.customer.users.find((user) => user._id === userId)
+	)
+
+
+
+
+
+
+
 	return (
 		<div>
 			<Topbar handleLogOut={handleLogOut} />
@@ -34,30 +52,33 @@ export default function User({handleLogOut}) {
 									className="userShowImg"
 								/>
 								<div className="userShowTopTitle">
-									<span className="userShowUsername">Anna Becker</span>
-									<span className="userShowUserTitle">Software Engineer</span>
+									<span className="userShowUsername">{user.name}</span>
+									<span className="userShowUserTitle">Loyal Customer</span>
 								</div>
 							</div>
 							<div className="userShowBottom">
 								<span className="userShowTitle">Account Details</span>
 								<div className="userShowInfo">
 									<PermIdentityIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">annabeck99</span>
+									<span className="userShowInfoTitle">{user._id}</span>
 								</div>
 								<div className="userShowInfo">
 									<CalendarTodayIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">10.12.1999</span>
+									<span className="userShowInfoTitle">
+									{user.createdAt}
+									{/* 10.12.1999 */}
+									</span>
 								</div>
 								<span className="userShowTitle">Contact Details</span>
 								<div className="userShowInfo">
-									<PhoneAndroidIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">+1 123 456 67</span>
-								</div>
-								<div className="userShowInfo">
 									<MailOutlineIcon className="userShowIcon" />
 									<span className="userShowInfoTitle">
-										annabeck99@gmail.com
+										{user.email}
 									</span>
+								</div>
+								<div className="userShowInfo">
+									<PhoneAndroidIcon className="userShowIcon" />
+									<span className="userShowInfoTitle">+1 123 456 67</span>
 								</div>
 								<div className="userShowInfo">
 									<LocationSearchingIcon className="userShowIcon" />

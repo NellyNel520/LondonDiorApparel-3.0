@@ -12,7 +12,7 @@ import { userRequest } from '../../services/requestMethods'
 import { updateProduct } from '../../redux/apiCalls'
 import { useDispatch } from 'react-redux'
 import {
-	getStorage,
+	getStorage, 
 	ref,
 	uploadBytesResumable,
 	getDownloadURL,
