@@ -10,6 +10,7 @@ import '../../styles/App.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../redux/apiCalls";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
  
 export default function UserList({handleLogOut}) {
   const [data, setData] = useState(userRows);
@@ -30,7 +31,7 @@ export default function UserList({handleLogOut}) {
   };
   
   const columns = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 120 },
     {
       field: "user",
       headerName: "Name",
@@ -38,7 +39,8 @@ export default function UserList({handleLogOut}) {
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
+            {/* <img className="userListImg" src={params.row.avatar} alt="" /> */}
+            <AccountCircleIcon className="userListImg"/>
             {params.row.name}
           </div>
         );
@@ -49,7 +51,7 @@ export default function UserList({handleLogOut}) {
     {
       field: "isAdmin",
       headerName: "Admin",
-      width: 120,
+      width: 200,
     },
     // {
     //   field: "transaction",
@@ -59,7 +61,7 @@ export default function UserList({handleLogOut}) {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
           <>
