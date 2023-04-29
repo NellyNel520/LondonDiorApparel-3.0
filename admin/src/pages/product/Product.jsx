@@ -16,7 +16,7 @@ import {
 	ref,
 	uploadBytesResumable,
 	getDownloadURL,
-} from 'firebase/storage'
+} from 'firebase/storage' 
 import app from '../../firebase'
 
 export default function Product({ handleLogOut }) {
@@ -247,15 +247,8 @@ export default function Product({ handleLogOut }) {
 									onChange={handleChange}
 									type="number"
 								/>
-								{/* <select name="inStock" id="idStock">
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
-								</select> */}
-								<label>Active</label>
-								<select name="active" id="active">
-									<option value="yes">Yes</option>
-									<option value="no">No</option>
-								</select>
+								
+								
 							</div>
 							<div className="productFormRight ">
 								<h3>Image</h3>
@@ -265,6 +258,7 @@ export default function Product({ handleLogOut }) {
 									<input
 									type="file"
 									id="file"
+									name="img"
 									onChange={(e) => setFile(e.target.files[0])}
 								/>
 								</div>

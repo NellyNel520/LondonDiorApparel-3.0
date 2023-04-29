@@ -121,3 +121,14 @@ export const updateProduct = async (id, product, dispatch) => {
   }
 };
 
+export const updateUser = async (id, customer, dispatch) => {
+  dispatch(updateCustomerStart());
+  try {
+    // update
+    const res = await userRequest.put(`/users/${id}`, customer);
+    dispatch(updateCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(updateCustomerFailure());
+  }
+};
+
