@@ -15,13 +15,15 @@ import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react'
 import { updateUser } from '../../redux/apiCalls'
+import { useNavigate } from 'react-router'
+
 
 export default function User({handleLogOut}) {
 	const location = useLocation()
 	const id = location.pathname.split('/')[2]
 	const [inputs, setInputs] = useState({})
 	const dispatch = useDispatch()
-
+	let navigate = useNavigate()
 
 	const user = useSelector((state) =>
 		state.customer.users.find((user) => user._id === id)
@@ -33,12 +35,15 @@ export default function User({handleLogOut}) {
 		})
 	}
 
-	// const handleUpdate = () => {
-	// 	const customer = {
-	// 	...inputs,
-	// 	}
-	// 	updateUser(customer, id, dispatch)
-	// }
+	const handleUpdate = (e) => {
+		e.preventDefault()
+		const customer = {
+		...inputs,
+		}
+		updateUser(id, customer, dispatch)
+		navigate('/users')
+		navigate(0)
+	}
 
 
 
@@ -107,51 +112,45 @@ export default function User({handleLogOut}) {
 						<div className="userUpdate">
 							<span className="userUpdateTitle">Edit</span>
 							<form className="userUpdateForm">
-								<div className="userUpdateLeft">
-									<div className="userUpdateItem">
-										<label>Full Name</label>
-										<input
-											type="text"
-											placeholder={user.name}
-											className="userUpdateInput"
-											name="name"
-											onChange={handleChange}
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Email</label>
-										<input
-											type="text"
-											placeholder={user.email}
-											className="userUpdateInput"
-											name="email"
-											onChange={handleChange}
-										/>
-									</div>
+							<div className="productFormLeft">
+						<label>Full Name</label>
+						<input
+							name="name"
+							onChange={handleChange}
+							type="text"
+							placeholder={user.name}
+						/>
+
+						<label>Email </label>
+						<input
+							name="email"
+							onChange={handleChange}
+							type="text"
+							placeholder={user.email}
+						/>
+						<label>Phone</label>
+						<input
+							placeholder="+ 1 123 456 7843"
+							// onChange={handleCat}
+							type="text"
+						/>
+						<label>Address</label>
+						<input
+							name="price"
+							placeholder={user.address}
+							// onChange={handleChange}
+							type="number"
+						/>
+					
+
+						<button onClick={handleUpdate}
+						 className="productButton mt-3 ">
+							Update
+						</button>
+					</div>
+							
 								
-									<div className="userUpdateItem">
-										<label>Phone</label>
-										<input
-											type="text"
-											placeholder="+1 123 456 67"
-											className="userUpdateInput"
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Address</label>
-										<input
-											type="text"
-											placeholder="New York | USA"
-											className="userUpdateInput"
-										/>
-									</div>
-								</div>
-								<div className="userUpdateRight">
 								
-									<button 
-									// onClick={handleUpdate} 
-									className="userUpdateButton">Update</button>
-								</div>
 							</form>
 						</div>
 					</div>

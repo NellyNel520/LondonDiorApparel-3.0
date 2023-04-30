@@ -62,6 +62,9 @@ export default function Product({ handleLogOut }) {
 	}, [productId, MONTHS])
 	console.log(pStats)
 
+	console.log(product)
+	console.log(product.categories)
+
 	return (
 		<div>
 			<Topbar handleLogOut={handleLogOut} />
