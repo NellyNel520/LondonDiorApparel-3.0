@@ -2,33 +2,20 @@ import { Link, useLocation } from 'react-router-dom'
 import './product.css'
 import Chart from '../../components/chart/Chart'
 import { productData } from '../../dummyData'
-import PublishIcon from '@mui/icons-material/Publish'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
 import { useSelector } from 'react-redux'
 import { useEffect, useMemo, useState } from 'react'
 import { userRequest } from '../../services/requestMethods'
-import { updateProduct } from '../../redux/apiCalls'
-import { useDispatch } from 'react-redux'
-import {
-	getStorage, 
-	ref,
-	uploadBytesResumable,
-	getDownloadURL,
-} from 'firebase/storage' 
-import app from '../../firebase'
+import ProductUpdate from '../../components/updateProduct/ProductUpdate'
+import ProductUpdate2 from '../../components/updateProduct/ProductUpdate2'
+
 
 export default function Product({ handleLogOut }) {
 	const location = useLocation()
 	const productId = location.pathname.split('/')[2]
 	const [pStats, setPStats] = useState([])
-	const [inputs, setInputs] = useState({})
-	const [file, setFile] = useState(null)
-	const [cat, setCat] = useState([])
-	const [color, setColor] = useState([])
-	const [size, setSize] = useState([])
-	const dispatch = useDispatch()
 
 	const product = useSelector((state) =>
 		state.product.products.find((product) => product._id === productId)
@@ -36,7 +23,6 @@ export default function Product({ handleLogOut }) {
 
 	console.log(productId)
 
-	
 	const MONTHS = useMemo(
 		() => [
 			'Jan',
@@ -75,72 +61,6 @@ export default function Product({ handleLogOut }) {
 		getStats()
 	}, [productId, MONTHS])
 	console.log(pStats)
-
-	const handleChange = (e) => {
-		setInputs((prev) => {
-			return { ...prev, [e.target.name]: e.target.value }
-		})
-	}
-	const handleCat = (e) => {
-		setCat(e.target.value.split(','))
-	}
-	const handleColor = (e) => {
-		setColor(e.target.value.split(','))
-	}
-	const handleSize = (e) => {
-		setSize(e.target.value.split(','))
-	}
-
-	const handleClick = (e) => {
-		e.preventDefault()
-		const fileName = new Date().getTime() + file.name
-		const storage = getStorage(app)
-		const storageRef = ref(storage, fileName)
-		const uploadTask = uploadBytesResumable(storageRef, file)
-
-		// Register three observers:
-		// 1. 'state_changed' observer, called any time the state changes
-		// 2. Error observer, called on failure
-		// 3. Completion observer, called on successful completion
-		uploadTask.on(
-			'state_changed',
-			(snapshot) => {
-				// Observe state change events such as progress, pause, and resume
-				// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-				console.log('Upload is ' + progress + '% done')
-				switch (snapshot.state) {
-					case 'paused':
-						console.log('Upload is paused')
-						break
-					case 'running':
-						console.log('Upload is running')
-						break
-					default:
-				}
-			},
-			(error) => {
-				// Handle unsuccessful uploads
-			},
-			() => {
-				// Handle successful uploads on complete
-				// For instance, get the download URL: https://firebasestorage.googleapis.com/...
-				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-					console.log('File available at', downloadURL)
-					const product = {
-						...inputs,
-						img: downloadURL,
-						categories: cat,
-						size: size,
-						color: color,
-					}
-					console.log(product)
-					updateProduct(product, productId, dispatch)
-				})
-			}
-		)
-	}
-
 
 	return (
 		<div>
@@ -190,87 +110,8 @@ export default function Product({ handleLogOut }) {
 						</div>
 					</div>
 
-
-
-					{/* update product form */}
-					<div className="productBottom">
-						<form className="productForm">
-							<div className="productFormLeft">
-								<label>Product Name</label>
-								<input
-									name="title"
-									onChange={handleChange}
-									type="text"
-									placeholder={product.title}
-								/>
-
-								<label>Product Description</label>
-								<input
-									name="desc"
-									type="text"
-									onChange={handleChange}
-									placeholder={product.desc}
-								/>
-								<label>Category</label>
-								<input
-									onChange={handleCat}
-									placeholder={product.categories}
-									name="categories"
-									type="text"
-								/>
-								<label>Price</label>
-								<input
-									onChange={handleChange}
-									placeholder={product.price}
-									name="price"
-									type="number"
-								/>
-								<label>Size(s)</label>
-								<input
-									// onChange={handleChange}
-									onChange={handleSize}
-									placeholder={product.size}
-									name="size"
-									type="text"
-								/>
-								<label>Available Color(s)</label>
-								<input
-									onChange={handleColor}
-									placeholder={product.color}
-									name="color"
-									type="text"
-								/>
-								<label>Count In Stock</label>
-								<input
-									name="inStock"
-									placeholder={product.inStock}
-									onChange={handleChange}
-									type="number"
-								/>
-								
-								
-							</div>
-							<div className="productFormRight ">
-								<h3>Image</h3>
-								<img src={product.img} alt="" className="productUploadImg" />
-								<div className="productUpload">
-									<label for="file">{/* <PublishIcon /> */}</label>
-									<input
-									type="file"
-									id="file"
-									name="img"
-									onChange={(e) => setFile(e.target.files[0])}
-								/>
-								</div>
-								<button onClick={handleClick} className="productButton">
-									Update
-								</button>
-							</div>
-						</form>
-					</div>
-
-
-					
+					{/* <ProductUpdate product={product} /> */}
+					<ProductUpdate2 product={product} />
 				</div>
 			</div>
 		</div>

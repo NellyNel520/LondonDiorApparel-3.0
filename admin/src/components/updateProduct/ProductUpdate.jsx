@@ -1,10 +1,5 @@
-import './newProduct.css'
-import Sidebar from '../../components/sidebar/Sidebar'
-import Topbar from '../../components/topbar/Topbar'
-import '../../styles/App.css'
-import { addProduct } from '../../redux/apiCalls'
-import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import React from "react";
+import { useEffect, useState } from 'react'
 import {
 	getStorage,
 	ref,
@@ -12,16 +7,23 @@ import {
 	getDownloadURL,
 } from 'firebase/storage'
 import app from '../../firebase'
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProduct } from "../../redux/apiCalls";
 
-const NewProduct = ({ handleLogOut }) => {
-	const [inputs, setInputs] = useState({})
-	const [file, setFile] = useState(null)
+
+export default function ProductUpdate({product}) {
+
+  const [inputs, setInputs] = useState({})
+  const [file, setFile] = useState(null)
 	const [cat, setCat] = useState([])
 	const [color, setColor] = useState([])
 	const [size, setSize] = useState([])
-	const dispatch = useDispatch()
+  const dispatch = useDispatch()
+  const id = product._id
+  console.log(id)
 
-	const handleChange = (e) => {
+  const handleChange = (e) => {
 		setInputs((prev) => {
 			return { ...prev, [e.target.name]: e.target.value }
 		})
@@ -36,7 +38,7 @@ const NewProduct = ({ handleLogOut }) => {
 		setSize(e.target.value.split(','))
 	}
 
-	const handleClick = (e) => {
+  const handleUpdate = (e) => {
 		e.preventDefault()
 		const fileName = new Date().getTime() + file.name
 		const storage = getStorage(app)
@@ -80,26 +82,16 @@ const NewProduct = ({ handleLogOut }) => {
 						color: color,
 					}
 					console.log(product)
-					addProduct(product, dispatch)
+					updateProduct(id, product, dispatch)
+          
 				})
 			}
 		)
 	}
 
-	// console.log(file)
-	// console.log(inputs)
-	return (
-		<div className="newProduct ">
-			<Topbar handleLogOut={handleLogOut} />
-			<div className="flex">
-				<Sidebar />
-
-				<div>
-					<h1 className="addProductTitle text-3xl text-center mb-6 font-play">
-						New Product
-					</h1>
-
-					<div className="productBottom">
+  return (
+    <div>Update form
+    	<div className="productBottom">
 						<form className="productForm">
 							<div className="productFormLeft">
 								<label>Product Name</label>
@@ -107,55 +99,55 @@ const NewProduct = ({ handleLogOut }) => {
 									name="title"
 									onChange={handleChange}
 									type="text"
-									placeholder="new shirt"
-									// value={formState.title}
+									placeholder={product.title}
+								
 								/>
 
 								<label>Product Description</label>
 								<input
 									name="desc"
 									onChange={handleChange}
-									// value={formState.desc}
+								
 									type="text"
-									placeholder="nice shirt"
+									placeholder={product.desc}
 								/>
 								<label>Categories</label>
 								<input
-									placeholder="t-shirt, long sleeve"
+									placeholder={product.categories}
 									onChange={handleCat}
-									// value={formState.category}
+									
 									type="text"
 								/>
 								<label>Price</label>
 								<input
 									name="price"
-									placeholder="$20.00"
+									placeholder={product.price}
 									onChange={handleChange}
-									// value={formState.price}
+								
 									type="number"
 								/>
 								<label>Size(s)</label>
 								<input
 									name="size"
-									placeholder="m,l"
+									placeholder={product.size}
 									onChange={handleSize}
-									// value={formState.size}
+									
 									type="text"
 								/>
 								<label>Available Color(s)</label>
 								<input
 									name="color"
-									placeholder="blue"
+									placeholder={product.color}
 									onChange={handleColor}
-									// value={formState.color}
+									
 									type="text"
 								/>
 								<label>Count In Stock</label>
 								<input
 									name="inStock"
-									placeholder="12"
+									placeholder={product.inStock}
 									onChange={handleChange}
-									// value={formState.inStock}
+									
 									type="number"
 								/>
 
@@ -165,16 +157,20 @@ const NewProduct = ({ handleLogOut }) => {
 									id="file"
 									onChange={(e) => setFile(e.target.files[0])}
 								/>
-								<button onClick={handleClick} className="productButton mt-3 ">
+								<button 
+                onClick={handleUpdate}
+                className="productButton mt-3 ">
 									Create
 								</button>
 							</div>
 						</form>
+            <div className="productFormRight">
+            <div className="productUpload">
+              <img src={product.img} alt="" className="w-[80%]" />
+            </div>
+            
+          </div>
 					</div>
-				</div>
-			</div>
-		</div>
-	)
+    </div>
+  )
 }
-
-export default NewProduct

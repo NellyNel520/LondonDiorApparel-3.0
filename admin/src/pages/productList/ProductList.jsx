@@ -10,7 +10,7 @@ import '../../styles/App.css'
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
-
+ 
 export default function ProductList({handleLogOut}) {
 	// const [data, setData] = useState(productRows)
 	const dispatch = useDispatch();
