@@ -68,6 +68,7 @@ const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  ${'' /* display: flex-end; */}
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
@@ -76,7 +77,7 @@ const Navbar = ({ user, handleLogOut }) => {
   let userOptions
 	if (user) {
     userOptions = (
-      <Wrapper className='text-blue-400'>
+      <Wrapper className='text-blue-400 h-20'>
         <Left>
           <Language>EN</Language>
           <SearchContainer className='rounded'>
@@ -85,7 +86,7 @@ const Navbar = ({ user, handleLogOut }) => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo className='font-ari text-[2rem]'>London Dior Apparel</Logo>
+          <Logo className='font-ari md:text-[2rem] sm:text-[1rem]'>London Dior Apparel</Logo>
         </Center>
         <Right>
           <Link onClick={handleLogOut} to="/"><MenuItem className='hover:text-white'>

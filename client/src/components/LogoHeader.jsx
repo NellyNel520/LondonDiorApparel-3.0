@@ -22,11 +22,14 @@ const Wrapper = styled.div`
 
 const LogoHeader = () => {
   return (
-    <Container>
-      <Wrapper className='text-white'>
-      <video className="w-[100vw]" src={logo} autoPlay loop muted/>
-      </Wrapper>
-    </Container>
+    // <Container>
+    //   <Wrapper className='text-white'>
+		<div>
+
+      <video className="w-[100vw] h-[100vh] bg-cover" src={logo} autoPlay loop muted/>
+		</div>
+    //   </Wrapper>
+    // </Container> */}
   )
 }
 
