@@ -107,13 +107,14 @@ const Product = ({ product }) => {
                   </b>
 								
 								</ProductName>
-								<div className="">
+								<div className="w-[32rem] mr-[5rem]">
 									{/* <b className="text-blue-400">ID:</b> */}
-									Are you a minimalist looking for a compact carry option? The
+                  {item.desc}
+									{/* Are you a minimalist looking for a compact carry option? The
 									Micro Backpack is the perfect size for your essential everyday
 									carry items. Wear it like a backpack or carry it like a
-									satchel for all-day use.
-									{/* {product._id} */}
+									satchel for all-day use. */}
+									
 								</div>
 								<div className="flex">
 									<b className="text-blue-400 pr-3">Color:</b>

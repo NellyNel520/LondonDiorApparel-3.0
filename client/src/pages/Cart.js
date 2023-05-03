@@ -249,7 +249,7 @@ const Cart = () => {
 					</StripeCheckout>
 				</Top>
 				<Bottom>
-					<Info>
+					<Info> 
 						<Hr />
 						{cart.products.map((product) => (
 							<Product className="mt-8 mb-8">
