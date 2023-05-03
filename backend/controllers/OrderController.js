@@ -58,8 +58,11 @@ const deleteOrder = async (req, res) => {
 
 // Get user orders
 const getUserOrders = async (req, res) => {
+	const query = req.query.new;
 	try {
-		const orders = await Order.find({ userId: req.params.userId })
+		const orders = query 
+		? await Order.find({ userId: req.params.userId }).sort({ _id: -1 }).limit(1)
+		: await Order.find({ userId: req.params.userId })
 		res.status(200).json(orders)
 	} catch (err) {
 		res.status(500).json(err)
