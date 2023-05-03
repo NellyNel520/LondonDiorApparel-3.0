@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { mobile } from '../responsive'
+import { mobile } from '../../responsive'
 
 const Product = styled.div`
 	display: flex;
@@ -139,15 +139,15 @@ const OrderHistory = () => {
 						</PriceDetail>
 					</Product>
 				</div>
-				<div className='ml-[75%]'>
-					<button className='mr-4'>View Product</button>
-          <span>|</span>
-          <button className='ml-4'>Buy Again</button>
+				<div className="ml-[75%]">
+					<button className="mr-4">View Product</button>
+					<span>|</span>
+					<button className="ml-4">Buy Again</button>
 				</div>
-        <Hr/>
+				<Hr />
 
-        {/* second product */}
-        <div className="flex ">
+				{/* second product */}
+				<div className="flex ">
 					<Product className="mt-8 mb-8">
 						<ProductDetail>
 							<Image
@@ -193,12 +193,11 @@ const OrderHistory = () => {
 						</PriceDetail>
 					</Product>
 				</div>
-				<div className='ml-[75%]'>
-					<button className='mr-4'>View Product</button>
-          <span>|</span>
-          <button className='ml-4'>Buy Again</button>
+				<div className="ml-[75%]">
+					<button className="mr-4">View Product</button>
+					<span>|</span>
+					<button className="ml-4">Buy Again</button>
 				</div>
-
 			</div>
 		</div>
 	)
