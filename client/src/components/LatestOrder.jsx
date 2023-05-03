@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from '../responsive'
+import { userRequest } from '../services/requestMethods'
+import { useEffect, useState } from 'react'
+import { useSelector } from "react-redux";
 
 const Product = styled.div`
 	display: flex;
@@ -71,6 +74,22 @@ const Hr = styled.hr`
 `
 
 const LatestOrder = () => {
+	const user = useSelector((state) => state.user.currentUser);
+	const id = user._id
+	const [order, setOrder] = useState()
+	const [products, setProducts] = useState([])
+
+	useEffect(() => {
+		const getLatestOrder = async () => {
+			try {
+				const res = await userRequest.get(`/orders/find/${id}/?new=true`)
+				setOrder(res.data)
+			} catch {}
+		}
+		getLatestOrder()
+	
+	}, [])
+
 	return (
 		<div>
 			<div className="order border">

@@ -8,6 +8,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
 import OrderHistory from '../components/OrderHistory'
 import LatestOrder from '../components/LatestOrder'
+// import { useSelector } from "react-redux";
 
 const UserProfile = ({ user }) => {
 	return (
