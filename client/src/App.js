@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from './pages/About';
+import UserProfile from './pages/UserProfile';
 import { useSelector, useDispatch } from "react-redux";
 import { logout, clearCart } from './redux/userRedux';
 // import { clearCart } from "./redux/cartRedux";
@@ -63,6 +64,7 @@ function App() {
          <Route path="/cart" element={<Cart />} />
          <Route path="/about" element={<About />} />
          <Route path="/success" element={<Success />} />
+         <Route path="/profile" element={<UserProfile user={user}/>} />
       </Routes>
       </main>
       <Newsletter />

@@ -83,7 +83,7 @@ export default function Product({ handleLogOut }) {
 							{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
 							<Chart
 								data={productData}
-								dataKey="Sales"
+								dataKey="Sales" 
 								title="Sales Performance"
 							/>
 						</div>
