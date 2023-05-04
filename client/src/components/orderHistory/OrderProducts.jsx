@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
+import { Link } from 'react-router-dom'
 
 const ProductCont = styled.div`
 	display: flex;
@@ -125,30 +126,31 @@ const OrderProducts = ({order}) => {
 									/>
 								</div>
 								<ProductSize>
-									<b className="text-blue-400">Size:</b>
+									<b className="text-blue-400">Size: </b>
 									{product.size}
 								</ProductSize>
 							</Details>
 						</ProductDetail>
 						<PriceDetail>
 							<ProductAmountContainer>
-								<ProductAmount>qty: 
+								<ProductAmount>
+                <span>qty: </span>
                 {product.quantity}
                 </ProductAmount>
 							</ProductAmountContainer>
 
 							<ProductPrice>
 								
-								{/* ${item.price * product.quantity} */}
+								{/* ${product.price * product.quantity} */}
 							</ProductPrice>
 							<br />
 						</PriceDetail>
 					</ProductCont>
 				</div>
-				<div className="ml-[75%]">
-					<button className="mr-4">View Product</button>
+				<div className="ml-[75%] mb-4">
+					<Link to={`/product/${product.productId}`}><button className="mr-4 hover:text-blue-400">View Product</button></Link>
 					<span>|</span>
-					<button className="ml-4">Buy Again</button>
+					<Link to={`/product/${product.productId}`}><button className="ml-4  hover:text-blue-400">Buy Again</button></Link>
 				</div>
 				<Hr />
 			</div>

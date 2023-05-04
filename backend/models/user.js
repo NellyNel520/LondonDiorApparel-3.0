@@ -10,9 +10,8 @@ const User = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		// orders: [{type: Schema.Types.ObjectId, ref: 'Order'}],
-		// address: { type: String },
-		// phoneNumber: { type: String }
+		address: { type: String },
+		phoneNumber: { type: String }
 	},
 	{ timestamps: true }
 )

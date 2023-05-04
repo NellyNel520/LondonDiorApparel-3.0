@@ -10,6 +10,7 @@ const LatestOrder = ({ user }) => {
 	const id = user._id
 	console.log(id)
 	const [orders, setOrders] = useState([])
+	
 
 	useEffect(() => {
 		const getUsersOrders = async () => {
@@ -21,7 +22,7 @@ const LatestOrder = ({ user }) => {
 		getUsersOrders()
 		console.log(orders)
 	}, [])
-
+ 
 	return (
 		<div>
 			{orders.map((order) => (
@@ -36,12 +37,13 @@ const LatestOrder = ({ user }) => {
 
 						<div className="px-4">
 							<span className="font-bold">Date Placed</span>
-							<div>Jul, 6th, 2022</div>
+							
+							<div>{order.createdAt}</div>
 						</div>
 
 						<div className="px-4">
 							<span className="font-bold">Total amount</span>
-							<div>$160.00</div>
+							<div>${order.amount}</div>
 						</div>
 					</div>
 

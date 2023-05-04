@@ -52,11 +52,11 @@ const UserProfile = ({ user }) => {
 								</div>
 								<div className="userShowInfo">
 									<PhoneAndroidIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">+1 123 456 67</span>
+									<span className="userShowInfoTitle">+ {user.phoneNumber}</span>
 								</div>
 								<div className="userShowInfo">
 									<LocationSearchingIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">New York | USA</span>
+									<span className="userShowInfoTitle">{user.address}</span>
 								</div>
 							</div>
 						</div>
@@ -72,7 +72,7 @@ const UserProfile = ({ user }) => {
 						</div>
 					</div>
 
-					<div className="ml-10 mt-10">Latest Order</div>
+					<div className="ml-10 mt-10 text-2xl font-play">Recent Order</div>
 					<div className="border rounded mx-10 mt-6">
 						<LatestOrder user={user} />
 					</div>
