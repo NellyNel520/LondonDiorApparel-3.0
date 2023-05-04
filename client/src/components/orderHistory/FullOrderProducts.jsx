@@ -73,7 +73,7 @@ const Hr = styled.hr`
 `
 
 
-const OrderProducts = ({order}) => {
+const FullOrderProducts = ({order}) => {
 
   console.log(order.products)
   const products = order.products
@@ -103,19 +103,19 @@ const OrderProducts = ({order}) => {
 							<Details className="text-xl">
 								<ProductName>
 									<b className="text-blue-400">
-                  Product Name
-                  {/* {product.title} */}
+                  {/* Product Name */}
+                  {product.title}
                 
                   </b>
 								
 								</ProductName>
 								<div className="w-[32rem] mr-[5rem]">
 									{/* <b className="text-blue-400">ID:</b> */}
-                  {/* {item.desc} */}
-									Are you a minimalist looking for a compact carry option? The
+                  {product.desc}
+									{/* Are you a minimalist looking for a compact carry option? The
 									Micro Backpack is the perfect size for your essential everyday
 									carry items. Wear it like a backpack or carry it like a
-									satchel for all-day use.
+									satchel for all-day use. */}
 									
 								</div>
 								<div className="flex">
@@ -164,4 +164,4 @@ const OrderProducts = ({order}) => {
   )
 }
 
-export default OrderProducts
+export default FullOrderProducts

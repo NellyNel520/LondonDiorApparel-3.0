@@ -6,7 +6,7 @@ import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
-import OrderHistory from '../../components/orderHistory/OrderHistory'
+import OrderHistory from '../../components/orderHistory/FullOrderHistory'
 import LatestOrder from '../../components/orderHistory/LatestOrder'
 // import { useSelector } from "react-redux";
 
@@ -31,7 +31,7 @@ const UserProfile = ({ user }) => {
 									<span className="userShowUsername">{user.name}</span>
 									<span className="userShowUserTitle">Loyal Customer</span>
 								</div>
-							</div>
+							</div> 
 							<div className="userShowBottom">
 								<span className="userShowTitle">Account Details</span>
 								<div className="userShowInfo">
