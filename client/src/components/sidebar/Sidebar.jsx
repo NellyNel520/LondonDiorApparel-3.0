@@ -11,53 +11,44 @@ import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ReportIcon from '@mui/icons-material/Report';
+import SettingsIcon from '@mui/icons-material/Settings';import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Dashboard</h3>
-          <ul className="sidebarList">
-            <Link to="/home" className="link">
-            <li className="sidebarListItem active">
-              <LineStyleIcon className="sidebarIcon" />
-              Profile
-            </li>
-            </Link>
-            <li className="sidebarListItem">
-              <TimelineIcon className="sidebarIcon" />
-              Manage Account
-            </li>
-            <li className="sidebarListItem">
-              <TrendingUpIcon className="sidebarIcon" />
-              Sales
-            </li>
-          </ul>
-        </div>
+        
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users" className="link">
+          <Link to="/profile" className="link">
               <li className="sidebarListItem">
                 <PermIdentityIcon className="sidebarIcon" />
-                Users
+                User Dashboard
               </li>
             </Link>
-            <Link to="/products" className="link">
+            <Link to="/profile/orderHistory" className="link">
               <li className="sidebarListItem">
                 <StorefrontIcon className="sidebarIcon" />
-                Products
+                Order History
               </li>
             </Link>
+            <Link to="/profile/orderHistory" className="link">
             <li className="sidebarListItem">
               <AttachMoneyIcon className="sidebarIcon" />
               Transactions
             </li>
+            </Link>
+            <Link to="/profile/edit" className="link">
             <li className="sidebarListItem">
-              <BarChartIcon className="sidebarIcon" />
-              Reports
+              <SettingsIcon className="sidebarIcon" />
+              Manage Account
+            </li>
+            </Link>
+            <li className="sidebarListItem">
+              <FavoriteIcon className="sidebarIcon" />
+              Wishlist
             </li>
           </ul>
         </div>

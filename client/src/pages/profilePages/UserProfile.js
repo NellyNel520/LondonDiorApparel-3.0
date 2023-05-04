@@ -1,13 +1,13 @@
 import React from 'react'
-import Sidebar from '../components/sidebar/Sidebar'
-import '../styles/userProfile.css'
+import Sidebar from '../../components/sidebar/Sidebar'
+import '../../styles/userProfile.css'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import LocationSearchingIcon from '@mui/icons-material/LocationSearching'
 import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
-import OrderHistory from '../components/orderHistory/OrderHistory'
-import LatestOrder from '../components/orderHistory/LatestOrder'
+import OrderHistory from '../../components/orderHistory/OrderHistory'
+import LatestOrder from '../../components/orderHistory/LatestOrder'
 // import { useSelector } from "react-redux";
 
 const UserProfile = ({ user }) => {
@@ -52,7 +52,9 @@ const UserProfile = ({ user }) => {
 								</div>
 								<div className="userShowInfo">
 									<PhoneAndroidIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">+ {user.phoneNumber}</span>
+									<span className="userShowInfoTitle">
+										+ {user.phoneNumber}
+									</span>
 								</div>
 								<div className="userShowInfo">
 									<LocationSearchingIcon className="userShowIcon" />
