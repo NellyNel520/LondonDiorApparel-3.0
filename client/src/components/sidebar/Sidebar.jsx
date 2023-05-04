@@ -14,10 +14,10 @@ import ReportIcon from '@mui/icons-material/Report';
 import SettingsIcon from '@mui/icons-material/Settings';import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar() { 
   return (
     <div className="sidebar">
-      <div className="sidebarWrapper">
+      <div className="sidebarWrapper  ">
         
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>

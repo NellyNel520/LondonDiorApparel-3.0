@@ -2,13 +2,13 @@
   flex: 1;
   height: 100rem;
   background-color: rgb(61, 61, 62);
-  position: sticky;
+  position:sticky;
   top: 50px;
   max-width: 17%;
 }
 
 .sidebarWrapper {
-  padding: 20px;
+  padding: 1.5rem;
   color: #555;
   
 }
@@ -24,7 +24,7 @@
 
 .sidebarList {
   list-style: none;
-  padding: 5px;
+  /* padding: 5px; */
 }
 
 .sidebarListItem {

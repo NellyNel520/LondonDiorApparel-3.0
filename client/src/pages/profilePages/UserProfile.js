@@ -12,7 +12,7 @@ import LatestOrder from '../../components/orderHistory/LatestOrder'
 
 const UserProfile = ({ user }) => {
 	return (
-		<div className="text-white  h-[100rem]">
+		<div className="text-white  h-auto">
 			{/* UserProfile */}
 			<div className="flex">
 				<Sidebar className="rounded" />
@@ -20,7 +20,7 @@ const UserProfile = ({ user }) => {
 				<div className="main py-6 ">
 					<div className="text-3xl text-center font-play ">My Profile</div>
 					<div className=" flex ">
-						<div className="userShow w-[25rem] h-[43%] mt-8 ml-10 mr-10">
+						<div className="userShow w-[20rem] h-[43%] mt-8 ml-10 mr-10">
 							<div className="userShowTop">
 								<img
 									src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -63,12 +63,12 @@ const UserProfile = ({ user }) => {
 							</div>
 						</div>
 
-						<div className="mt-10 mx-10">
-							<div className="border rounded w-[25rem] h-[10rem] mb-[4rem]">
+						<div className="mt-10 ml-6">
+							<div className="border rounded w-[20rem] h-[10rem] mb-[4rem]">
 								<div>Customer Service</div>
 							</div>
 
-							<div className="border w-[25rem] rounded h-[10rem]">
+							<div className="border w-[20rem] rounded h-[10rem]">
 								<div>Wishlist</div>
 							</div>
 						</div>
