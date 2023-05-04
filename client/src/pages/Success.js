@@ -41,6 +41,10 @@ const Success = () => {
 					products: cart.products.map((item) => ({
 						productId: item._id,
 						quantity: item.quantity,
+						title: item.title,
+						img: item.img,
+						color: item.color,
+						size: item.size,
 					})),
 					amount: cart.total,
 					address: data.billing_details.address,
@@ -57,15 +61,17 @@ const Success = () => {
 			<Wrapper>
 				<div className="flex justify-center text-black `">
 					<div className="text-center">
-						<div className="text-[5rem] mb-4 text-blue-500 font-ari">Success! </div>
-						<div className='text-xl'>
-							<span className='font-bold'>{currentUser.name},</span>
+						<div className="text-[5rem] mb-4 text-blue-500 font-ari">
+							Success!{' '}
+						</div>
+						<div className="text-xl">
+							<span className="font-bold">{currentUser.name},</span>
 							{orderId
 								? ` Order has been created successfully. Your order number is `
 								: `Successfull. Your order is being prepared...`}
-								<div className='text-blue-500 mt-2 underline'>{orderId}</div>
+							<div className="text-blue-500 mt-2 underline">{orderId}</div>
 						</div>
-			
+
 						<Link to={'/'}>
 							<button className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
 								Go to Homepage
