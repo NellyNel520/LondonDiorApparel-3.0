@@ -106,7 +106,7 @@ export default function User({handleLogOut}) {
 									<span className="userShowInfoTitle">New York | USA</span>
 								</div>
 							</div>
-						</div>
+						</div> 
 
 						{/* edit/ UPDATE user */}
 						<div className="userUpdate">

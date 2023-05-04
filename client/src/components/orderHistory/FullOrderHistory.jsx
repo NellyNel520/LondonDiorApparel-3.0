@@ -111,7 +111,7 @@ const FullOrderHistory = ({user}) => {
 
 							<div className="px-4">
 								<span className="font-bold">Total amount</span>
-								<div>${order.amount}</div>
+								<div>${order.amount.toFixed(2)}</div>
 							</div>
 						</div>
 						<div>

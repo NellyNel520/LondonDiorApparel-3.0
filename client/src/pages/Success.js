@@ -32,7 +32,7 @@ const Success = () => {
 	const cart = location.state.products
 	const currentUser = useSelector((state) => state.user.currentUser)
 	const [orderId, setOrderId] = useState(null)
-
+ 
 	useEffect(() => {
 		const createOrder = async () => {
 			try {

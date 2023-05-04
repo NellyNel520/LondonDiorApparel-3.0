@@ -1,6 +1,6 @@
 import './newUser.css'
 import Sidebar from '../../components/sidebar/Sidebar'
-import Topbar from '../../components/topbar/Topbar'
+import Topbar from '../../components/topbar/Topbar' 
 import '../../styles/App.css'
 import { registerUser } from '../../redux/apiCalls'
 import { useDispatch } from 'react-redux'
