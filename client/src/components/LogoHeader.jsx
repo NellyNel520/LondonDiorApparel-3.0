@@ -26,7 +26,7 @@ const LogoHeader = () => {
     //   <Wrapper className='text-white'>
 		<div>
 
-      <video className="w-[100vw] h-[100vh] bg-cover" src={logo} autoPlay loop muted/>
+      <video className=" bg-cover" src={logo} autoPlay loop muted/>
 		</div>
     //   </Wrapper>
     // </Container> */}
