@@ -95,16 +95,16 @@ const OrderProducts = ({order}) => {
 						<ProductDetail>
 							<Image
 								className="ml-3"
-                src="https://img.freepik.com/premium-vector/female-user-profile-avatar-is-woman-character-screen-saver-with-emotions_505620-617.jpg"
-                // src={item.img}
+                // src="https://img.freepik.com/premium-vector/female-user-profile-avatar-is-woman-character-screen-saver-with-emotions_505620-617.jpg"
+                src={product.img}
 							
 							/>
 							<Details className="text-xl">
 								<ProductName>
 									<b className="text-blue-400">
-                  Product Name
-                  {/* {product.productId}  */}
-                  {/* {item.title} */}
+                  {/* Product Name */}
+                  {product.title}
+                
                   </b>
 								
 								</ProductName>
@@ -121,19 +121,19 @@ const OrderProducts = ({order}) => {
 									<b className="text-blue-400 pr-3">Color:</b>
 									<ProductColor
 										className="mt-2"
-										// color={product.color}
+										color={product.color}
 									/>
 								</div>
 								<ProductSize>
 									<b className="text-blue-400">Size:</b>
-									{/* {product.size} */}
+									{product.size}
 								</ProductSize>
 							</Details>
 						</ProductDetail>
 						<PriceDetail>
 							<ProductAmountContainer>
 								<ProductAmount>qty: 
-                {/* {product.quantity} */}
+                {product.quantity}
                 </ProductAmount>
 							</ProductAmountContainer>
 
