@@ -17,7 +17,8 @@ const ProductDetail = styled.div`
 `
 
 const Image = styled.img`
-	width: 150px;
+	width: 10rem;
+	height: 17rem;
 `
 
 const Details = styled.div`

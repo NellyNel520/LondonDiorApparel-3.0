@@ -2,6 +2,7 @@ import './widgetSm.css'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useEffect, useState } from 'react'
 import { userRequest } from '../../services/requestMethods'
+import { Link } from 'react-router-dom'
 export default function WidgetSm() {
 	const [users, setUsers] = useState([])
 
@@ -19,7 +20,7 @@ export default function WidgetSm() {
 	return (
 		<div className='flex'>
 		<div className="widgetSm">
-			<span className="widgetSmTitle">New Join Members</span>
+			<span className="widgetSmTitle">New Members</span>
 			<ul className="widgetSmList">
 				{users.map(user => (
 
@@ -36,10 +37,11 @@ export default function WidgetSm() {
 						<span className="widgetSmUsername">{user.name}</span>
 						<span className="widgetSmUserTitle">{user.email}</span>
 					</div>
-					<button className="widgetSmButton">
+					<Link to={`/user/${user._id}`}><button className="widgetSmButton">
 						<VisibilityIcon className="widgetSmIcon" />
 						Display
 					</button>
+					</Link>
 				</li>
 				))}
 			</ul>
