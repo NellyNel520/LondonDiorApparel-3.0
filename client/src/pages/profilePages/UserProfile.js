@@ -19,7 +19,7 @@ const UserProfile = ({ user }) => {
 			<div className="flex">
 				<Sidebar className="rounded" />
 
-				<div className="main py-6 ">
+				<div className="main py-6 font-play">
 					<div className="text-3xl text-center font-play ">My Profile</div>
 					<div className=" flex">
 						<div className="userShow border rounded w-[20rem] h-[43%] mt-8 ml-10 mr-10">
@@ -30,7 +30,7 @@ const UserProfile = ({ user }) => {
 									className="userShowImg"
 								/>
 								<div className="userShowTopTitle">
-									<span className="userShowUsername">{user.name}</span>
+									<span className="userShowUsername text-2xl font-play">{user.name}</span>
 									<span className="userShowUserTitle">Loyal Customer</span>
 								
 								</div>
@@ -39,12 +39,12 @@ const UserProfile = ({ user }) => {
 								<span className="userShowTitle">Account Details</span>
 								<div className="userShowInfo">
 									<PermIdentityIcon className="userShowIcon" />
-									<span className="userShowInfoTitle">{user._id}</span>
+									<span className="userShowInfoTitle">ID: {user._id}</span>
 								</div>
 								<div className="userShowInfo">
 									<CalendarTodayIcon className="userShowIcon" />
 									<span className="userShowInfoTitle">
-										{dateJoined}
+										Account Created: {dateJoined}
 										{/* 10.12.1999 */}
 									</span>
 								</div>

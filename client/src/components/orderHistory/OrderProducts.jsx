@@ -2,11 +2,12 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' 
 
 const ProductCont = styled.div`
 	display: flex;
 	justify-content: space-between;
+	min-width: 50vw;
 
 	${mobile({ flexDirection: 'column' })}
 `
@@ -17,7 +18,8 @@ const ProductDetail = styled.div`
 `
 
 const Image = styled.img`
-	width: 150px;
+	width: 10rem;
+	height: 17rem;
 `
 
 const Details = styled.div`
@@ -100,16 +102,16 @@ const OrderProducts = ({order}) => {
                 src={product.img}
 							
 							/>
-							<Details className="text-xl">
+							<Details className="text-lg">
 								<ProductName>
-									<b className="text-blue-400">
+									<b className="text-blue-400 text-2xl">
                   {/* Product Name */}
                   {product.title}
                 
                   </b>
 								
 								</ProductName>
-								<div className="w-[32rem] mr-[5rem]">
+								<div className="w-[100%] flex-wrap mr-3rem]">
 									{/* <b className="text-blue-400">ID:</b> */}
                   {product.desc}
 									{/* Are you a minimalist looking for a compact carry option? The

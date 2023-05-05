@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 export default function Sidebar() { 
   return (
     <div className="sidebar">
-      <div className="sidebarWrapper  ">
+      <div className="sidebarWrapper font-play ">
         
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>

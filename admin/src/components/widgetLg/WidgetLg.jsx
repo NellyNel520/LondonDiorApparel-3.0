@@ -26,7 +26,7 @@ export default function WidgetLg() {
         <tr className="widgetLgTr ">
           <th className="widgetLgTh">Customer</th>
           <th className="widgetLgTh">Date</th>
-          <th className="widgetLgTh pr-4">Amount</th>
+          <th className="widgetLgTh pr-4">Total</th>
           <th className="widgetLgTh">Status</th>
         </tr>
         {orders.map((order) => (
@@ -41,7 +41,7 @@ export default function WidgetLg() {
             <span className="widgetLgName pr-4">{order.userId}</span>
           </td>
           <td className="widgetLgDate pr-4">{format(order.createdAt)}</td>
-          <td className="widgetLgAmount pr-4 text-center">${order.amount}</td>
+          <td className="widgetLgAmount pr-4 text-center">${order.amount.toFixed(2)}</td>
           <td className="widgetLgStatus">
             <Button type={order.status} />
           </td>

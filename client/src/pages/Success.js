@@ -38,6 +38,7 @@ const Success = () => {
 			try {
 				const res = await userRequest.post('/orders/new', {
 					userId: currentUser._id,
+					email: currentUser.email,
 					products: cart.products.map((item) => ({
 						productId: item._id,
 						quantity: item.quantity,

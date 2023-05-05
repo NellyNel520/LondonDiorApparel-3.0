@@ -158,6 +158,23 @@ const NewProduct = ({ handleLogOut }) => {
 									// value={formState.inStock}
 									type="number"
 								/>
+								<label>Rating</label>
+								<input
+									name="rating"
+									placeholder="12"
+									onChange={handleChange}
+									// value={formState.inStock}
+									type="number"
+								/>
+								<label>Reviews</label>
+								<input
+									name="numReviews"
+									placeholder="12"
+									onChange={handleChange}
+									// value={formState.inStock}
+									type="number"
+								/>
+
 
 								<label for="file">Image</label>
 								<input

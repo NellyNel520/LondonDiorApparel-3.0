@@ -52,7 +52,7 @@ const Newsletter = () => {
   return (
     <Container>
       <Title className='font-play'>NewsLetter</Title>
-      <Description className='font-play'>Sign up for our newsletter today and be the first to know about our latest arrivals, exclusive discounts, and special promotions. </Description>
+      <Description className='font-play text-center px-3'>Sign up for our newsletter today and be the first to know about our latest arrivals, exclusive discounts, and special promotions. </Description>
       <InputContainer>
         <Input placeholder='Enter Your Email' />
         <Button className='hover:bg-yellow-400'>

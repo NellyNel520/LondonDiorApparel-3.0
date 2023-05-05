@@ -7,6 +7,7 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email'
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
+import { Link } from 'react-router-dom'
 import { mobile } from "../responsive";
 
 const Container = styled.div`
@@ -91,12 +92,16 @@ const Footer = () => {
 					Your one-stop-shop for all things fashion! Shop now and get up to 50% off on our latest collection.
 				</Desc>
 				<SocialContainer className='mt-10'>
+					<Link to={'https://www.linkedin.com/in/channelharris/'}>
 					<SocialIcon>
 						<LinkedInIcon sx={{ fontSize: "50px"}} className="text-blue-400"/>
 					</SocialIcon>
+					</Link>
+					<Link to={'https://github.com/NellyNel520'}>
 					<SocialIcon>
 						<GitHubIcon sx={{ fontSize: "50px"}} className='text-gray-400'/>
 					</SocialIcon>
+					</Link>
 					<SocialIcon color="E4405F">
 						<InstagramIcon sx={{ fontSize: "50px" }} />
 					</SocialIcon>
