@@ -1,18 +1,18 @@
 import React from 'react'
-import Sidebar from '../../components/sidebar/Sidebar'
+import Sidebar from '../../components/sidebar/Sidebar' 
 import '../../styles/editUser.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { userRequest } from '../../services/requestMethods'
-import { useDispatch } from 'react-redux'
+
 
 
 
 const EditUser = ({user}) => {
   const id = user._id
   const [inputs, setInputs] = useState({})
-	const dispatch = useDispatch()
   let navigate = useNavigate()
+	
 
   const handleChange = (e) => {
 		setInputs((prev) => {
@@ -91,6 +91,7 @@ const EditUser = ({user}) => {
 
 								<button 
 								onClick={handleUpdate}
+								
 								className="productButton mt-3 hover:bg-green-500 ">Update</button>
 							</div>
 						</form>
