@@ -1,11 +1,12 @@
 import Axios from 'axios'
 
-const BASE_URL = 'http://localhost:3001/api'
+const BASE_URL = 'http://localhost:3001/api' 
 
-// const user = JSON.parse(localStorage.getItem('persist:root'))?.user
-// const currentUser = user && JSON.parse(user).currentUser
-// const TOKEN = currentUser?.accessToken
-const TOKEN = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.accessToken
+const user = JSON.parse(localStorage.getItem('persist:root'))?.user
+const currentUser = user && JSON.parse(user).currentUser
+const TOKEN = currentUser?.accessToken
+// const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2RjYjQwMTc3YTAzMTZlOTZkODhhNyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODMyNTM3NjR9.zyVobOuw4wWxVK-eUeJHoosfJ3Hcj48pR7ajhTeCzbo"
+// const TOKEN = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).user).currentUser.accessToken
 
 export const publicRequest = Axios.create({
 	baseURL: BASE_URL,

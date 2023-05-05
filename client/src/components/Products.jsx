@@ -72,7 +72,7 @@ useEffect(() => {
     {category
       ? filteredProducts.map((item) => <ProductCard item={item} key={item.id} />)
       : products
-          .slice(0, 8)
+          .slice(0, 6)
           .map((item) => <ProductCard item={item} key={item.id} />)}
   </Container>
   )

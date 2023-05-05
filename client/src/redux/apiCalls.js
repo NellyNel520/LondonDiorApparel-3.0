@@ -1,5 +1,5 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
-import { publicRequest, userRequest } from "../services/requestMethods";
+import { loginFailure, loginStart, loginSuccess} from "./userRedux";
+import { publicRequest, } from "../services/requestMethods";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -20,14 +20,7 @@ export const registerUser = async (data) => {
   }
 }
 
-export const updateUser = async (id, user) => {
-  try{
-    const res = await userRequest.put(`/users/${id}`, user)
-    return res.data
-  } catch (error) {
-    throw error
-  }
-}
+
 
 
 

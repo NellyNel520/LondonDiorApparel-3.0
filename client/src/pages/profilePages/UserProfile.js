@@ -9,8 +9,10 @@ import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
 import OrderHistory from '../../components/orderHistory/FullOrderHistory'
 import LatestOrder from '../../components/orderHistory/LatestOrder'
 // import { useSelector } from "react-redux";
+import moment from 'moment'
 
 const UserProfile = ({ user }) => {
+	let dateJoined = moment(user.createdAt).format('MMM DD, YYYY')
 	return (
 		<div className="text-white  h-auto">
 			{/* UserProfile */}
@@ -19,8 +21,8 @@ const UserProfile = ({ user }) => {
 
 				<div className="main py-6 ">
 					<div className="text-3xl text-center font-play ">My Profile</div>
-					<div className=" flex ">
-						<div className="userShow w-[20rem] h-[43%] mt-8 ml-10 mr-10">
+					<div className=" flex">
+						<div className="userShow border rounded w-[20rem] h-[43%] mt-8 ml-10 mr-10">
 							<div className="userShowTop">
 								<img
 									src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
@@ -30,6 +32,7 @@ const UserProfile = ({ user }) => {
 								<div className="userShowTopTitle">
 									<span className="userShowUsername">{user.name}</span>
 									<span className="userShowUserTitle">Loyal Customer</span>
+								
 								</div>
 							</div> 
 							<div className="userShowBottom">
@@ -41,7 +44,7 @@ const UserProfile = ({ user }) => {
 								<div className="userShowInfo">
 									<CalendarTodayIcon className="userShowIcon" />
 									<span className="userShowInfoTitle">
-										{user.createdAt}
+										{dateJoined}
 										{/* 10.12.1999 */}
 									</span>
 								</div>
@@ -61,9 +64,12 @@ const UserProfile = ({ user }) => {
 									<span className="userShowInfoTitle">{user.address}</span>
 								</div>
 							</div>
+							
 						</div>
 
-						<div className="mt-10 ml-6">
+						
+
+						{/* <div className="mt-10 ml-6">
 							<div className="border rounded w-[20rem] h-[10rem] mb-[4rem]">
 								<div>Customer Service</div>
 							</div>
@@ -71,7 +77,7 @@ const UserProfile = ({ user }) => {
 							<div className="border w-[20rem] rounded h-[10rem]">
 								<div>Wishlist</div>
 							</div>
-						</div>
+						</div> */}
 					</div>
 
 					<div className="ml-10 mt-10 text-2xl font-play">Recent Order</div>

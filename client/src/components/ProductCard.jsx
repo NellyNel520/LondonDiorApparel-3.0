@@ -23,10 +23,10 @@ const Info = styled.div`
 
 const Container = styled.div`
 	flex: 1;
-	margin: 8px 7px;
-	min-width: 280px;
-	max-width: 340px;
-	height: 350px;
+	margin-bottom: 1rem;
+	min-width: 18rem;
+	max-width: 20rem;
+	height: 27rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -61,6 +61,8 @@ const Icon = styled.div`
 
 const ProductCard = ({ item }) => {
 	return (
+		<div>
+		<Link to={`/product/${item._id}`}>
 		<Container>
 			{/* <Circle /> */}
 			<Image src={item.img} />
@@ -77,11 +79,15 @@ const ProductCard = ({ item }) => {
 					</Icon>
 				</Link>
 
+				{/* <Link to={'/profile'}> */}
 				<Icon>
 					<FavoriteIcon className='hover:fill-red-400'/>
 				</Icon>
+				{/* </Link> */}
 			</Info>
 		</Container>
+		</Link>
+		</div>
 	)
 }
 

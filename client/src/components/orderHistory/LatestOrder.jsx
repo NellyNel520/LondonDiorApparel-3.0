@@ -2,6 +2,8 @@ import React from 'react'
 import { userRequest } from '../../services/requestMethods'
 import { useEffect, useState } from 'react'
 import OrderProducts from './OrderProducts'
+import moment from 'moment'
+
 
 const LatestOrder = ({ user }) => {
 	// const [orders, setOrders] = useState([])
@@ -20,6 +22,8 @@ const LatestOrder = ({ user }) => {
 		console.log(orders)
 	}, [])
 
+
+
 	return (
 		<div>
 			{orders.map((order) => (
@@ -36,11 +40,11 @@ const LatestOrder = ({ user }) => {
 							<div className="px-4">
 								<span className="font-bold">Date Placed</span>
 
-								<div>{order.createdAt}</div>
+								<div>{moment(order.createdAt).format('MMM DD, YYYY')}</div>
 							</div>
 
 							<div className="px-4">
-								<span className="font-bold">Total amount</span>
+								<span className="font-bold">Total</span>
 								<div>${order.amount.toFixed(2)}</div>
 							</div>
 						</div>

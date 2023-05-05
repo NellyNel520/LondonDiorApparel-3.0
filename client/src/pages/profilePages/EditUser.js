@@ -4,12 +4,14 @@ import '../../styles/editUser.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { userRequest } from '../../services/requestMethods'
+import { useDispatch } from 'react-redux'
 
 
 
 const EditUser = ({user}) => {
   const id = user._id
   const [inputs, setInputs] = useState({})
+	const dispatch = useDispatch()
   let navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -26,6 +28,7 @@ const EditUser = ({user}) => {
       // navigate(0)
     } catch {}
 	}
+	
 
 
   return (
@@ -33,12 +36,12 @@ const EditUser = ({user}) => {
     <div className='flex'>
       <Sidebar className="rounded" />
 
-      <div className='mx-[25%] mt-6'>
+      <div className=' h-[auto] mx-[25%] mt-6'>
 					<h1 className="newUserTitle addProductTitle text-3xl text-center mb-6 font-play">
 						Edit User Account
 					</h1>
 
-					<div className="productBottom">
+					<div className="productBottom rounded ">
 						<form className="productForm text-black">
 							<div className="productFormLeft">
 								<label>Full Name</label>
@@ -88,7 +91,7 @@ const EditUser = ({user}) => {
 
 								<button 
 								onClick={handleUpdate}
-								className="productButton mt-3 ">Update</button>
+								className="productButton mt-3 hover:bg-green-500 ">Update</button>
 							</div>
 						</form>
 					</div>
