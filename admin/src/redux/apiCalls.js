@@ -26,6 +26,18 @@ import {getCustomerStart,
   addCustomerStart,
   addCustomerSuccess,
   addCustomerFailure, } from "./customerRedux"
+import {getOrderStart,
+  getOrderSuccess,
+  getOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
+  updateOrderStart,
+  updateOrderSuccess,
+  updateOrderFailure,
+  addOrderStart,
+  addOrderSuccess,
+  addOrderFailure,} from "./orderRedux"
 
 export const login = async (dispatch, user) => {
 	dispatch(loginStart())
@@ -83,6 +95,16 @@ export const getUsers = async (dispatch) => {
     dispatch(getCustomerSuccess(res.data));
   } catch (err) {
     dispatch(getCustomerFailure());
+  }
+};
+
+export const getOrders = async (dispatch) => {
+  dispatch(getOrderStart());
+  try {
+    const res = await userRequest.get("/orders/all");
+    dispatch(getOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(getOrderFailure());
   }
 };
 
