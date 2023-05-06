@@ -51,10 +51,11 @@ export default function Sidebar() {
                 Products
               </li>
             </Link>
-            <li className="sidebarListItem">
+            <Link to={'/orders'}><li className="sidebarListItem">
               <AttachMoneyIcon className="sidebarIcon" />
               Transactions
             </li>
+            </Link>
             <li className="sidebarListItem">
               <BarChartIcon className="sidebarIcon" />
               Reports

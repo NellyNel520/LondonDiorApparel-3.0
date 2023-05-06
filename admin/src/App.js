@@ -9,6 +9,7 @@ import UserList from './pages/userList/UserList'
 import User from './pages/user/User'
 import NewUser from './pages/newUser/NewUser'
 import ProductList from './pages/productList/ProductList'
+import OrderList from './pages/orderList/OrderList'
 import Product from './pages/product/Product'
 import NewProduct from './pages/newProduct/NewProduct'
 import Login from '../src/pages/login/Login'
@@ -40,6 +41,7 @@ const App = () => {
 				<Route path="/newUser" element={ <NewUser handleLogOut={handleLogOut}/> } />
 				<Route path="/product/:productId" element={<Product handleLogOut={handleLogOut}/>} />
         <Route path="/products" element={<ProductList handleLogOut={handleLogOut}/>} /> 
+				{/* <Route path="/orders" element={<OrderList handleLogOut={handleLogOut}/>} />  */}
 				<Route path="/newproduct" element={<NewProduct handleLogOut={handleLogOut}/>} /> 
 			</Routes>
 		</div>
