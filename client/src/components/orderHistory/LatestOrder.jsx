@@ -56,6 +56,6 @@ const LatestOrder = ({ user }) => {
 			))}
 		</div>
 	)
-}
+} 
 
 export default LatestOrder

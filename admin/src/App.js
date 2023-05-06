@@ -13,6 +13,7 @@ import OrderList from './pages/orderList/OrderList'
 import Product from './pages/product/Product'
 import NewProduct from './pages/newProduct/NewProduct'
 import Login from '../src/pages/login/Login'
+import Order from './pages/order/Order'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from './redux/userRedux';
@@ -40,6 +41,7 @@ const App = () => {
 				<Route path="/user/:userId" element={ <User handleLogOut={handleLogOut}/>} />
 				<Route path="/newUser" element={ <NewUser handleLogOut={handleLogOut}/> } />
 				<Route path="/product/:productId" element={<Product handleLogOut={handleLogOut}/>} />
+				<Route path="/order/:orderId" element={<Order handleLogOut={handleLogOut}/>} />
         <Route path="/products" element={<ProductList handleLogOut={handleLogOut}/>} /> 
 				<Route path="/orders" element={<OrderList handleLogOut={handleLogOut}/>} /> 
 				<Route path="/newproduct" element={<NewProduct handleLogOut={handleLogOut}/>} /> 

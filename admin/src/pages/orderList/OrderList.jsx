@@ -32,7 +32,7 @@ export default function OrderList({ handleLogOut }) {
 		{ field: '_id', headerName: 'Order ID', width: 100 },
 		{
 			field: 'email',
-			headerName: 'User',
+			headerName: 'User Email',
 			width: 200,
 			renderCell: (params) => {
 				return (
@@ -53,6 +53,14 @@ export default function OrderList({ handleLogOut }) {
 			width: 200,
 			renderCell: (params) => {
 				return <div>{format(params.row.createdAt)}</div>
+			},
+		},
+    {
+			field: 'products',
+			headerName: 'Items',
+			width: 110,
+			renderCell: (params) => {
+				return <div>{params.row.products.length}</div>
 			},
 		},
 		{
@@ -78,7 +86,7 @@ export default function OrderList({ handleLogOut }) {
 			renderCell: (params) => {
 				return (
 					<>
-						<Link to={'/product/' + params.row._id}>
+						<Link to={'/order/' + params.row._id}>
 							<button className="productListEdit">Edit</button>
 						</Link>
 						{/* <DeleteOutlineIcon

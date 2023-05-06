@@ -154,3 +154,14 @@ export const updateUser = async (id, customer, dispatch) => {
   }
 };
 
+export const updateOrder = async (id, order, dispatch) => {
+  dispatch(updateOrderStart());
+  try {
+    // update
+    const res = await userRequest.put(`/orders/${id}`, order);
+    dispatch(updateOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(updateOrderFailure());
+  }
+};
+
