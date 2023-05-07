@@ -27,7 +27,7 @@ export default function FeaturedInfo() {
 
   return (
     <div className="featured">
-      <div className="featuredItem bg-white ">
+      <div className="featuredItem bg-gray-300  ">
         <span className="featuredTitle ">Revanue</span>
         <div className="featuredMoneyContainer ">
           <span className="featuredMoney">${income[0]?.total.toFixed(2)}</span>
@@ -46,7 +46,7 @@ export default function FeaturedInfo() {
         </div>
         <span className="featuredSub">Compared to last month</span>
       </div>
-      <div className="featuredItem bg-white">
+      <div className="featuredItem bg-gray-300">
         <span className="featuredTitle">Sales</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">$4,415</span>
@@ -56,7 +56,7 @@ export default function FeaturedInfo() {
         </div>
         <span className="featuredSub">Compared to last month</span>
       </div>
-      <div className="featuredItem bg-white">
+      <div className="featuredItem bg-gray-300">
         <span className="featuredTitle">Cost</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">$2,225</span>

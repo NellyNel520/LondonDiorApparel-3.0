@@ -29,7 +29,7 @@ const updateProduct = async (req, res) => {
     res.status(500).json(err);
 }
 }
-
+ 
 
 // Delete Product
 

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 
 export default function Topbar({handleLogOut}) {
   return (
-    <div className="topbar">
+    <div className="topbar pb-3">
       <div className="topbarWrapper">
         <div className="topLeft">
           <span className="logo font-ari text-blue-500">London Dior Apparel Admin</span>

@@ -9,13 +9,14 @@ import OrderProducts from './OrderProducts'
 import './order.css'
 import { updateOrder } from '../../redux/apiCalls'
 import { useNavigate } from 'react-router'
+import EditIcon from '@mui/icons-material/Edit'
 
 export default function Order() {
 	const location = useLocation()
 	const id = location.pathname.split('/')[2]
-  const [status, setStatus] = useState('')
-  const dispatch = useDispatch()
-  let navigate = useNavigate()
+	const [status, setStatus] = useState('')
+	const dispatch = useDispatch()
+	let navigate = useNavigate()
 
 	const order = useSelector((state) =>
 		state.order.orders.find((order) => order._id === id)
@@ -25,22 +26,21 @@ export default function Order() {
 		return <button className={'orderStatusButton ' + type}>{type}</button>
 	}
 
-  const handleChange = (e) => {
-    setStatus((prev) => {
-      return {...prev, [e.target.name]: e.target.value}
-    })
-  }
+	const handleChange = (e) => {
+		setStatus((prev) => {
+			return { ...prev, [e.target.name]: e.target.value }
+		})
+	}
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const order = {
-      ...status,
-    }
-    updateOrder(id, order, dispatch)
-    navigate('/orders')
-    navigate(0)
-
-  }
+	const handleUpdate = (e) => {
+		e.preventDefault()
+		const order = {
+			...status,
+		}
+		updateOrder(id, order, dispatch)
+		navigate('/orders')
+		navigate(0)
+	}
 
 	return (
 		<div>
@@ -49,29 +49,55 @@ export default function Order() {
 				<Sidebar />
 
 				<div className="main">
-
-        {/* update order */}
-					<div className="border m-8 w-[30%] p-4 ">
-						<div className="font-play text-xl text-center">
-							Update Order Status
+					<div className="flex">
+						{/* update order */}
+						<div className="border rounded m-8 w-[30%] p-4 font-play ">
+							<div className="font-play text-xl text-center">Order Status</div>
+							<form className="updateForm py-4 ">
+								<label className="text-lg">
+									<EditIcon className="text-blue-400" />
+									Order Status:
+								</label>
+								<select name="status" onChange={handleChange}>
+									<option>Select</option>
+									<option value="pending">pending</option>
+									<option value="approved">approved</option>
+									<option value="declined">declined</option>
+								</select>
+							</form>
+							<button
+								onClick={handleUpdate}
+								className="border bg-blue-400 py-1 px-2 rounded hover:text-white hover:bg-green-400 "
+							>
+								Update
+							</button>
+							<div></div>
 						</div>
-						<form className="updateForm py-4">
-							<label>Order Status:</label>
-							<select name="status" onChange={handleChange}>
-                <option >Select</option>
-								<option value="pending">pending</option>
-								<option value="approved">approved</option>
-								<option value="declined">declined</option>
-							</select>
-						</form>
-						<button onClick={handleUpdate} className="border bg-blue-400 py-1 px-2 rounded hover:text-white">
-							Update
-						</button>
+
+						<div className='border rounded m-8 w-[30%] p-4 font-play'>
+							<div className='text-center text-xl'>Shipping Info</div>
+							<div className='orderShowInfo'>
+								Address: <span className='orderShowInfoTitle'> {order.address.line1}</span>
+							</div>
+							<div className='mt-[-1rem]'>
+								City: <span className='orderShowInfoTitle'> {order.address.city}</span>
+							</div>
+							<div className='mt-[]'>
+								State: <span className='orderShowInfoTitle'> {order.address.state}</span>
+							</div>
+							<div className='mt-[]'>
+								ZipCode: <span className='orderShowInfoTitle'> {order.address.postal_code}</span>
+							</div>
+							<div className='mt-[]'>
+								Country: <span className='orderShowInfoTitle'> {order.address.country}</span>
+							</div>
+
+						</div>
 					</div>
 
 					<div>
 						<div className="order border rounded w-[80%] m-8">
-							<div className="orderTop py-6 flex border text-xl">
+							<div className="orderTop bg-gray-400 rounded py-6 flex border text-xl">
 								<div className="px-4">
 									<span className="font-bold">Order Number</span>
 									<div>

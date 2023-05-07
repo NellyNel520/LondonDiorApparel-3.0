@@ -52,7 +52,7 @@ export default function Home({handleLogOut}) {
 		<div className="home">
 			<Topbar handleLogOut={handleLogOut}/>
 			<div className='flex'>
-				<Sidebar />
+				<Sidebar /> 
         <div className='cont'>
 				  <FeaturedInfo />
 				  <Chart

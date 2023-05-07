@@ -19,7 +19,7 @@ export default function WidgetSm() {
 
 	return (
 		<div className='flex'>
-		<div className="widgetSm">
+		<div className="widgetSm bg-gray-300 rounded">
 			<span className="widgetSmTitle">New Members</span>
 			<ul className="widgetSmList">
 				{users.map(user => (

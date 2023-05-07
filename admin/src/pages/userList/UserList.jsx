@@ -31,7 +31,7 @@ export default function UserList({handleLogOut}) {
   };
   
   const columns = [
-    { field: "_id", headerName: "ID", width: 120 },
+    { field: "_id", headerName: "ID", width: 150 },
     {
       field: "user",
       headerName: "Name",
@@ -85,7 +85,7 @@ export default function UserList({handleLogOut}) {
       <Sidebar />
 
      
-    <div className="userList">
+    <div className="userList bg-gray-300 m-6 rounded">
       <DataGrid
         rows={users}
         getRowId={(row) => row._id}

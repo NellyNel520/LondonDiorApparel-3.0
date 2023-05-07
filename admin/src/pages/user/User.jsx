@@ -4,7 +4,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid'
 import PublishIcon from '@mui/icons-material/Publish'
-
+import moment from 'moment'
 import { Link } from 'react-router-dom'
 import './user.css'
 import Sidebar from '../../components/sidebar/Sidebar'
@@ -57,23 +57,23 @@ export default function User({handleLogOut}) {
 			<div className="flex">
 				<Sidebar />
 
-				<div className="user">
+				<div className="user font-play py-[2rem] px-[4rem]">
 					<div className="userTitleContainer">
-						<h1 className="userTitle">Edit User</h1>
+						<h1 className="userTitle text-blue-400 text-2xl">User: {user.name} </h1>
 						<Link to="/newUser">
 							<button className="userAddButton">Create</button>
 						</Link>
 					</div>
-					<div className="userContainer">
-						<div className="userShow">
+					<div className="userContainer w-[80%]">
+						<div className="userShow bg-gray-300 rounded">
 							<div className="userShowTop">
-								<img
+							<img
 									src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
 									alt=""
 									className="userShowImg"
 								/>
 								<div className="userShowTopTitle">
-									<span className="userShowUsername">{user.name}</span>
+									<span className="userShowUsername text-xl text-blue-500">{user.name}</span>
 									<span className="userShowUserTitle">Loyal Customer</span>
 								</div>
 							</div>
@@ -86,7 +86,7 @@ export default function User({handleLogOut}) {
 								<div className="userShowInfo">
 									<CalendarTodayIcon className="userShowIcon" />
 									<span className="userShowInfoTitle">
-									{user.createdAt}
+									{moment(user.createdAt).format('MMM DD, YYYY')}
 									{/* 10.12.1999 */}
 									</span>
 								</div>
@@ -109,8 +109,8 @@ export default function User({handleLogOut}) {
 						</div>  
 
 						{/* edit/ UPDATE user */}
-						<div className="userUpdate">
-							<span className="userUpdateTitle">Edit</span>
+						<div className="userUpdate rounded bg-gray-300">
+							<span className="userUpdateTitle text-blue-500">Edit</span>
 							<form className="userUpdateForm">
 							<div className="productFormLeft">
 						<label>Full Name</label>
@@ -128,23 +128,24 @@ export default function User({handleLogOut}) {
 							type="text"
 							placeholder={user.email}
 						/>
-						<label>Phone</label>
+						<label>Phone (optional)</label>
 						<input
+							name="phoneNumber"
 							placeholder="+ 1 123 456 7843"
-							// onChange={handleCat}
+							onChange={handleChange}
 							type="text"
 						/>
-						<label>Address</label>
+						<label>Address (optional)</label>
 						<input
-							name="price"
+							name="address"
 							placeholder={user.address}
-							// onChange={handleChange}
+							onChange={handleChange}
 							type="number"
 						/>
 					
 
 						<button onClick={handleUpdate}
-						 className="productButton mt-3 ">
+						 className="userUpdateButton mt-3 hover:bg-green-500">
 							Update
 						</button>
 					</div>

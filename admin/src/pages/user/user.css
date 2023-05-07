@@ -1,6 +1,6 @@
 .user {
   flex: 4;
-  padding: 20px;
+  /* padding: 2rem; */
 }
 
 .userTitleContainer {
@@ -10,7 +10,7 @@
 }
 
 .userAddButton {
-  width: 80px;
+  width: 4rem;
   border: none;
   padding: 5px;
   background-color: teal;
@@ -71,9 +71,9 @@
 }
 
 .userShowTitle {
-  font-size: 14px;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: rgb(175, 170, 170);
+  color: rgb(28, 119, 238);
 }
 
 .userShowInfo{
@@ -84,11 +84,13 @@
 }
 
 .userShowIcon{
-    font-size: 16px !important;
+    font-size: 1.3rem !important;
+    color: rgb(28, 119, 238); 
 }
 
 .userShowInfoTitle{
     margin-left: 10px;
+    font-size: 1.2rem;
 }
 
 .userUpdateTitle{
@@ -148,7 +150,7 @@
     border: none;
     padding: 5px;
     cursor: pointer;
-    background-color: darkblue;
+    background-color: rgb(6, 114, 228);
     color: white;
     font-weight: 600;
 }

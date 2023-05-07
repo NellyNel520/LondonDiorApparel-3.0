@@ -108,6 +108,7 @@ export const getOrders = async (dispatch) => {
   }
 };
 
+// DELETE
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
@@ -129,9 +130,19 @@ export const deleteUser = async (id, dispatch) => {
   }
 };
 
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/orders/${id}`);
+    dispatch(deleteOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(deleteOrderFailure());
+  }
+};
 
 
-// Needs work
+
+// UPDATE
 export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {

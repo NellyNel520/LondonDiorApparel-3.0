@@ -1,22 +1,21 @@
 import './orderList.css'
 import { DataGrid } from '@mui/x-data-grid'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
-import { productRows } from '../../dummyData'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrders } from '../../redux/apiCalls'
+import { getOrders, deleteOrder } from '../../redux/apiCalls'
 import { format } from 'timeago.js'
+import '../../styles/App.css'
 
 export default function OrderList({ handleLogOut }) {
-	// const [data, setData] = useState(productRows);
 	const dispatch = useDispatch()
 	const orders = useSelector((state) => state.order.orders)
 
-  const Button = ({ type }) => {
+	const Button = ({ type }) => {
 		return <button className={'orderStatusButton ' + type}>{type}</button>
 	}
 
@@ -24,16 +23,16 @@ export default function OrderList({ handleLogOut }) {
 		getOrders(dispatch)
 	}, [dispatch])
 
-	// const handleDelete = (id) => {
-	//   setData(data.filter((item) => item.id !== id));
-	// };
+	const handleDelete = (id) => {
+		deleteOrder(id, dispatch)
+	};
 
 	const columns = [
 		{ field: '_id', headerName: 'Order ID', width: 100 },
 		{
 			field: 'email',
 			headerName: 'User Email',
-			width: 200,
+			width: 250,
 			renderCell: (params) => {
 				return (
 					<div className="productListItem">
@@ -55,7 +54,7 @@ export default function OrderList({ handleLogOut }) {
 				return <div>{format(params.row.createdAt)}</div>
 			},
 		},
-    {
+		{
 			field: 'products',
 			headerName: 'Items',
 			width: 110,
@@ -67,17 +66,21 @@ export default function OrderList({ handleLogOut }) {
 			field: 'amount',
 			headerName: 'Total',
 			width: 160,
-      renderCell: (params) => {
-        return <div>${params.row.amount.toFixed(2)}</div>
-      }
+			renderCell: (params) => {
+				return <div>${params.row.amount.toFixed(2)}</div>
+			},
 		},
 		{
 			field: 'status',
 			headerName: 'Status',
 			width: 120,
-      renderCell: (params) => {
-        return <div><Button type={params.row.status}/></div>
-      }
+			renderCell: (params) => {
+				return (
+					<div>
+						<Button type={params.row.status} />
+					</div>
+				)
+			},
 		},
 		{
 			field: 'action',
@@ -89,10 +92,10 @@ export default function OrderList({ handleLogOut }) {
 						<Link to={'/order/' + params.row._id}>
 							<button className="productListEdit">Edit</button>
 						</Link>
-						{/* <DeleteOutlineIcon
-              className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            /> */}
+						<DeleteOutlineIcon
+              className="userListDelete"
+              onClick={() => handleDelete(params.row._id)}
+            />
 					</>
 				)
 			},
@@ -104,17 +107,19 @@ export default function OrderList({ handleLogOut }) {
 			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
+
+
 				<div className="productList">
 					<DataGrid
 						rows={orders}
+						getRowId={(row) => row._id}
 						disableSelectionOnClick
 						columns={columns}
-						getRowId={(row) => row._id}
 						pageSize={8}
 						checkboxSelection
 					/>
 				</div>
 			</div>
 		</div>
-	)
+	);
 }

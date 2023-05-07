@@ -20,7 +20,7 @@ export default function WidgetLg() {
 		return <button className={'widgetLgButton ' + type}>{type}</button>
 	}
 	return (
-		<div className="widgetLg">
+		<div className="widgetLg bg-gray-300 rounded">
 			<h3 className="widgetLgTitle">Recent Transactions</h3>
 			<table className="widgetLgTable">
 				<tr className="widgetLgTr ">

@@ -5,12 +5,24 @@ import { productData } from '../../dummyData'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
+import styled from 'styled-components'
+import { mobile } from '../../responsive'
 import { useSelector } from 'react-redux'
 import { useEffect, useMemo, useState } from 'react'
 import { userRequest } from '../../services/requestMethods'
 import ProductUpdate from '../../components/updateProduct/ProductUpdate'
 import ProductUpdate2 from '../../components/updateProduct/ProductUpdate2'
 
+
+const FilterColor = styled.div`
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	
+	background-color: ${(props) => props.color};
+	margin: 0px 5px;
+	cursor: pointer;
+`
 
 export default function Product({ handleLogOut }) {
 	const location = useLocation()
@@ -66,49 +78,64 @@ export default function Product({ handleLogOut }) {
 	console.log(product.categories)
 
 	return (
-		<div>
+		<div className='w-[100vw]'>
 			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
 
 				<div className="product">
 					<div className="productTitleContainer mt-4">
-						<h1 className="productTitle">Product</h1>
-						<Link to="/newproduct">
+						<h1 className="productTitle text-blue-500 pl-6 text-3xl font-play">{product.title}</h1>
+						{/* <Link to="/newproduct">
 							<button className="productAddButton">Create</button>
-						</Link>
+						</Link> */}
 					</div>
 					<div className="productTop">
-						<div className="productTopLeft">
+						<div className="productTopLeft w-[46%] mr-7">
 							{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
 							<Chart
 								data={productData}
 								dataKey="Sales" 
 								title="Sales Performance"
+								
 							/>
 						</div>
-						<div className="productTopRight">
+						<div className="productTopRight bg-gray-300 rounded w-[42%]">
 							<div className="productInfoTop">
 								<img src={product.img} alt="" className="productInfoImg" />
-								<span className="productName">{product.title}</span>
+								<span className="productName text-xl text-blue-500">{product.title}</span>
 							</div>
 							<div className="productInfoBottom">
 								<div className="productInfoItem">
-									<span className="productInfoKey">id:</span>
+									<span className="productInfoKey">Product Id:</span>
 									<span className="productInfoValue">{product._id}</span>
 								</div>
 								<div className="productInfoItem">
-									<span className="productInfoKey">sales:</span>
-									<span className="productInfoValue">5123</span>
+									<span className="productInfoKey">Categories:</span>
+									<span className="productInfoValue">{product.inStock}</span>
 								</div>
 								<div className="productInfoItem">
-									<span className="productInfoKey">active:</span>
+									<span className="productInfoKey">Count In Stock:</span>
+									<span className="productInfoValue">{product.inStock}</span>
+								</div>
+								<div className="productInfoItem">
+									<span className="productInfoKey">Price:</span>
 									<span className="productInfoValue">yes</span>
 								</div>
 								<div className="productInfoItem">
-									<span className="productInfoKey">in stock:</span>
-									<span className="productInfoValue">{product.inStock}</span>
+									<span className="productInfoKey">Color(s):</span>
+										{product.color?.map((c) => (
+											<FilterColor color={c} key={c} />
+										))}
+									
+									{/* <span className="productInfoValue">5123</span> */}
 								</div>
+								<div className="productInfoItem">
+									<span className="productInfoKey">Size(s):</span>
+									<span className="productInfoValue">yes</span>
+								</div>
+								
+							
 							</div>
 						</div>
 					</div>

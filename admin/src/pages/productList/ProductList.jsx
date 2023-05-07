@@ -49,6 +49,9 @@ export default function ProductList({handleLogOut}) {
 			field: 'price',
 			headerName: 'Price',
 			width: 160,
+			renderCell: (params) => {
+				return <div>${params.row.price.toFixed(2)}</div>
+			},
 		},
 		{
 			field: 'action',
@@ -75,7 +78,7 @@ export default function ProductList({handleLogOut}) {
 			<Topbar handleLogOut={handleLogOut}/>
 			<div className="flex">
 				<Sidebar />
-				<div className="productList">
+				<div className="productList  bg-gray-300 m-6 rounded">
 					<DataGrid
 						rows={products}
 						disableSelectionOnClick

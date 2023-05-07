@@ -110,7 +110,7 @@ export default function ProductUpdate2({ product }) {
 	return (
 		<div>
 			Update form 2
-			<div className="productBottom">
+			<div className="productBottom bg-gray-300 rounded w-[90%]">
 				<form className="productForm">
 					<div className="productFormLeft">
 						<label>Product Name</label>

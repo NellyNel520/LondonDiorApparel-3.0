@@ -7,7 +7,7 @@ export const orderSlice = createSlice({
     isFetching: false,
     error: false,
   },
-  reducers: {
+  reducers: { 
     //GET ALL
     getOrderStart: (state) => {
       state.isFetching = true;
