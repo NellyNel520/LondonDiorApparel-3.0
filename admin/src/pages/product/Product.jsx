@@ -13,16 +13,20 @@ import { userRequest } from '../../services/requestMethods'
 import ProductUpdate from '../../components/updateProduct/ProductUpdate'
 import ProductUpdate2 from '../../components/updateProduct/ProductUpdate2'
 
-
 const FilterColor = styled.div`
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	
+
 	background-color: ${(props) => props.color};
 	margin: 0px 5px;
 	cursor: pointer;
 `
+const FilterSize = styled.select`
+	margin-left: 10px;
+	padding: 5px;
+`
+const FilterSizeOption = styled.option``
 
 export default function Product({ handleLogOut }) {
 	const location = useLocation()
@@ -78,41 +82,48 @@ export default function Product({ handleLogOut }) {
 	console.log(product.categories)
 
 	return (
-		<div className='w-[100vw]'>
+		<div className="w-[100vw]">
 			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
 
 				<div className="product">
 					<div className="productTitleContainer mt-4">
-						<h1 className="productTitle text-blue-500 pl-6 text-3xl font-play">{product.title}</h1>
+						<h1 className="productTitle text-blue-500 pl-6 text-3xl font-play">
+							{product.title}
+						</h1>
 						{/* <Link to="/newproduct">
 							<button className="productAddButton">Create</button>
 						</Link> */}
 					</div>
 					<div className="productTop">
-						<div className="productTopLeft w-[46%] mr-7">
+						<div className="productTopLeft w-[46%] mr-[7rem]">
 							{/* need to add pstats to data only one month so no stats currently showing dummy data currenttly */}
 							<Chart
 								data={productData}
-								dataKey="Sales" 
+								dataKey="Sales"
 								title="Sales Performance"
-								
 							/>
 						</div>
-						<div className="productTopRight bg-gray-300 rounded w-[42%]">
+						<div className="productTopRight bg-gray-300 rounded w-[35%] font-play px-[3rem] py-[1.5rem]">
 							<div className="productInfoTop">
 								<img src={product.img} alt="" className="productInfoImg" />
-								<span className="productName text-xl text-blue-500">{product.title}</span>
+								<span className="productName text-2xl text-blue-500">
+									{product.title}
+								</span>
 							</div>
-							<div className="productInfoBottom">
-								<div className="productInfoItem">
+							<div className="productInfoBottom text-lg">
+								<div className="productInfoItem ">
 									<span className="productInfoKey">Product Id:</span>
 									<span className="productInfoValue">{product._id}</span>
 								</div>
 								<div className="productInfoItem">
 									<span className="productInfoKey">Categories:</span>
-									<span className="productInfoValue">{product.inStock}</span>
+									{product.categories?.map((category) => (
+										<div key={category}>{category}</div>
+									))}
+
+									{/* <span className="productInfoValue">{product.categories}</span> */}
 								</div>
 								<div className="productInfoItem">
 									<span className="productInfoKey">Count In Stock:</span>
@@ -120,22 +131,22 @@ export default function Product({ handleLogOut }) {
 								</div>
 								<div className="productInfoItem">
 									<span className="productInfoKey">Price:</span>
-									<span className="productInfoValue">yes</span>
+									<span className="productInfoValue text-xl pb-1">$ {product.price.toFixed(2)}</span>
 								</div>
 								<div className="productInfoItem">
 									<span className="productInfoKey">Color(s):</span>
-										{product.color?.map((c) => (
-											<FilterColor color={c} key={c} />
-										))}
-									
+									{product.color?.map((c) => (
+										<FilterColor color={c} key={c} />
+									))}
+
 									{/* <span className="productInfoValue">5123</span> */}
 								</div>
 								<div className="productInfoItem">
 									<span className="productInfoKey">Size(s):</span>
-									<span className="productInfoValue">yes</span>
+									{product.size?.map((s) => (
+										<FilterSizeOption key={s}>{s}</FilterSizeOption>
+									))}
 								</div>
-								
-							
 							</div>
 						</div>
 					</div>
