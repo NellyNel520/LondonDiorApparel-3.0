@@ -35,9 +35,10 @@ export default function ProductUpdate2({ product }) {
 			return { ...prev, [e.target.name]: e.target.value }
 		})
 	}
-	const handleCat = (e) => {
-		setCat(e.target.value.split(','))
-	}
+	// const handleCat = (e) => {
+	// 	setCat(e.target.value.split(','))
+			
+	// }
 	const handleColor = (e) => {
 		setColor(e.target.value.split(','))
 	}
@@ -97,7 +98,6 @@ export default function ProductUpdate2({ product }) {
 		e.preventDefault()
 		const product = {
 			...inputs,
-			categories: cat,
 			size: size,
 			color: color,
 		}
@@ -109,11 +109,11 @@ export default function ProductUpdate2({ product }) {
 
 	return (
 		<div>
-			Update form 2
+			<div className='text-blue-400 px-5 text-3xl font-play'>Update Product</div>
 			<div className="productBottom bg-gray-300 rounded w-[90%]">
-				<form className="productForm">
+				<form className="productForm font-play">
 					<div className="productFormLeft">
-						<label>Product Name</label>
+						<label className='text-xl'>Product Name</label>
 						<input
 							name="title"
 							onChange={handleChange}
@@ -121,41 +121,46 @@ export default function ProductUpdate2({ product }) {
 							placeholder={product.title}
 						/>
 
-						<label>Product Description</label>
-						<input
-							name="desc"
+						<label className='text-xl'>Product Description</label>
+						
+						<textarea 
+							name='desc'
 							onChange={handleChange}
-							type="text"
+							rows="5"
+							cols="50"
 							placeholder={product.desc}
 						/>
-						<label>Categories</label>
+						<label className='text-xl'>Categories</label>
 						<input
 							placeholder={product.categories}
-							onChange={handleCat}
+							onChange={handleChange}
 							type="text"
+							name='categories'
 						/>
-						<label>Price</label>
+						<label className='text-xl'>Price</label>
 						<input
 							name="price"
-							placeholder={product.price}
+							placeholder={product.price.toFixed(2)}
 							onChange={handleChange}
 							type="number"
 						/>
-						<label>Size(s)</label>
+						<label className='text-xl'>Size(s)</label>
 						<input
 							name="size"
 							placeholder={product.size}
 							onChange={handleSize}
 							type="text"
 						/>
-						<label>Available Color(s)</label>
+					
+				
+						<label className='text-xl'>Available Color(s)</label>
 						<input
 							name="color"
 							placeholder={product.color}
 							onChange={handleColor}
 							type="text"
 						/>
-						<label>Count In Stock</label>
+						<label className='text-xl'>Count In Stock</label>
 						<input
 							name="inStock"
 							placeholder={product.inStock}
@@ -163,7 +168,7 @@ export default function ProductUpdate2({ product }) {
 							type="number"
 						/>
 
-						<label>Rating (1-5)</label>
+						<label className='text-xl'>Rating (1-5)</label>
 						<input
 							name="rating"
 							placeholder={product.rating}
@@ -178,8 +183,8 @@ export default function ProductUpdate2({ product }) {
 					</div>
 				</form>
 
-				<form>
-					<label for="file">Image</label>
+				<form className='pl-8 w-[20%]'>
+					<label className=" text-2xl pb-2 font-play text-blue-500" for="file">New Image</label>
 					<input
 						type="file"
 						id="file"
@@ -192,7 +197,7 @@ export default function ProductUpdate2({ product }) {
 
 				<div className="productFormRight">
 					<div className="productUpload flex-column">
-						<img src={product.img} alt="" className="w-[80%] ml-[15%]" />
+						<img src={product.img} alt="" className="w-[100%] " />
 					</div>
 				</div>
 			</div>

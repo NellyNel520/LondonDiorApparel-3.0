@@ -60,7 +60,7 @@ const getProductById = async (req, res) => {
 	} catch (error) {
 		return res.status(500).send(error.message);
 	}
-};
+}; 
 
 
 
@@ -92,7 +92,7 @@ const getAllProductsAndFilter = async (req, res) => {
         },
       });
     } else {
-      products = await Product.find();
+      products = await Product.find().sort({ _id: -1 });
     }
 
     res.status(200).json(products);

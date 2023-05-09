@@ -7,22 +7,22 @@ import { useState } from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Topbar from '../../components/topbar/Topbar'
 import '../../styles/App.css'
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
- 
-export default function ProductList({handleLogOut}) {
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProduct, getProducts } from '../../redux/apiCalls'
+
+export default function ProductList({ handleLogOut }) {
 	// const [data, setData] = useState(productRows)
-	const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
+	const dispatch = useDispatch()
+	const products = useSelector((state) => state.product.products)
 
 	useEffect(() => {
-    getProducts(dispatch);
-  }, [dispatch]);
+		getProducts(dispatch)
+	}, [dispatch])
 
-  const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
-  };
+	const handleDelete = (id) => {
+		deleteProduct(id, dispatch)
+	}
 
 	const columns = [
 		{ field: '_id', headerName: 'ID', width: 120 },
@@ -39,7 +39,12 @@ export default function ProductList({handleLogOut}) {
 				)
 			},
 		},
-		{ field: 'inStock', headerName: 'Stock', width: 200 },
+		{ field: 'inStock', headerName: 'Stock', width: 120 },
+		{
+			field: 'categories',
+			headerName: 'Category',
+			width: 150,
+		},
 		{
 			field: 'rating',
 			headerName: 'Rating',
@@ -75,18 +80,23 @@ export default function ProductList({handleLogOut}) {
 
 	return (
 		<div>
-			<Topbar handleLogOut={handleLogOut}/>
+			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
-				<div className="productList  bg-gray-300 m-6 rounded">
-					<DataGrid
-						rows={products}
-						disableSelectionOnClick
-						columns={columns}
-						getRowId={(row) => row._id}
-						pageSize={8}
-						checkboxSelection
-					/>
+
+				<div>
+					<div className='text-blue-400 text-[4rem] font-abril text-center'>Products</div>
+
+					<div className="productList  bg-gray-300 m-6 rounded">
+						<DataGrid
+							rows={products}
+							disableSelectionOnClick
+							columns={columns}
+							getRowId={(row) => row._id}
+							pageSize={8}
+							checkboxSelection
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

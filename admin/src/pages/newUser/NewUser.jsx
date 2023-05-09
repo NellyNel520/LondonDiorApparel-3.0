@@ -36,12 +36,12 @@ const NewUser = ({ handleLogOut }) => {
 			<Topbar handleLogOut={handleLogOut} />
 			<div className="flex">
 				<Sidebar />
-				<div>
-					<h1 className="newUserTitle addProductTitle text-3xl text-center mb-6 font-play">
+				<div className='w-[80vw]'>
+					<h1 className="newUserTitle addProductTitle text-[4rem] text-center mb-6 font-play text-blue-400">
 						New User
-					</h1>
+					</h1> 
 
-					<div className="productBottom">
+					<div className="newProductBottom bg-gray-300 rounded w-[45%] mx-[28%] font-play text-xl">
 						<form className="productForm">
 							<div className="productFormLeft">
 								<label>Full Name</label>
@@ -81,7 +81,7 @@ const NewUser = ({ handleLogOut }) => {
 
 								<button 
 								onClick={handleClick}
-								className="productButton mt-3 ">Create</button>
+								className="border p-3 bg-blue-400 rounded text-xl hover:bg-green-400 text-white mt-3 ">Create</button>
 							</div>
 						</form>
 					</div>

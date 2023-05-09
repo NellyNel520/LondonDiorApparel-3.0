@@ -25,7 +25,7 @@ export default function OrderList({ handleLogOut }) {
 
 	const handleDelete = (id) => {
 		deleteOrder(id, dispatch)
-	};
+	}
 
 	const columns = [
 		{ field: '_id', headerName: 'Order ID', width: 100 },
@@ -93,9 +93,9 @@ export default function OrderList({ handleLogOut }) {
 							<button className="productListEdit">Edit</button>
 						</Link>
 						<DeleteOutlineIcon
-              className="userListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
+							className="userListDelete"
+							onClick={() => handleDelete(params.row._id)}
+						/>
 					</>
 				)
 			},
@@ -108,18 +108,22 @@ export default function OrderList({ handleLogOut }) {
 			<div className="flex">
 				<Sidebar />
 
+				<div>
+				<div className='text-blue-400 text-[4rem] text-center font-abril'>Orders</div>
+					<div className="productList bg-gray-300 m-6 rounded">
+						<DataGrid
+							rows={orders}
+							getRowId={(row) => row._id}
+							disableSelectionOnClick
+							columns={columns}
+							pageSize={8}
+							checkboxSelection
+						/>
+					</div>
 
-				<div className="productList">
-					<DataGrid
-						rows={orders}
-						getRowId={(row) => row._id}
-						disableSelectionOnClick
-						columns={columns}
-						pageSize={8}
-						checkboxSelection
-					/>
+
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

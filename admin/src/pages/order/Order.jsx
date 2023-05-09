@@ -51,12 +51,12 @@ export default function Order() {
 				<div className="main">
 					<div className="flex">
 						{/* update order */}
-						<div className="border rounded m-8 w-[30%] p-4 font-play ">
+						<div className="border bg-gray-300 rounded m-8 w-[30%] p-4 font-play ">
 							<div className="font-play text-xl text-center">Order Status</div>
 							<form className="updateForm py-4 ">
 								<label className="text-lg">
 									<EditIcon className="text-blue-400" />
-									Order Status:
+									 Status:
 								</label>
 								<select name="status" onChange={handleChange}>
 									<option>Select</option>
@@ -67,14 +67,14 @@ export default function Order() {
 							</form>
 							<button
 								onClick={handleUpdate}
-								className="border bg-blue-400 py-1 px-2 rounded hover:text-white hover:bg-green-400 "
+								className="border bg-blue-400 py-2 px-3 rounded hover:text-white hover:bg-green-400 "
 							>
 								Update
 							</button>
 							<div></div>
 						</div>
 
-						<div className='border rounded m-8 w-[30%] p-4 font-play'>
+						<div className='border bg-gray-300 rounded m-8 w-[30%] p-4 font-play'>
 							<div className='text-center text-xl'>Shipping Info</div>
 							<div className='orderShowInfo'>
 								Address: <span className='orderShowInfoTitle'> {order.address.line1}</span>
@@ -97,27 +97,27 @@ export default function Order() {
 
 					<div>
 						<div className="order border rounded w-[80%] m-8">
-							<div className="orderTop bg-gray-400 rounded py-6 flex border text-xl">
+							<div className="orderTop bg-gray-300 rounded py-6 flex border text-xl">
 								<div className="px-4">
-									<span className="font-bold">Order Number</span>
+									<span className="font-bold text-blue-500">Order Number</span>
 									<div>
-										<span className="text-gray-400">#</span> {order._id}
+										<span className="text-blue-500 text-2xl">#</span> {order._id}
 									</div>
 								</div>
 
-								<div className="px-4">
-									<span className="font-bold">Date Placed</span>
+								<div className="px-6">
+									<span className="font-bold text-blue-500">Date Placed</span>
 
 									<div>{moment(order.createdAt).format('MMM DD, YYYY')}</div>
 								</div>
 
 								<div className="px-4">
-									<span className="font-bold">Total</span>
+									<span className="font-bold text-blue-500">Total</span>
 									<div>${order.amount.toFixed(2)}</div>
 								</div>
 
 								<div className="pl-[8rem]">
-									<span className="font-bold">Status</span>
+									<span className="font-bold  text-blue-500">Status:</span>
 									<div>
 										<Button type={order.status} />
 									</div>

@@ -12,6 +12,7 @@ import {
 	getDownloadURL,
 } from 'firebase/storage'
 import app from '../../firebase'
+import { useNavigate } from 'react-router'
 
 const NewProduct = ({ handleLogOut }) => {
 	const [inputs, setInputs] = useState({})
@@ -20,6 +21,7 @@ const NewProduct = ({ handleLogOut }) => {
 	const [color, setColor] = useState([])
 	const [size, setSize] = useState([])
 	const dispatch = useDispatch()
+	let navigate = useNavigate()
 
 	const handleChange = (e) => {
 		setInputs((prev) => {
@@ -81,6 +83,8 @@ const NewProduct = ({ handleLogOut }) => {
 					}
 					console.log(product)
 					addProduct(product, dispatch)
+					navigate("/products")
+					navigate(0)
 				})
 			}
 		)
@@ -94,13 +98,13 @@ const NewProduct = ({ handleLogOut }) => {
 			<div className="flex">
 				<Sidebar />
 
-				<div>
-					<h1 className="addProductTitle text-3xl text-center mb-6 font-play">
+				<div className="w-[80vw]">
+					<h1 className="addProductTitle text-[4rem] text-center mb-6 font-abril text-blue-400">
 						New Product
 					</h1>
 
-					<div className="productBottom">
-						<form className="productForm">
+					<div className="newProductBottom  bg-gray-300 rounded w-[54%] mx-[25%] font-play text-xl">
+						<form className="productForm ">
 							<div className="productFormLeft">
 								<label>Product Name</label>
 								<input
@@ -112,16 +116,18 @@ const NewProduct = ({ handleLogOut }) => {
 								/>
 
 								<label>Product Description</label>
-								<input
+								<textarea
 									name="desc"
 									onChange={handleChange}
 									// value={formState.desc}
+									rows="5"
+									cols="50"
 									type="text"
-									placeholder="nice shirt"
+									placeholder="Product Description"
 								/>
-								<label>Categories</label>
+								<label>Category</label>
 								<input
-									placeholder="t-shirt, long sleeve"
+									placeholder="t-shirt"
 									onChange={handleCat}
 									// value={formState.category}
 									type="text"
@@ -175,14 +181,16 @@ const NewProduct = ({ handleLogOut }) => {
 									type="number"
 								/>
 
-
 								<label for="file">Image</label>
 								<input
 									type="file"
 									id="file"
 									onChange={(e) => setFile(e.target.files[0])}
 								/>
-								<button onClick={handleClick} className="productButton mt-3 ">
+								<button
+									onClick={handleClick}
+									className=" p-2 mt-3 rounded hover:bg-green-500 text-white bg-blue-500"
+								>
 									Create
 								</button>
 							</div>

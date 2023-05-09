@@ -9,10 +9,12 @@ import { BASE_URL } from '../global'
 
 
 const Container = styled.div`
- padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+ 
+  padding: 2em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 1em;
+  justify-content: center;
 `;
 const Products = ({category, filters, sort}) => {
   // console.log(category, filters, sort) IT WORKS
