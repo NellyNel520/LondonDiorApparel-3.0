@@ -2,8 +2,11 @@ import {
 	loginFailure,
 	loginStart,
 	loginSuccess,
+	updateUserStart,
+	updateUserSuccess,
+	updateUserFailure,
 } from './userRedux'
-import { publicRequest } from '../services/requestMethods'
+import { publicRequest, userRequest } from '../services/requestMethods'
 
 export const login = async (dispatch, user) => {
 	dispatch(loginStart())
@@ -23,3 +26,13 @@ export const registerUser = async (data) => {
 		throw error
 	}
 }
+export const updateUser = async (id, user, dispatch) => {
+  dispatch(updateUserStart());
+  try {
+    // update
+    const res = await userRequest.put(`users/${id}`, user);
+    dispatch(updateUserSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUserFailure());
+  }
+};

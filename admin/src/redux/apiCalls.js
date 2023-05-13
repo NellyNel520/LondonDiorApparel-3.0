@@ -151,7 +151,7 @@ export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductSuccess(res.data));
   } catch (err) {
     dispatch(updateProductFailure());
-  }
+  } 
 };
 
 export const updateUser = async (id, customer, dispatch) => {

@@ -46,7 +46,7 @@ export const customerSlice = createSlice({
       state.isFetching = false;
       state.users[
         state.users.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.product;
+      ] = action.payload.customer;
     },
     updateCustomerFailure: (state) => {
       state.isFetching = false;

@@ -4,14 +4,16 @@ import '../../styles/editUser.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { userRequest } from '../../services/requestMethods'
-
+import { useDispatch } from 'react-redux'
+import { updateUser } from '../../redux/apiCalls'
 
 
 
 const EditUser = ({user}) => {
   const id = user._id
   const [inputs, setInputs] = useState({})
-  let navigate = useNavigate()
+  let navigate = useNavigate() 
+	const dispatch = useDispatch()
 	
 
   const handleChange = (e) => {
@@ -20,14 +22,26 @@ const EditUser = ({user}) => {
 		})
 	}
 
-  const handleUpdate = async () => {
-    const user = {...inputs}
-		try {
-      await userRequest.put(`users/${id}`, user)
-      navigate('/profile')
-      // navigate(0)
-    } catch {}
+  // const handleUpdate = async () => {
+  //   const user = {...inputs}
+	// 	try {
+  //     await userRequest.put(`users/${id}`, user)
+  //     navigate('/profile')
+  //     // navigate(0)
+  //   } catch {}
+	// }
+
+	const handleUpdate = (e) => {
+		e.preventDefault()
+		const user = {
+			...inputs
+		}
+		console.log(user)
+		updateUser(id, user, dispatch)
+		// navigate('/profile')
+		// navigate(0)
 	}
+
 	
 
 

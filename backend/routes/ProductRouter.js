@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const controller = require('../controllers/ProductController')
 const {
-	verifyToken,
+	verifyToken, 
 	verifyTokenAndAuthorization,
 	verifyTokenAndAdmin,
 } = require('../controllers/VerifyToken')
