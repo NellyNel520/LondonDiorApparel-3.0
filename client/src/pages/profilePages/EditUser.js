@@ -3,7 +3,6 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import '../../styles/editUser.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { userRequest } from '../../services/requestMethods'
 import { useDispatch } from 'react-redux'
 import { updateUser } from '../../redux/apiCalls'
 
@@ -22,14 +21,7 @@ const EditUser = ({user}) => {
 		})
 	}
 
-  // const handleUpdate = async () => {
-  //   const user = {...inputs}
-	// 	try {
-  //     await userRequest.put(`users/${id}`, user)
-  //     navigate('/profile')
-  //     // navigate(0)
-  //   } catch {}
-	// }
+  
 
 	const handleUpdate = (e) => {
 		e.preventDefault()
@@ -38,8 +30,7 @@ const EditUser = ({user}) => {
 		}
 		console.log(user)
 		updateUser(id, user, dispatch)
-		// navigate('/profile')
-		// navigate(0)
+		navigate('/profile')
 	}
 
 	
