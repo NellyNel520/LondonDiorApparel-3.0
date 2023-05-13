@@ -6,7 +6,16 @@ import {
 	updateUserSuccess,
 	updateUserFailure,
 } from './userRedux'
+import {
+  getOrderStart,
+  getOrderSuccess,
+  getOrderFailure,
+  addOrderStart,
+  addOrderSuccess,
+  addOrderFailure,
+} from './orderRedux'
 import { publicRequest, userRequest } from '../services/requestMethods'
+import { useEffect, useState } from 'react'
 
 export const login = async (dispatch, user) => {
 	dispatch(loginStart())
@@ -36,3 +45,15 @@ export const updateUser = async (id, user, dispatch) => {
     dispatch(updateUserFailure());
   }
 };
+
+// ORDER
+
+export const createOrder = async (order, dispatch) => {
+	dispatch(addOrderStart())
+	try {
+		const res = await userRequest.post('/orders/new', order);
+		dispatch(addOrderSuccess(res.data));
+	} catch (err) {
+		dispatch(addOrderFailure());
+	}
+}

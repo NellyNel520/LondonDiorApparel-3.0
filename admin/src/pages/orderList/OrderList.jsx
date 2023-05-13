@@ -18,7 +18,7 @@ export default function OrderList({ handleLogOut }) {
 	const Button = ({ type }) => {
 		return <button className={'orderStatusButton ' + type}>{type}</button>
 	}
-
+ 
 	useEffect(() => {
 		getOrders(dispatch)
 	}, [dispatch])

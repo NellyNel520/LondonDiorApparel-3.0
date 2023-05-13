@@ -5,6 +5,7 @@ import FullOrderProducts from './FullOrderProducts'
 import { userRequest } from '../../services/requestMethods'
 import { useEffect, useState } from 'react'
 import moment from 'moment'
+import '../../styles/order.css'
 
 const Product = styled.div`
 	display: flex;
@@ -79,6 +80,10 @@ const FullOrderHistory = ({user}) => {
 	console.log(id)
 	const [orders, setOrders] = useState([])
 
+	const Button = ({ type }) => {
+		return <button className={'orderStatusButton ' + type}>{type}</button>
+	}
+
 
 	useEffect(() => {
 		const getUsersOrders = async () => {
@@ -113,6 +118,13 @@ const FullOrderHistory = ({user}) => {
 							<div className="px-4">
 								<span className="font-bold">Total</span>
 								<div>${order.amount.toFixed(2)}</div>
+							</div>
+
+							<div className="px-4">
+								<span className="font-bold">Status</span>
+								<div>
+									<Button type={order.status} />
+								</div>
 							</div>
 						</div>
 						<div>

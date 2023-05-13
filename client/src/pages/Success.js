@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 import { userRequest } from '../services/requestMethods'
+import { createOrder } from '../redux/apiCalls'
+import { useNavigate } from 'react-router'
 // import client from /seriveces/api
 
 const Container = styled.div`
@@ -32,30 +34,56 @@ const Success = () => {
 	const cart = location.state.products
 	const currentUser = useSelector((state) => state.user.currentUser)
 	const [orderId, setOrderId] = useState(null)
- 
+	const dispatch = useDispatch()
+	let navigate = useNavigate() 
+
+	// useEffect(() => {
+	// 	const createOrder = async () => {
+	// 		try {
+	// 			const res = await userRequest.post('/orders/new', {
+	// 				userId: currentUser._id,
+	// 				email: currentUser.email,
+	// 				products: cart.products.map((item) => ({
+	// 					productId: item._id,
+	// 					quantity: item.quantity,
+	// 					title: item.title,
+	// 					desc: item.desc,
+	// 					img: item.img,
+	// 					color: item.color,
+	// 					size: item.size,
+	// 				})),
+	// 				amount: cart.total,
+	// 				address: data.billing_details.address,
+	// 			})
+	// 			console.log(res)
+	// 			setOrderId(res.data._id)
+	// 		} catch {}
+	// 	}
+	// 	data && createOrder()
+	// }, [cart, data, currentUser])
+
 	useEffect(() => {
-		const createOrder = async () => {
-			try {
-				const res = await userRequest.post('/orders/new', {
-					userId: currentUser._id,
-					email: currentUser.email,
-					products: cart.products.map((item) => ({
-						productId: item._id,
-						quantity: item.quantity,
-						title: item.title,
-						desc: item.desc,
-						img: item.img,
-						color: item.color,
-						size: item.size,
-					})),
-					amount: cart.total,
-					address: data.billing_details.address,
-				})
-				console.log(res)
-				setOrderId(res.data._id)
-			} catch {}
+		const order = {
+			userId: currentUser._id,
+			email: currentUser.email,
+			products: cart.products.map((item) => ({
+				productId: item._id,
+				quantity: item.quantity,
+				title: item.title,
+				desc: item.desc,
+				img: item.img,
+				color: item.color,
+				size: item.size,
+			})),
+			amount: cart.total,
+			address: data.billing_details.address,
 		}
-		data && createOrder()
+		console.log(order)
+		data && createOrder(order, dispatch)
+		
+		// setOrderId(order._id)
+
+
 	}, [cart, data, currentUser])
 
 	return (
@@ -74,9 +102,9 @@ const Success = () => {
 							<div className="text-blue-500 mt-2 underline">{orderId}</div>
 						</div>
 
-						<Link to={'/'}>
+						<Link to={'/profile'}>
 							<button className="ml-3 rounded-md border border-transparent bg-blue-500 py-3 px-5 mb-6 text-lg font-medium text-white shadow-sm hover:bg-blue-400 hover:text-black focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8">
-								Go to Homepage
+								Go to Dashboard
 							</button>
 						</Link>
 					</div>

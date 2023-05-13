@@ -3,6 +3,7 @@ import { userRequest } from '../../services/requestMethods'
 import { useEffect, useState } from 'react'
 import OrderProducts from './OrderProducts'
 import moment from 'moment'
+import '../../styles/order.css'
  
 
 const LatestOrder = ({ user }) => {
@@ -10,6 +11,10 @@ const LatestOrder = ({ user }) => {
 	const id = user._id
 	console.log(id)
 	const [orders, setOrders] = useState([])
+
+	const Button = ({ type }) => {
+		return <button className={'orderStatusButton ' + type}>{type}</button>
+	}
 
 	useEffect(() => {
 		const getUsersOrders = async () => {
@@ -46,6 +51,12 @@ const LatestOrder = ({ user }) => {
 							<div className="px-4">
 								<span className="font-bold">Total</span>
 								<div>${order.amount.toFixed(2)}</div>
+							</div>
+
+							<div className="px-4">
+								<span className="font-bold">Status</span>
+								{/* <div>{order.status}</div> */}
+								<div><Button type={order.status} /></div>
 							</div>
 						</div>
 						<div>
